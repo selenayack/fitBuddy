@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/linear"
     tools:context=".MainActivity">
 
     <EditText
@@ -65,10 +65,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/btn"
-        android:backgroundTint="@color/white"
+        android:background="@drawable/white_box"
         android:text="Giris Yap"
-        android:textColor="@color/white"
+        android:textColor="@color/orange"
         android:textColorHighlight="@color/white"
         android:textColorLink="@color/white"
         android:textSize="24sp"
