@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".FitnessFragment"
+    android:background="#FAF7F7"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@drawable/linear"
+        app:title="FitBuddy"
+        android:textAlignment="textEnd"
+        app:titleTextColor="@color/white"
+        android:gravity="end"
+        tools:ignore="InvalidId" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10.0dp"
+                android:layout_marginTop="15.0dp"
+                android:background="@drawable/backgroundcrop"
+                android:orientation="vertical"
+
+                >
+                <LinearLayout
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="130.0dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:orientation="vertical"
+
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="monospace"
+                            android:padding="5.0dp"
+                            android:text="18 yaşından küçükler için"
+                            android:textColor="#ff000000"
+                            android:textSize="18.0dp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="serif"
+                            android:padding="5.0dp"
+                            android:text="60 günlük maraton"
+                            android:textColor="#FF5E5858"
+                            android:textSize="15.0dp"
+                            android:textStyle="bold"
+                            tools:ignore="TextSizeCheck" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5.0dp"
+                            android:text="Her gün 15 dakika"
+                            android:textColor="@color/orange"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.0"
+                        >
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/exersice_7"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.0"
+                        >
+                        <ImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10.0dp"
+                            android:src="@drawable/baseline_keyboard_arrow_right_24"
+                            />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                <Button
+                    android:id="@+id/startFitness"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10.0dp"
+                    android:background="@drawable/buton"
+                    android:text="Başla"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textAllCaps="true"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5.0dp"
+                android:layout_marginTop="15.0dp"
+                android:background="@drawable/backgroundcrop"
+                android:orientation="vertical"
+
+                >
+                <LinearLayout
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="130.0dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:orientation="vertical"
+
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="monospace"
+                            android:padding="5.0dp"
+                            android:text="18 yaşından büyükler için"
+                            android:textColor="#ff000000"
+                            android:textSize="18.0dp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="serif"
+                            android:padding="5.0dp"
+                            android:text="60 günlük maraton"
+                            android:textColor="#FF5E5858"
+                            android:textSize="15.0dp"
+                            android:textStyle="bold"
+                            tools:ignore="TextSizeCheck" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5.0dp"
+                            android:text="Her gün 15 dakika"
+                            android:textColor="@color/orange"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.0"
+                        >
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/exersice_1"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.0"
+                        >
+                        <ImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10.0dp"
+                            android:src="@drawable/baseline_keyboard_arrow_right_24"
+                            />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                <Button
+                    android:id="@+id/startFitness2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10.0dp"
+                    android:background="@drawable/buton"
+                    android:text="Başla"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textAllCaps="true"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5.0dp"
+                android:layout_marginTop="15.0dp"
+                android:background="@drawable/backgroundcrop"
+                android:orientation="vertical"
+
+                >
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="150.0dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    >
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10.0dp"
+                        android:src="@drawable/image"
+                        />
+
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.0"
+                        >
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fl_Adplaceholder"
+                    />
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+    </ScrollView>
+
+
+
+
+</LinearLayout>
