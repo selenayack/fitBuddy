@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="20dp"
     android:padding="20dp"
     android:id="@+id/dialogForgot"
@@ -39,19 +40,22 @@
             android:textColor="@color/orange"
             app:layout_constraintTop_toBottomOf="@id/forgotTitle"
             app:layout_constraintBottom_toTopOf="@+id/emailBox"/>
+
         <EditText
+            android:id="@+id/emailBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:id="@+id/emailBox"
-            android:textColor="@color/orange"
-            android:textSize="16sp"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="30dp"
-            android:maxLines="1"
             android:backgroundTint="@color/orange"
-            app:layout_constraintStart_toStartOf="parent"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:textColor="@color/orange"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/forgotTitle"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/forgotTitle"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
             android:layout_width="0dp"
