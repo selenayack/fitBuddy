@@ -76,6 +76,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2 set yapınız"
+                                android:textColor="#FF5E5858"
                                 android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -170,6 +171,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2 set yapınız"
+                                android:textColor="#FF5E5858"
                                 android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -264,6 +266,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2 set yapınız"
+                                android:textColor="#FF5E5858"
                                 android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -359,6 +362,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2 set yapınız"
+                                android:textColor="#FF5E5858"
                                 android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -453,6 +457,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2 set yapınız"
+                                android:textColor="#FF5E5858"
                                 android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -548,6 +553,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2 set yapınız"
+                                android:textColor="#FF5E5858"
                                 android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -642,6 +648,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2 set yapınız"
+                                android:textColor="#FF5E5858"
                                 android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -737,6 +744,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2 set yapınız"
+                                android:textColor="#FF5E5858"
                                 android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -831,6 +839,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2 set yapınız"
+                                android:textColor="#FF5E5858"
                                 android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -926,6 +935,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2 set yapınız"
+                                android:textColor="#FF5E5858"
                                 android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1010,7 +1020,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="monospace"
-                                android:text="Plank with leg left"
+                                android:text="Plank with leg lift"
                                 android:textAllCaps="true"
                                 android:textColor="@color/black"
                                 android:textSize="15.0dp"
@@ -1020,6 +1030,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2 set yapınız"
+                                android:textColor="#FF5E5858"
                                 android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1114,6 +1125,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2 set yapınız"
+                                android:textColor="#FF5E5858"
                                 android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1208,6 +1220,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2 set yapınız"
+                                android:textColor="#FF5E5858"
                                 android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1302,6 +1315,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2 set yapınız"
+                                android:textColor="#FF5E5858"
                                 android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1323,6 +1337,99 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/exersice_14"/>
+
+
+
+
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.0"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            >
+                            <ImageView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="10.0dp"
+                                android:src="@drawable/baseline_keyboard_arrow_right_24"
+                                />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="2.0dp"
+                        android:background="#ffaaa9a9"/>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="100.0dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/boat_pose15"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dp"
+                        android:minHeight="48dp"
+                        android:onClick="Imagebuttonclicker"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10.0dp"
+                            android:layout_weight="1.0"
+                            android:orientation="vertical"
+
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="monospace"
+                                android:text="Leg Up"
+                                android:textAllCaps="true"
+                                android:textColor="@color/black"
+                                android:textSize="15.0dp"
+                                android:textStyle="bold"
+                                tools:ignore="TextSizeCheck" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2 set yapınız"
+                                android:textColor="#FF5E5858"
+                                android:textStyle="bold"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="01:00 dakika"
+                                android:textStyle="bold"
+                                android:textColor="@color/orange"/>
+
+
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.0">
+
+
+                            <pl.droidsonroids.gif.GifImageView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/exersice_15"/>
 
 
 
