@@ -62,7 +62,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="monospace"
                             android:padding="5.0dp"
-                            android:text="18 yaşından küçükler için"
+                            android:text="Tüm vücut Egzersizleri"
                             android:textColor="#ff000000"
                             android:textSize="18.0dp"
                             android:textStyle="bold"
@@ -161,7 +161,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="monospace"
                             android:padding="5.0dp"
-                            android:text="18 yaşından büyükler için"
+                            android:text="Kardio"
                             android:textColor="#ff000000"
                             android:textSize="18.0dp"
                             android:textStyle="bold"
@@ -197,7 +197,7 @@
                         <pl.droidsonroids.gif.GifImageView
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/exersice_1"/>
+                            android:src="@drawable/rope"/>
 
                     </LinearLayout>
                     <LinearLayout
