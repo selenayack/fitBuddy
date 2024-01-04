@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/exersice_7" />
+
+            <Button
+                android:id="@+id/time"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_marginLeft="105dp"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/button_bg_round"
+                android:padding="15dp"
+                android:text="01:00"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/startButton"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/start_btn"
+                android:gravity="center"
+                android:text="Başla"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_marginLeft="08dp"/>
+
+            <TextView
+                android:layout_width="305dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/btn_nasilyapilir"
+                android:padding="7dp"
+                android:text="Nasıl Yapılır"
+                android:textAlignment="center"
+                android:textColor="#323131"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="20dp"
+                android:background="#FDFFFD"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="#FDFFFD"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#FDFFFD"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:text=
+                            "1-Sırtınız yere düz ve bacaklarınız yukarıda olacak şekilde uzanın. Rahatınız için zeminin halı kaplı bir bölümüne veya yoga matına uzanın. Bacaklarınızı bükün ve dizlerinizi doğrudan pelvisinizin üzerine gelene kadar yukarı çekin. Ayaklarınız düz bir şekilde dışarı çıkacak şekilde dizlerinizi 90 derecelik bir açıyla bükün. \n\n
+2-Ellerinizi başınızın arkasında tutun ve karnınıza doğru bakın. Gövdenizi dirsek-diz egzersizi pozisyonuna getirmek için kollarınızı arkanıza doğru uzatın. Daha sonra dirseklerinizi bükün ve iki elinizi başınızın arkasında tutun. Boynunuzu, vücudunuzun aşağısına, göbek deliğinize bakacak şekilde bükün. [\n\n
+3-Karın kaslarınızı kasın ve dizlerinizi dirseklerinize kadar çekin. Çenenizi aşağıda tutun ve karın kaslarınızı gerin. Egzersiz yaparken karın kaslarınızı sürekli aktif tutun.[3]Çıtır çıtır yapmak için dirseklerinizi yerinde tutun ve dirsekleriniz ve dizleriniz birbirine değene kadar dizlerinizi yukarı doğru kaldırın. Dirsekleriniz ve dizleriniz birbirine dokunduğunda alt karın bölgenizde hafif bir yanma hissetmelisiniz \n\n
+4-Vücudunuzu başlangıç ​​pozisyonuna geri indirin. 1 mekik çektikten sonra karın kaslarınızı yavaşça gevşetin ve başınızı tekrar yere doğru indirin. Ayrıca dizlerinizi tekrar doğrudan pelvisinizin üzerine gelinceye kadar indirin.\n\n
+"
+
+                        >
+
+                    </TextView>
+
+                </LinearLayout>
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>
