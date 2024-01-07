@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@drawable/linear"
+            android:textAlignment="textEnd"
+            app:layout_collapseMode="pin"
+            app:title="FitBuddy"
+            app:titleTextColor="@color/white" />
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        >
+        <ImageView
+            android:src="@drawable/kalori3"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="90dp"
+            android:layout_gravity="center_horizontal"/>
+
+
+
+
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- dogum tarihi  -->
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                >
+
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dogum_tarihi"
+                    android:layout_marginTop="5dp"
+                  />
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <Spinner
+                            android:id="@+id/spinner4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+                        <Spinner
+                            android:id="@+id/spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:entries="@array/aylar"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+                        <Spinner
+                            android:id="@+id/spinner5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            tools:ignore="TouchTargetSizeCheck" />
+                    </TableRow>
+
+                </TableLayout>
+            </TableRow>
+
+
+
+            <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+            <!-- dogum tarihi  -->
+
+
+            <!-- cinsiyet  -->
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="24dp">
+
+                <TextView
+                    android:id="@+id/textView24"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cinsiyet" />
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+
+                    <RadioGroup
+                        android:id="@+id/radioGrupCinsiyet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+
+                        <RadioButton
+                            android:id="@+id/radioButton2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/erkek"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+                        <RadioButton
+                            android:id="@+id/radioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/kadın"
+                            android:layout_marginLeft="20dp"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+                    </RadioGroup>
+
+
+                </TableRow>
+                </TableLayout>
+            </TableRow>
+            <!-- cinsiyet  -->
+
+            <!-- ölcü birimi-->
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ölçü_birimi"
+                    android:layout_marginTop="24dp"/>
+
+                <Spinner
+                    android:id="@+id/spinnerHaftalıkKg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="24dp"
+                    android:entries="@array/ölcüBirimi"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </TableRow>
+            <!-- ölcü birimi-->
+            <!--boy-->
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_marginTop="24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/boy" />
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <EditText
+                            android:id="@+id/editTextHeightCm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="3"
+                            android:inputType="number"
+                            android:layout_marginLeft="5dp"/>
+
+                        <EditText
+                            android:id="@+id/editTextHeightInches"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="3"
+                            android:inputType="number"
+                            android:layout_marginLeft="5dp"/>
+                        <TextView
+                            android:id="@+id/textViewCm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cm"/>
+
+                    </TableRow>
+                </TableLayout>
+            </TableRow>
+            <!--boy-->
+            <!--kilo-->
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView30"
+                    android:layout_marginTop="24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/kilo" />
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <EditText
+                            android:id="@+id/editTextWeight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:ems="3"
+                            android:inputType="number" />
+                        <TextView
+                            android:id="@+id/textViewOlcuBirimi2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/kg"/>
+                    </TableRow>
+                </TableLayout>
+            </TableRow>
+            <!--kilo-->
+
+            <!-- aktivite-->
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/aktivite_seviyesi"
+                    android:layout_marginTop="24dp"/>
+
+                <Spinner
+                    android:id="@+id/spinner3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:entries="@array/aktiviteSeviyesi"
+                    tools:ignore="TouchTargetSizeCheck"/>
+
+            </TableRow>
+            <!-- aktivite-->
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/blank" />
+
+
+            </TableRow>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <ImageView
+                    android:id="@+id/imageViewerrormessage"
+                    android:src="@drawable/error"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="0dp"
+               />
+
+
+            <TextView
+                android:id="@+id/textViewErrorMessage"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:text="@string/blank"/>
+
+
+
+
+
+            </TableRow>
+        </TableLayout>
+
+            <Button
+                android:id="@+id/buttonDevam"
+                android:background="@drawable/buton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Devam Et"
+                android:textColor="@color/white"
+                android:layout_marginTop="34dp"/>
+
+
+
+
+
+
+        </TableLayout>
+
+    </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    </ScrollView>
+
+
+
+
+
