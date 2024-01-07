@@ -21,10 +21,10 @@
         android:theme="@style/Theme.FitBuddy"
         tools:targetApi="31">
         <activity
-            android:name=".calculate_bmr"
+            android:name=".MainActivitytest"
             android:exported="false" />
         <activity
-            android:name=".user"
+            android:name=".calculate_bmr"
             android:exported="false" />
         <activity
             android:name=".user_infos"
