@@ -16,7 +16,7 @@ public class DbAdapter {
 
 
     private static final String DATABASE_NAME = "fitBuddyDiet";
-    private static final int DATABASE_VERSION = 56;
+    private static final int DATABASE_VERSION = 162;
 
     private final Context context;
     private DatabaseHelper dbHelper;
@@ -43,10 +43,27 @@ public class DbAdapter {
 
                 db.execSQL("CREATE TABLE IF NOT EXISTS hedef("+
                         "hedef_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                        "hedef_mevcut_kilo INT,"+
+                        "hedef_mevcut_kilo DOUBLE,"+
                         "hedef_mevcut_kilo_tarih DATE, "+
                         "hedef_kilo INT,"+
-                        "hedef_haftalık_kilo VARCHAR);");
+                        "hedef_yapılmak_istenen INT," +
+                        "hedef_haftalık_kilo VARCHAR," +
+                        "hedef_kalori INT," +
+                        "hedef_protein INT," +
+                        "hedef_carb INT," +
+                        "hedef_yag INT," +
+                        "hedef_kalori_aktiviteİle INT," +
+                        "hedef_protein_aktiviteİle INT," +
+                        "hedef_carb_aktiviteİle INT," +
+                        "hedef_yag_aktiviteİle INT," +
+                        "hedef_kalori_aktivite_diyet_ile INT," +
+                        "hedef_protein_aktivite_diyet_ile INT," +
+                        "hedef_carb_aktivite_diyet_ile INT," +
+                        "hedef_yag_aktivite_diyet_ile INT," +
+
+
+
+                        "hedef_not);");
 
             }
             catch (SQLException e) {
@@ -57,10 +74,9 @@ public class DbAdapter {
             try {
 
                 db.execSQL("CREATE TABLE IF NOT EXISTS USER("+
-                        "user_id TEXT PRIMARY KEY,"+
+                        "user_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                         "user_cinsiyet INT,"+
                         "user_boy INT,"+
-                        "user_kilo INT,"+
                         "user_olcu VARCHAR,"+
                         "user_aktivite_derecesi INT,"+
                         "user_dogum_tarih DATE," +
@@ -135,6 +151,8 @@ public class DbAdapter {
             db.execSQL("DROP TABLE IF EXISTS food_diary");
             db.execSQL("DROP TABLE IF EXISTS food_diary_kalori_yenen");
             db.execSQL("DROP TABLE IF EXISTS user");
+            db.execSQL("DROP TABLE IF EXISTS hedef");
+
 
             onCreate(db);
         }
@@ -220,24 +238,71 @@ public class DbAdapter {
 
 
 
-
-
-
-
-
-
-
     public int count(String table){
+        try{
         Cursor mcount =db.rawQuery("SELECT COUNT(*) FROM"+table+" ",null);
         mcount.moveToFirst();
         int count=mcount.getInt(0);
         mcount.close();
         return count;
     }
+        catch (SQLException e){
+            return -1;
+        }
 
 
 }
 
+public Cursor selectPrimaryKey(String table,String primaryKey,long sutunId,String []fields)throws SQLException{
+
+   // Cursor cursor = db.query(table, fields, primaryKey + "=", new String[]{String.valueOf(sutunId)}, null, null, null);
+    Cursor cursor = db.query(table, fields, primaryKey + "="+ sutunId, null, null, null,null);
+    if (cursor != null) {
+        cursor.moveToFirst();
+    }
+
+    return cursor;
+}
+    public boolean update(String table,String primaryKey,long sutunId,String fields,String value)throws SQLException{
+
+        value=value.substring(1,value.length()-1);
+
+        ContentValues args=new ContentValues();
+       args.put(fields,value);
+       return db.update(table,args,primaryKey+"="+sutunId,null)>0;
+
+
+    }
+
+    public boolean update(String table,String primaryKey,long sutunId,String fields,double value)throws SQLException{
+
+
+        ContentValues args=new ContentValues();
+        args.put(fields,value);
+        return db.update(table,args,primaryKey+"="+sutunId,null)>0;
+
+
+
+    }
+
+    public boolean update(String table,String primaryKey,long sutunId,String fields,int value)throws SQLException{
+
+
+        ContentValues args=new ContentValues();
+        args.put(fields,value);
+        return db.update(table,args,primaryKey+"="+sutunId,null)>0;
+
+
+
+    }
+
+
+
+
+
+
+
+}
 
 
 
