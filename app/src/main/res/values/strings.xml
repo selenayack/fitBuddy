@@ -69,8 +69,24 @@
     <string name="blank"></string>
 
 
+    <string name="Mevcut_Kilo">Mevcut Kilo</string>
+    <string name="Haftalık_hedef">Haftalık Hedef</string>
 
+    <string-array name="hedef">
+        <item>Kilo Vermek</item>
+        <item>Kilo Almak</item>
 
+    </string-array>
+
+    <string-array name="hedef_kg">
+        <item>0.5</item>
+        <item>1</item>
+        <item>1.5</item>
+
+    </string-array>
+
+    <string name="haftalık">Haftalık</string>
+    <string name="pound_haftalık">Pound Haftalık</string>
 
 
 </resources>
