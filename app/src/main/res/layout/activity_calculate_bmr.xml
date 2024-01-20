@@ -154,7 +154,7 @@
                         android:text="@string/blank" />
 
                     <Button
-                        android:id="@+id/buttonHesapla"
+                        android:id="@+id/buttonEkle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="60dp"
