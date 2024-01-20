@@ -7,9 +7,12 @@
     android:orientation="vertical"
     tools:context=".HomeFragment"
     android:background="#FAF7F7"
+
     >
 
+
     <androidx.appcompat.widget.Toolbar
+
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
@@ -111,9 +114,6 @@
                 />
 
 
-
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -125,14 +125,176 @@
                     android:id="@+id/fl_Adplaceholder"
                     />
 
+
             </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="100dp">
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+
+                    >
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/KahvatıAdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_margin="16dp"
+                        app:backgroundTint="#FF5722"
+                        app:fabSize="mini"
+                        app:srcCompat="@drawable/baseline_add_24" />
+
+
+                    <TextView
+                        android:id="@+id/textViewKahvaltı"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="70dp"
+                        android:text="@string/Kahvaltı"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                </TableRow>
+            </TableLayout>
+
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="100dp">
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+
+                >
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/ÖğleYemeğiAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="16dp"
+                    app:backgroundTint="#FF5722"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/baseline_add_24" />
+
+
+                <TextView
+                    android:id="@+id/textViewÖğleYemeği"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="70dp"
+                    android:text="@string/Öğle_Yemeği"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="100dp">
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+
+                    >
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/Akşam_YemeğiAdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:fabSize="mini"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_margin="16dp"
+                        app:backgroundTint="#FF5722"
+                        app:srcCompat="@drawable/baseline_add_24" />
+
+
+                    <TextView
+                        android:id="@+id/textViewAkşam_Yemeği"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="70dp"
+                        android:text="@string/Akşam_Yemeği"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="100dp">
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+
+                    >
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/AtıştırmalıkAdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_margin="16dp"
+                        app:fabSize="mini"
+                        app:backgroundTint="#FF5722"
+                        app:srcCompat="@drawable/baseline_add_24" />
+
+
+                    <TextView
+                        android:id="@+id/textViewAtıştırmalık"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="70dp"
+                        android:text="@string/Ara_Öğün"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                </TableRow>
+            </TableLayout>
+
+
+
 
 
         </LinearLayout>
 
 
-    </ScrollView>
 
+
+    </ScrollView>
 
 
 </LinearLayout>

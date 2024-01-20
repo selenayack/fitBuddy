@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewListName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="List item"
+        android:textSize="18dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+
+
+        />
+
+    <TextView
+        android:id="@+id/textViewListNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textViewListName"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="18dp"
+        android:textSize="18dp"
+        android:layout_marginBottom="2dp"
+        android:text="Number"
+
+
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textViewListSubName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewListNumber"
+        android:layout_alignStart="@+id/textViewListName"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="4dp"
+        android:text="text"
+        android:textSize="15dp" />
+
+
+</RelativeLayout>

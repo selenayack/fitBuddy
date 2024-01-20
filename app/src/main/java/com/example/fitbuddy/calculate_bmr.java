@@ -1,19 +1,20 @@
 package com.example.fitbuddy;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Calendar;
 
@@ -25,17 +26,15 @@ public class calculate_bmr extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculate_bmr);
-        Button buttonHesapla = (Button) findViewById(R.id.buttonHesapla);
+        Button buttonHesapla = (Button) findViewById(R.id.buttonEkle);
         buttonHesapla.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View view) {
                 Bmrhesapla();
                 Intent i = new Intent(calculate_bmr.this, MainActivity2.class);
                 startActivity(i);
+                }
+           });
 
-
-            }
-        });
 
 
         //errorMesajınıSakla();
@@ -45,19 +44,31 @@ public class calculate_bmr extends AppCompatActivity {
 
     }
 
+
+
     private void kullanılanOlcu() {
 
-        DbAdapter db = new DbAdapter(this);
+        DbAdapter db = new DbAdapter(this) {
+            @Override
+            public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+            }
+
+            @Override
+            public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+            }
+        };
         db.open();
         long sutunId = 1;
 
         String fields[] = new String[]{
-                "user_id",
+                "_id",
                 "user_olcu"
 
         };
 
-        Cursor c = db.selectPrimaryKey("USER", "user_id", sutunId, fields);
+        Cursor c = db.selectPrimaryKey("USER", "_id", sutunId, fields);
         String olcu;
         olcu = c.getString(1);
         //Toast.makeText(this,"Olcu: "+olcu,Toast.LENGTH_LONG).show();
@@ -104,27 +115,44 @@ public class calculate_bmr extends AppCompatActivity {
         //if (errorMessage.isEmpty()) {
 
 
-        DbAdapter db = new DbAdapter(this);
+        DbAdapter db = new DbAdapter(this) {
+            @Override
+            public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+            }
+
+            @Override
+            public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+            }
+        };
         db.open();
+
+
+
+
+
         long hedefId = 1;
 
+
+
         double doubleMevcutKiloSQL = db.quoteSmart(doubleMevcutKilo);
-        boolean updateMevcutKilo = db.update("hedef", "hedef_id", hedefId, "hedef_mevcut_kilo", doubleMevcutKiloSQL);
+        boolean updateMevcutKilo = db.update("hedef", "_id", hedefId, "hedef_mevcut_kilo", doubleMevcutKiloSQL);
         Log.d("calculate_bmr", "hedef_mevcut_kilo güncellendi: " + updateMevcutKilo);
 
         int intHedefSQL = db.quoteSmart(intHedef);
-        boolean updateHedef = db.update("hedef", "hedef_id", hedefId, "hedef_yapılmak_istenen", intHedefSQL);
+        boolean updateHedef = db.update("hedef", "_id", hedefId, "hedef_yapılmak_istenen", intHedefSQL);
         Log.d("calculate_bmr", "hedef_yapılmak_istenen güncellendi: " + updateHedef);
 
         String stringHaftalikKgSQL = db.quoteSmart(stringHaftalikKg);
-        boolean updateHaftalikKg = db.update("hedef", "hedef_id", hedefId, "hedef_haftalık_kilo", stringHaftalikKgSQL);
+        boolean updateHaftalikKg = db.update("hedef", "_id", hedefId, "hedef_haftalık_kilo", stringHaftalikKgSQL);
         Log.d("calculate_bmr", "hedef_haftalık_kg güncellendi: " + updateHaftalikKg);
 
 
         long sutunId = 1;
 
         String fields[] = new String[]{
-                "user_id",
+                "_id",
                 "user_dogum_tarih",
                 "user_cinsiyet",
                 "user_boy",
@@ -132,7 +160,7 @@ public class calculate_bmr extends AppCompatActivity {
 
 
         };
-        Cursor c = db.selectPrimaryKey("USER", "user_id", sutunId, fields);
+        Cursor c = db.selectPrimaryKey("USER", "_id", sutunId, fields);
         String stringUserDogum = c.getString(1);
         String stringUserCinsiyet = c.getString(2);
         String stringUserBoy = c.getString(3);
@@ -232,7 +260,7 @@ public class calculate_bmr extends AppCompatActivity {
         double kaloriAktivitesizSQL=db.quoteSmart(BMR);
 
 
-        db.update("hedef","hedef_id",hedefId,"hedef_kalori",kaloriAktivitesizSQL);
+        db.update("hedef","_id",hedefId,"hedef_kalori",kaloriAktivitesizSQL);
 
 
         double protein=Math.round(BMR*25/100);
@@ -243,9 +271,9 @@ public class calculate_bmr extends AppCompatActivity {
         double karbSQL=db.quoteSmart(karbonhidrat);
         double yagSQL=db.quoteSmart(yag);
 
-        db.update("hedef","hedef_id",hedefId,"hedef_protein",proteinSQL);
-        db.update("hedef","hedef_id",hedefId,"hedef_carb",karbSQL);
-        db.update("hedef","hedef_id",hedefId,"hedef_yag",yagSQL);
+        db.update("hedef","_id",hedefId,"hedef_protein",proteinSQL);
+        db.update("hedef","_id",hedefId,"hedef_carb",karbSQL);
+        db.update("hedef","_id",hedefId,"hedef_yag",yagSQL);
 
 
 
@@ -278,7 +306,7 @@ public class calculate_bmr extends AppCompatActivity {
         double kaloriAktiviteSQL=db.quoteSmart( kaloriAktivite);
 
 
-        db.update("hedef","hedef_id",hedefId,"hedef_kalori_aktiviteİle",kaloriAktiviteSQL);
+        db.update("hedef","_id",hedefId,"hedef_kalori_aktiviteİle",kaloriAktiviteSQL);
 
 
         double proteinAktivite=Math.round(kaloriAktivite*25/100);
@@ -289,9 +317,9 @@ public class calculate_bmr extends AppCompatActivity {
         double karbAktiviteSQL=db.quoteSmart(karbonhidratAktivite);
         double yagAktiviteSQL=db.quoteSmart(yagAktivite);
 
-        db.update("hedef","hedef_id",hedefId,"hedef_protein_aktiviteİle",proteinAktiviteSQL);
-        db.update("hedef","hedef_id",hedefId,"hedef_carb_aktiviteİle",karbAktiviteSQL);
-        db.update("hedef","hedef_id",hedefId,"hedef_yag_aktiviteİle",yagAktiviteSQL);
+        db.update("hedef","_id",hedefId,"hedef_protein_aktiviteİle",proteinAktiviteSQL);
+        db.update("hedef","_id",hedefId,"hedef_carb_aktiviteİle",karbAktiviteSQL);
+        db.update("hedef","_id",hedefId,"hedef_yag_aktiviteİle",yagAktiviteSQL);
 
         //Toast.makeText(this,"BMR aktivite ile : "+BMR,Toast.LENGTH_LONG).show();
 
@@ -329,7 +357,7 @@ public class calculate_bmr extends AppCompatActivity {
         double kaloriAktiviteveDiyetSQL=db.quoteSmart(kaloriAktiviteVeDiyet);
 
 
-        db.update("hedef","hedef_id",hedefId,"hedef_kalori_aktivite_diyet_ile",kaloriAktiviteveDiyetSQL);
+        db.update("hedef","_id",hedefId,"hedef_kalori_aktivite_diyet_ile",kaloriAktiviteveDiyetSQL);
 
        double proteinAktiviteDiyet=Math.round(kaloriAktiviteVeDiyet*25/100);
        double karbonhidratAktiviteDiyet=Math.round (kaloriAktiviteVeDiyet*50/100);
@@ -339,9 +367,9 @@ public class calculate_bmr extends AppCompatActivity {
        double karbAktiviteDiyetSQL=db.quoteSmart(karbonhidratAktiviteDiyet);
        double yagAktiviteDiyetSQL=db.quoteSmart(yagAktiviteDiyet);
 
-       db.update("hedef","hedef_id",hedefId,"hedef_protein_aktivite_diyet_ile",proteinAktiviteDiyetSQL);
-       db.update("hedef","hedef_id",hedefId,"hedef_carb_aktivite_diyet_ile",karbAktiviteDiyetSQL);
-       db.update("hedef","hedef_id",hedefId,"hedef_yag_aktivite_diyet_ile",yagAktiviteDiyetSQL);
+       db.update("hedef","_id",hedefId,"hedef_protein_aktivite_diyet_ile",proteinAktiviteDiyetSQL);
+       db.update("hedef","_id",hedefId,"hedef_carb_aktivite_diyet_ile",karbAktiviteDiyetSQL);
+       db.update("hedef","_id",hedefId,"hedef_yag_aktivite_diyet_ile",yagAktiviteDiyetSQL);
 
 
 

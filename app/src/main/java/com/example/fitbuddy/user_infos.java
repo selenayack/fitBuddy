@@ -3,6 +3,7 @@ package com.example.fitbuddy;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -85,21 +86,21 @@ public class user_infos extends AppCompatActivity {
         editTextHeightInches.setVisibility(View.GONE);
 
 
-       Spinner spinnerOlcuBirimi=(Spinner) findViewById(R.id.spinnerHaftalıkKg);
+        Spinner spinnerOlcuBirimi=(Spinner) findViewById(R.id.spinnerHaftalıkKg);
 
 
-       spinnerOlcuBirimi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-           @Override
-           public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long l) {
-               olcuDegistir();
-           }
+        spinnerOlcuBirimi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long l) {
+                olcuDegistir();
+            }
 
-           @Override
-           public void onNothingSelected(AdapterView<?> adapterView) {
-               //olcuDegistir();
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //olcuDegistir();
 
-           }
-       });
+            }
+        });
 
 
 
@@ -195,94 +196,75 @@ public class user_infos extends AppCompatActivity {
     private void devamEt() {
 
 
+        TextView textViewErrorMessage = (TextView) findViewById(R.id.textViewErrorMessage);
+        ImageView imageViewError = (ImageView) findViewById(R.id.imageViewerrormessage);
 
-        TextView textViewErrorMessage=(TextView) findViewById(R.id.textViewErrorMessage);
-        ImageView imageViewError=(ImageView)findViewById(R.id.imageViewerrormessage);
+        String errorMessage = "";
 
-        String errorMessage="";
-
-        Spinner spinnerDTGün =(Spinner) findViewById(R.id.spinner4);
-        String stringDTGün=spinnerDTGün.getSelectedItem().toString();
-        int DTGün=0;
+        Spinner spinnerDTGün = (Spinner) findViewById(R.id.spinner4);
+        String stringDTGün = spinnerDTGün.getSelectedItem().toString();
+        int DTGün = 0;
         try {
-            DTGün=Integer.parseInt(stringDTGün);
-            if(DTGün<10){
-                stringDTGün="0"+stringDTGün;
+            DTGün = Integer.parseInt(stringDTGün);
+            if (DTGün < 10) {
+                stringDTGün = "0" + stringDTGün;
             }
-        }
-        catch (NumberFormatException nfe) {
-          System.out.println("parse ediemedi"+nfe);
-          errorMessage="lütfen dogum gününüzü girin";
+        } catch (NumberFormatException nfe) {
+            System.out.println("parse ediemedi" + nfe);
+            errorMessage = "lütfen dogum gününüzü girin";
 
 
         }
 
-        Spinner spinnerDTAy =(Spinner) findViewById(R.id.spinner);
-        String stringDTAy=spinnerDTAy.getSelectedItem().toString();
-        if(stringDTAy.startsWith("Oc")){
-            stringDTAy="01";
-        }
+        Spinner spinnerDTAy = (Spinner) findViewById(R.id.spinner);
+        String stringDTAy = spinnerDTAy.getSelectedItem().toString();
+        if (stringDTAy.startsWith("Oc")) {
+            stringDTAy = "01";
+        } else if (stringDTAy.startsWith("Şu")) {
+            stringDTAy = "02";
+        } else if (stringDTAy.startsWith("Mar")) {
 
-        else if(stringDTAy.startsWith("Şu")){
-            stringDTAy="02";
-        }
-        else if(stringDTAy.startsWith("Mar")){
-
-            stringDTAy="03";
-        }
-        else if(stringDTAy.startsWith("Ni")){
-            stringDTAy="04";
-        }
-
-        else if(stringDTAy.startsWith("May")){
-            stringDTAy="05";
-        }
-        else if(stringDTAy.startsWith("Haz")){
-            stringDTAy="06";
-        }
-        else if(stringDTAy.startsWith("Tem")){
-            stringDTAy="07";
-        }
-        else if(stringDTAy.startsWith("Ağ")){
-            stringDTAy="08";
-        }
-        else if(stringDTAy.startsWith("Ey")){
-            stringDTAy="09";
-        }
-        else if(stringDTAy.startsWith("Ek")){
-            stringDTAy="10";
-        }
-        else if(stringDTAy.startsWith("Ka")){
-            stringDTAy="11";
-        }
-        else if(stringDTAy.startsWith("Ar")){
-            stringDTAy="12";
+            stringDTAy = "03";
+        } else if (stringDTAy.startsWith("Ni")) {
+            stringDTAy = "04";
+        } else if (stringDTAy.startsWith("May")) {
+            stringDTAy = "05";
+        } else if (stringDTAy.startsWith("Haz")) {
+            stringDTAy = "06";
+        } else if (stringDTAy.startsWith("Tem")) {
+            stringDTAy = "07";
+        } else if (stringDTAy.startsWith("Ağ")) {
+            stringDTAy = "08";
+        } else if (stringDTAy.startsWith("Ey")) {
+            stringDTAy = "09";
+        } else if (stringDTAy.startsWith("Ek")) {
+            stringDTAy = "10";
+        } else if (stringDTAy.startsWith("Ka")) {
+            stringDTAy = "11";
+        } else if (stringDTAy.startsWith("Ar")) {
+            stringDTAy = "12";
         }
 
 
-
-
-
-        Spinner spinnerDTYıl =(Spinner) findViewById(R.id.spinner5);
-        String stringDTYıl=spinnerDTYıl.getSelectedItem().toString();
-        int DTYıl=0;
+        Spinner spinnerDTYıl = (Spinner) findViewById(R.id.spinner5);
+        String stringDTYıl = spinnerDTYıl.getSelectedItem().toString();
+        int DTYıl = 0;
         try {
-            DTYıl=Integer.parseInt(stringDTYıl);
-        }
-        catch (NumberFormatException nfe) {
-            System.out.println("parse edilemedi"+nfe);
-            errorMessage="lütfen dogum yilinizi girin";
+            DTYıl = Integer.parseInt(stringDTYıl);
+        } catch (NumberFormatException nfe) {
+            System.out.println("parse edilemedi" + nfe);
+            errorMessage = "lütfen dogum yilinizi girin";
 
 
         }
 
-        String dogumTarihi=stringDTGün+"-"+stringDTAy+"-"+DTYıl;
+        String dogumTarihi = stringDTGün + "-" + stringDTAy + "-" + DTYıl;
         //Toast.makeText(this,dogumTarihi,Toast.LENGTH_SHORT).show();
 
 
-        RadioGroup radioGroupCinsiyet=(RadioGroup) findViewById(R.id.radioGrupCinsiyet);
-        int selectedId=radioGroupCinsiyet.getCheckedRadioButtonId();
-        RadioButton radioButtonCinsiyet=(RadioButton)findViewById(selectedId);
+        RadioGroup radioGroupCinsiyet = (RadioGroup) findViewById(R.id.radioGrupCinsiyet);
+        int selectedId = radioGroupCinsiyet.getCheckedRadioButtonId();
+        RadioButton radioButtonCinsiyet = (RadioButton) findViewById(selectedId);
 
         if (radioGroupCinsiyet.getCheckedRadioButtonId() == -1) {
             // Cinsiyet seçilmemişse
@@ -294,107 +276,92 @@ public class user_infos extends AppCompatActivity {
         }
 
 
-
         String stringGender = "";
         stringGender = radioButtonCinsiyet.getText().toString();
-
-
 
 
         //Toast.makeText(this,radioButtonCinsiyet.getText(),Toast.LENGTH_SHORT).show();
 
 
-        EditText editTextHeightInches=(EditText)findViewById(R.id.editTextHeightInches);
-        EditText editTextHeightCm=(EditText)findViewById(R.id.editTextHeightCm);
-        String stringHeightCm=editTextHeightCm.getText().toString();
-        String stringHeightInches=editTextHeightInches.getText().toString();
+        EditText editTextHeightInches = (EditText) findViewById(R.id.editTextHeightInches);
+        EditText editTextHeightCm = (EditText) findViewById(R.id.editTextHeightCm);
+        String stringHeightCm = editTextHeightCm.getText().toString();
+        String stringHeightInches = editTextHeightInches.getText().toString();
 
-        double heightCm=0;
-        double heightFeet=0;
-        double heightInches=0;
-        boolean metric=true;
+        double heightCm = 0;
+        double heightFeet = 0;
+        double heightInches = 0;
+        boolean metric = true;
 
-        Spinner spinnerOlcuBirimi=(Spinner) findViewById(R.id.spinnerHaftalıkKg);
-        String stringOlcuBiirimi=spinnerOlcuBirimi.getSelectedItem().toString();
+        Spinner spinnerOlcuBirimi = (Spinner) findViewById(R.id.spinnerHaftalıkKg);
+        String stringOlcuBiirimi = spinnerOlcuBirimi.getSelectedItem().toString();
 
-        int intOlcu=spinnerOlcuBirimi.getSelectedItemPosition();
+        int intOlcu = spinnerOlcuBirimi.getSelectedItemPosition();
 
-        if(intOlcu==0){
-            stringOlcuBiirimi="kg_cm";
+        if (intOlcu == 0) {
+            stringOlcuBiirimi = "kg_cm";
+
+
+        } else {
+            stringOlcuBiirimi = "pound_inch";
+            metric = false;
 
 
         }
-        else{
-            stringOlcuBiirimi="pound_inch";
-            metric=false;
 
-
+        if (stringOlcuBiirimi.startsWith("p")) {
+            metric = false;
         }
 
-        if(stringOlcuBiirimi.startsWith("p")) {
-            metric=false;
-        }
-
-        if(metric==true){
+        if (metric == true) {
             try {
-                heightCm=Double.parseDouble(stringHeightCm);
-            }
-            catch (NumberFormatException nfe){
-                errorMessage="Boy(cm) sayı olmalı";
+                heightCm = Double.parseDouble(stringHeightCm);
+            } catch (NumberFormatException nfe) {
+                errorMessage = "Boy(cm) sayı olmalı";
             }
 
-        }
-
-        else{
+        } else {
 
             try {
-                heightFeet=Double.parseDouble(stringHeightCm);
-            }
-            catch (NumberFormatException nfe){
-                errorMessage="Boy(feet) sayı olmalı";
+                heightFeet = Double.parseDouble(stringHeightCm);
+            } catch (NumberFormatException nfe) {
+                errorMessage = "Boy(feet) sayı olmalı";
             }
             try {
-                heightInches=Double.parseDouble(stringHeightInches);
-            }
-            catch (NumberFormatException nfe){
-                errorMessage="Boy(inch) sayı olmalı";
+                heightInches = Double.parseDouble(stringHeightInches);
+            } catch (NumberFormatException nfe) {
+                errorMessage = "Boy(inch) sayı olmalı";
             }
 
-            heightCm=((heightFeet*12)+heightInches)*2.54;
-            heightCm=Math.round(heightCm);
+            heightCm = ((heightFeet * 12) + heightInches) * 2.54;
+            heightCm = Math.round(heightCm);
 
         }
 
 
+        EditText editTextWeight = (EditText) findViewById(R.id.editTextWeight);
+        String stringWeight = editTextWeight.getText().toString();
+        double doubleWeight = 0;
 
-
-        EditText editTextWeight=(EditText) findViewById(R.id.editTextWeight);
-        String stringWeight=editTextWeight.getText().toString();
-        double doubleWeight=0;
-
-        if(stringOlcuBiirimi.startsWith("p")) {
-            metric=false;
+        if (stringOlcuBiirimi.startsWith("p")) {
+            metric = false;
         }
 
-        if(metric==true){
+        if (metric == true) {
             try {
-                doubleWeight=Double.parseDouble(stringWeight);
+                doubleWeight = Double.parseDouble(stringWeight);
+            } catch (NumberFormatException nfe) {
+                errorMessage = "Kilo sayı olmalı";
             }
-            catch (NumberFormatException nfe){
-                errorMessage="Kilo sayı olmalı";
-            }
+
+        } else {
+
+
+            doubleWeight = Math.round(doubleWeight * 0.45359237);
 
         }
 
-        else{
-
-
-
-            doubleWeight = Math.round(doubleWeight *0.45359237);
-
-        }
-
-        editTextWeight.setText("" +doubleWeight);
+        editTextWeight.setText("" + doubleWeight);
 
 
 
@@ -423,20 +390,9 @@ public class user_infos extends AppCompatActivity {
         editTextWeight.setText("" +doubleWeight);*/
 
 
+        Spinner spinnerAktiviteSeviyesi = (Spinner) findViewById(R.id.spinner3);
 
-
-
-
-        Spinner spinnerAktiviteSeviyesi=(Spinner)findViewById(R.id.spinner3);
-
-        int intActivityLevel=spinnerAktiviteSeviyesi.getSelectedItemPosition();
-
-
-
-
-
-
-
+        int intActivityLevel = spinnerAktiviteSeviyesi.getSelectedItemPosition();
 
 
         if (errorMessage.isEmpty()) {
@@ -444,7 +400,17 @@ public class user_infos extends AppCompatActivity {
             imageViewError.setVisibility(View.GONE);
 
 
-            DbAdapter db = new DbAdapter(this);
+            DbAdapter db = new DbAdapter(this) {
+                @Override
+                public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+                }
+
+                @Override
+                public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+                }
+            };
             db.open();
 
             String dogumTarihiSQL = db.quoteSmart(dogumTarihi);
@@ -452,19 +418,19 @@ public class user_infos extends AppCompatActivity {
             double heightCmSQL = db.quoteSmart(heightCm);
             int intActivityLevelSQL = db.quoteSmart(intActivityLevel);
             String doubleWeightSQL = db.quoteSmart(stringWeight);
-            String stringOlcuSQL=db.quoteSmart(stringOlcuBiirimi);
+            String stringOlcuSQL = db.quoteSmart(stringOlcuBiirimi);
 
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
                 String email = user.getEmail();
                 //String userID = user.getUid();
-                String stringInput = "NULL,"+dogumTarihiSQL + "," + stringCinsiyetSQL + "," + heightCmSQL + "," + intActivityLevelSQL + ",'" + email + "',"+stringOlcuSQL;
+                String stringInput = "NULL," + dogumTarihiSQL + "," + stringCinsiyetSQL + "," + heightCmSQL + "," + intActivityLevelSQL + ",'" + email + "'," + stringOlcuSQL;
 
-                db.insert("USER", "user_id,user_dogum_tarih,user_cinsiyet,user_boy,user_aktivite_derecesi,user_email,user_olcu", stringInput);
+                db.insert("USER", "_id,user_dogum_tarih,user_cinsiyet,user_boy,user_aktivite_derecesi,user_email,user_olcu", stringInput);
 
-                DateFormat df=new SimpleDateFormat("dd-MM-yyyy");
-                String hedefTarih=df.format(Calendar.getInstance().getTime());
+                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                String hedefTarih = df.format(Calendar.getInstance().getTime());
 
 
 
@@ -473,15 +439,14 @@ public class user_infos extends AppCompatActivity {
                 int ay=cc.get(Calendar.MONTH);
                 int gün=cc.get(Calendar.DAY_OF_MONTH);
                 String hedefTarih=gün+"-"+ay+"-"+yıl;*/
-                String hedefTarihSQL=db.quoteSmart(hedefTarih);
+                String hedefTarihSQL = db.quoteSmart(hedefTarih);
 
 
+                stringInput = "NULL," + doubleWeightSQL + "," + hedefTarihSQL;
 
-                stringInput =  "NULL," +  doubleWeightSQL + "," +hedefTarihSQL;
+                db.insert("hedef", "_id,hedef_mevcut_kilo,hedef_mevcut_kilo_tarih", stringInput);
 
-                db.insert("hedef", "hedef_id,hedef_mevcut_kilo,hedef_mevcut_kilo_tarih", stringInput);
-
-                Intent i=new Intent(user_infos.this,calculate_bmr.class);
+                Intent i = new Intent(user_infos.this, calculate_bmr.class);
                 startActivity(i);
             }
 
@@ -493,10 +458,6 @@ public class user_infos extends AppCompatActivity {
         }
 
 
+    }}
 
 
-
-    }
-
-
-}

@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/hedef"
+            android:title="Hedefler" />
+        <item
+            android:id="@+id/kategori"
+            android:title="Kategoriler" />
+        <item
+            android:id="@+id/yemek"
+            android:title="Besinler" />
+    </group>
+</menu>
