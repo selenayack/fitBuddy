@@ -1,15 +1,410 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AccountFragment">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Account Fragment"
-        android:textSize="25dp"
-        android:layout_centerInParent="true"/>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="@drawable/linear"
+                android:textAlignment="textEnd"
+                app:layout_collapseMode="pin"
+                app:title="FitBuddy"
+                app:titleTextColor="@color/white" />
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            >
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="50dp"
+                android:layout_marginTop="80dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- FloatingActionButton -->
+
+                    <!-- Container LinearLayout for stacked TextViews -->
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/KahvatıAdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="30dp"
+                        app:backgroundTint="@color/orange"
+                        app:fabSize="mini"
+                        app:srcCompat="@drawable/baseline_person_24"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewMail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="70dp"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textViewİsim"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/orange"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="70dp"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </TableRow>
+            </TableLayout>
+
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+               >
+
+                <!-- dogum tarihi  -->
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    >
+
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/dogum_tarihi" />
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <Spinner
+                                android:id="@+id/spinner4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                tools:ignore="TouchTargetSizeCheck" />
+
+                            <Spinner
+                                android:id="@+id/spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:entries="@array/aylar"
+                                tools:ignore="TouchTargetSizeCheck" />
+
+                            <Spinner
+                                android:id="@+id/spinner5"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                tools:ignore="TouchTargetSizeCheck" />
+                        </TableRow>
+
+                    </TableLayout>
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <!-- dogum tarihi  -->
+
+
+                <!-- cinsiyet  -->
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="24dp">
+
+                    <TextView
+                        android:id="@+id/textView24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/cinsiyet" />
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <RadioGroup
+                                android:id="@+id/radioGrupCinsiyet"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/radioButton2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/erkek"
+                                    tools:ignore="TouchTargetSizeCheck" />
+
+                                <RadioButton
+                                    android:id="@+id/radioButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="20dp"
+                                    android:text="@string/kadın"
+                                    tools:ignore="TouchTargetSizeCheck" />
+
+                            </RadioGroup>
+
+
+                        </TableRow>
+                    </TableLayout>
+                </TableRow>
+                <!-- cinsiyet  -->
+
+                <!-- ölcü birimi-->
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/ölçü_birimi" />
+
+                    <Spinner
+                        android:id="@+id/spinnerHaftalıkKg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="24dp"
+                        android:entries="@array/ölcüBirimi"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </TableRow>
+                <!-- ölcü birimi-->
+                <!--boy-->
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/boy" />
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/editTextHeightCm"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:ems="3"
+                                android:inputType="number" />
+
+                            <EditText
+                                android:id="@+id/editTextHeightInches"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:ems="3"
+                                android:inputType="number" />
+
+                            <TextView
+                                android:id="@+id/textViewCm"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/cm" />
+
+                        </TableRow>
+                    </TableLayout>
+                </TableRow>
+                <!--boy-->
+                <!--kilo-->
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/kilo" />
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/editTextWeight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:ems="3"
+                                android:inputType="number" />
+
+                            <TextView
+                                android:id="@+id/textViewOlcuBirimi2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/kg" />
+                        </TableRow>
+                    </TableLayout>
+                </TableRow>
+                <!--kilo-->
+
+                <!-- aktivite-->
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/aktivite_seviyesi" />
+
+                    <Spinner
+                        android:id="@+id/spinner3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:entries="@array/aktiviteSeviyesi"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </TableRow>
+                <!-- aktivite-->
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/blank" />
+
+
+                </TableRow>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imageViewerrormessage"
+                            android:layout_width="40dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="0dp"
+                            android:src="@drawable/error" />
+
+
+                        <TextView
+                            android:id="@+id/textViewErrorMessage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="@string/blank" />
+
+
+                    </TableRow>
+                </TableLayout>
+
+                <Button
+                    android:id="@+id/buttonBilgiGuncelle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    android:background="@drawable/buton"
+                    android:text="Bilgilerimi Güncelle"
+                    android:textColor="@color/white" />
+
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</ScrollView>
+
+
+
+
+
+
+

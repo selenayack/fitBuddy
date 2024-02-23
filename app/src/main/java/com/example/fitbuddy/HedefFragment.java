@@ -1,7 +1,5 @@
 package com.example.fitbuddy;
 
-import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,16 +13,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import java.util.Calendar;
 
 public class HedefFragment extends Fragment {
     private View view;
+    Cursor listCursorHedef;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         view=inflater.inflate(R.layout.fragment_hedef, container, false);
 
         ((MainActivity2)getActivity()).getSupportActionBar().setTitle("Hedefler");
@@ -43,6 +41,117 @@ public class HedefFragment extends Fragment {
         //errorMesajınıSakla();
 
         kullanılanOlcu();
+
+
+
+
+
+        DbAdapter db = new DbAdapter(getActivity()) {
+            @Override
+            public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+            }
+
+            @Override
+            public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+            }
+        };
+        db.open();
+
+
+
+
+        String fields[] = new String[]{
+                "_id",
+                "hedef_kalori INT",
+                "hedef_protein INT",
+                "hedef_carb INT",
+                "hedef_yag INT",
+                "hedef_kalori_aktiviteİle INT",
+                "hedef_protein_aktiviteİle INT",
+                "hedef_carb_aktiviteİle INT",
+                "hedef_yag_aktiviteİle INT",
+                "hedef_kalori_aktivite_diyet_ile INT",
+                "hedef_protein_aktivite_diyet_ile INT",
+                "hedef_carb_aktivite_diyet_ile INT",
+                "hedef_yag_aktivite_diyet_ile INT"
+        };
+
+        listCursorHedef = db.select("hedef", fields, "", "", "_id", "ASC");
+
+
+
+// String currentIdSQL = db.quoteSmart(currentId);
+
+        String currentId = listCursorHedef.getString(0);
+        String currentName = listCursorHedef.getString(1);
+        Cursor HedefCursor = db.select("hedef", fields, "_id", currentId);
+
+
+
+        if (HedefCursor != null && HedefCursor.moveToFirst()) {
+
+            String StringId =HedefCursor.getString(0);
+
+            String StringKalori =HedefCursor.getString(1);
+            String StringProtein = HedefCursor.getString(2);
+            String StringCarb  = HedefCursor.getString(3);
+            String StringYag =HedefCursor.getString(4);
+            String StringKaloriAktivite = HedefCursor.getString(5);
+            String StringProteinAktivite = HedefCursor.getString(6);
+            String StringCarbAktivite = HedefCursor.getString(7);
+            String StringYagAktivite= HedefCursor.getString(8);
+            String StringKaloriAktiviteDiyet = HedefCursor.getString(9);
+            String StringProteinAktiviteDiyet = HedefCursor.getString(10);
+            String StringCarbAktiviteDiyet  = HedefCursor.getString(11);
+            String StringYagAktiviteDiyet= HedefCursor.getString(12);
+
+
+
+            TextView textViewFoodEnergyYüzde =  view.findViewById(R.id.textViewFoodEnergyYüzde);
+            textViewFoodEnergyYüzde.setText(StringKalori);
+
+            TextView textViewFoodproteinYüzde = view.findViewById(R.id.textViewFoodProteinYüzde);
+            textViewFoodproteinYüzde.setText(StringProtein);
+
+            TextView textViewFoodCarbYüzde =   view.findViewById(R.id.textViewFoodCarbYüzde);
+            textViewFoodCarbYüzde.setText(StringCarb);
+
+            TextView textViewFoodYagYüzde =  view.findViewById(R.id.textViewFoodFatYüzde);
+            textViewFoodYagYüzde.setText(StringYag);
+
+
+            TextView textViewFoodEnergyN =  view.findViewById(R.id.textViewFoodEnergyN);
+            textViewFoodEnergyN.setText(StringKaloriAktivite);
+
+            TextView textViewFoodproteinN =  view.findViewById(R.id.textViewFoodProteinN);
+            textViewFoodproteinN.setText(StringProteinAktivite);
+
+            TextView textViewFoodCarbN =   view.findViewById(R.id.textViewFoodCarbN);
+            textViewFoodCarbN.setText(StringCarbAktivite);
+
+            TextView textViewFoodYagN =  view.findViewById(R.id.textViewFoodFatN);
+            textViewFoodYagN.setText(StringYagAktivite);
+
+            TextView textViewKaloriDiyetle = view.findViewById(R.id.textViewDiyetle);
+            textViewKaloriDiyetle.setText(StringKaloriAktiviteDiyet);
+
+            TextView textViewproteinDiyetle =  view.findViewById(R.id.textViewProteinDiyetle);
+            textViewproteinDiyetle.setText(StringProteinAktiviteDiyet);
+
+            TextView textViewCarbDiyetle =   view.findViewById(R.id.textViewCarbDiyetle);
+            textViewCarbDiyetle.setText(StringCarbAktiviteDiyet);
+
+            TextView textViewYagDiyetle =  view.findViewById(R.id.textViewYagDiyetle);
+            textViewYagDiyetle.setText(StringYagAktiviteDiyet);
+
+            }
+
+         else {
+            Log.e("ERROR_TAG", "Cursor is empty");
+        }
+
 
         return view;
 
@@ -170,12 +279,12 @@ public class HedefFragment extends Fragment {
             System.out.println("dogum" + stringUserDogum);
 
 
-            //Get yas
+
             String[] items1 = stringUserDogum.split("-");
             String stringDay = items1[0];
             String stringMonth = items1[1];
             String stringYear = items1[2];
-            //yılı da doğru aldı
+
 
 
             int intYear = 0;
@@ -186,7 +295,7 @@ public class HedefFragment extends Fragment {
                 System.out.println("Parse edilemedi");
             }
 
-            //System.out.println("yıl"+intYear);  bu da doğru
+
 
 
             int intMonth = 0;
@@ -346,16 +455,108 @@ public class HedefFragment extends Fragment {
             db.update("hedef", "_id", hedefId, "hedef_yag_aktivite_diyet_ile", yagAktiviteDiyetSQL);
 
 
-            db.close();
 
 
-            //}
 
-        /*else {
-            textViewErrorMessage.setText(errorMessage);
-            textViewErrorMessage.setVisibility(View.VISIBLE);
-            imageViewError.setVisibility(View.VISIBLE);
-        }*/
+        String fields2[] = new String[]{
+                "_id",
+                "hedef_kalori INT",
+                "hedef_protein INT",
+                "hedef_carb INT",
+                "hedef_yag INT",
+                "hedef_kalori_aktiviteİle INT",
+                "hedef_protein_aktiviteİle INT",
+                "hedef_carb_aktiviteİle INT",
+                "hedef_yag_aktiviteİle INT",
+                "hedef_kalori_aktivite_diyet_ile INT",
+                "hedef_protein_aktivite_diyet_ile INT",
+                "hedef_carb_aktivite_diyet_ile INT",
+                "hedef_yag_aktivite_diyet_ile INT"
+        };
+
+        listCursorHedef = db.select("hedef", fields2, "", "", "_id", "ASC");
+
+
+
+// String currentIdSQL = db.quoteSmart(currentId);
+
+        String currentId = listCursorHedef.getString(0);
+        String currentName = listCursorHedef.getString(1);
+        Cursor HedefCursor = db.select("hedef", fields2, "_id", currentId);
+
+
+
+        if (HedefCursor != null && HedefCursor.moveToFirst()) {
+
+            String StringId =HedefCursor.getString(0);
+
+            String StringKalori =HedefCursor.getString(1);
+            String StringProtein = HedefCursor.getString(2);
+            String StringCarb  = HedefCursor.getString(3);
+            String StringYag =HedefCursor.getString(4);
+            String StringKaloriAktivite = HedefCursor.getString(5);
+            String StringProteinAktivite = HedefCursor.getString(6);
+            String StringCarbAktivite = HedefCursor.getString(7);
+            String StringYagAktivite= HedefCursor.getString(8);
+            String StringKaloriAktiviteDiyet = HedefCursor.getString(9);
+            String StringProteinAktiviteDiyet = HedefCursor.getString(10);
+            String StringCarbAktiviteDiyet  = HedefCursor.getString(11);
+            String StringYagAktiviteDiyet= HedefCursor.getString(12);
+
+
+
+            TextView textViewFoodEnergyYüzde =  view.findViewById(R.id.textViewFoodEnergyYüzde);
+            textViewFoodEnergyYüzde.setText(StringKalori);
+
+            TextView textViewFoodproteinYüzde = view.findViewById(R.id.textViewFoodProteinYüzde);
+            textViewFoodproteinYüzde.setText(StringProtein);
+
+            TextView textViewFoodCarbYüzde =   view.findViewById(R.id.textViewFoodCarbYüzde);
+            textViewFoodCarbYüzde.setText(StringCarb);
+
+            TextView textViewFoodYagYüzde =  view.findViewById(R.id.textViewFoodFatYüzde);
+            textViewFoodYagYüzde.setText(StringYag);
+
+
+            TextView textViewFoodEnergyN =  view.findViewById(R.id.textViewFoodEnergyN);
+            textViewFoodEnergyN.setText(StringKaloriAktivite);
+
+            TextView textViewFoodproteinN =  view.findViewById(R.id.textViewFoodProteinN);
+            textViewFoodproteinN.setText(StringProteinAktivite);
+
+            TextView textViewFoodCarbN =   view.findViewById(R.id.textViewFoodCarbN);
+            textViewFoodCarbN.setText(StringCarbAktivite);
+
+            TextView textViewFoodYagN =  view.findViewById(R.id.textViewFoodFatN);
+            textViewFoodYagN.setText(StringYagAktivite);
+
+            TextView textViewKaloriDiyetle = view.findViewById(R.id.textViewDiyetle);
+            textViewKaloriDiyetle.setText(StringKaloriAktiviteDiyet);
+
+            TextView textViewproteinDiyetle =  view.findViewById(R.id.textViewProteinDiyetle);
+            textViewproteinDiyetle.setText(StringProteinAktiviteDiyet);
+
+            TextView textViewCarbDiyetle =   view.findViewById(R.id.textViewCarbDiyetle);
+            textViewCarbDiyetle.setText(StringCarbAktiviteDiyet);
+
+            TextView textViewYagDiyetle =  view.findViewById(R.id.textViewYagDiyetle);
+            textViewYagDiyetle.setText(StringYagAktiviteDiyet);
+
+
+
+
+        }
+
+        else {
+            Log.e("ERROR_TAG", "Cursor is empty");
+        }
+
+
+        db.close();
+
+
+
+
         }
 
 

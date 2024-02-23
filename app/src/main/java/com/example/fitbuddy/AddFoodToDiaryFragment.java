@@ -1,8 +1,5 @@
 package com.example.fitbuddy;
 
-import static com.example.fitbuddy.FoodDiaryAddFoodViewFragment.ARG_PARAM1;
-import static com.example.fitbuddy.FoodDiaryAddFoodViewFragment.ARG_PARAM2;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
@@ -24,8 +21,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -52,7 +47,7 @@ public class AddFoodToDiaryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
 
         view = inflater.inflate(R.layout.fragment_add_food_to_diary, container, false);
         ((MainActivity2) getActivity()).getSupportActionBar().setTitle("Besin Günlüğü");
@@ -165,7 +160,6 @@ public class AddFoodToDiaryFragment extends Fragment {
         db.open();
 
 
-        // Kategorinin altındaki besinleri listele
 
 
         addFoodCursor.moveToPosition(listItemIdClicked);
@@ -241,7 +235,7 @@ public class AddFoodToDiaryFragment extends Fragment {
 
         foodListView.setAdapter(continentAdapter);
 
-        // Besinlere tıklama olayı eklenebilir
+
         foodListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
@@ -299,7 +293,7 @@ public class AddFoodToDiaryFragment extends Fragment {
         Cursor foodCursor = db.select("food", fields, "_id", currentId);
 
         if (foodCursor != null && foodCursor.moveToFirst()) {
-            // Cursor boş değilse işlemleri gerçekleştir
+
             String StringId = foodCursor.getString(0);
             String Stringİsim = foodCursor.getString(1);
             String StringPorsiyonBuyuklugu = foodCursor.getString(2);
@@ -350,7 +344,7 @@ public class AddFoodToDiaryFragment extends Fragment {
             TextView textViewFoodEnergyN = (TextView) getView().findViewById(R.id.textViewFoodEnergyN);
             textViewFoodEnergyN.setText(StringKaloriHesaplanmıs);
 
-            TextView textViewFoodproteinN = (TextView) getView().findViewById(R.id.textViewFoodProteinN);
+            TextView textViewFoodproteinN = (TextView) getView().findViewById(R.id.textViewProteinDiyetle);
             textViewFoodproteinN.setText(StringProteinHesaplanmıs);
 
             TextView textViewFoodCarbN = (TextView) getView().findViewById(R.id.textViewFoodCarbN);
@@ -512,7 +506,6 @@ public class AddFoodToDiaryFragment extends Fragment {
 
             if (foodCursor != null && foodCursor.moveToFirst()) {
 
-            // Cursor boş değilse işlemleri gerçekleştir
                 String StringId = foodCursor.getString(0);
                 String Stringİsim = foodCursor.getString(1);
                 String StringPorsiyonBuyuklugu = foodCursor.getString(2);

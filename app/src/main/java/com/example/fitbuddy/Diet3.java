@@ -16,7 +16,7 @@ import android.widget.TextView;
 public class Diet3 extends AppCompatActivity {
 
     public Diet3() {
-        // Boş yapıcı metot
+
     }
 
     @Override

@@ -39,7 +39,7 @@ public class CategoriesAdd  extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // onViewCreated içinde createNewKategori metodunu çağır
+
         createNewKategori();
 
         Button btnKaydet = mainView.findViewById(R.id.buttonKaydet);
@@ -110,7 +110,7 @@ public class CategoriesAdd  extends Fragment {
                     Log.d("DEBUG_TAG", "Satır sayısı: " + rowCount);
 
                     if (rowCount > 0 && findParentId.moveToFirst()) {
-                        // Satır üzerinde işlemleri gerçekleştir
+
                         int categoryIndex = findParentId.getColumnIndex("category_parent_id");
 
                         if (categoryIndex != -1) {
@@ -124,7 +124,7 @@ public class CategoriesAdd  extends Fragment {
                         Log.d("DEBUG_TAG", "Eşleşen satır bulunamadı");
                     }
                 } finally {
-                    // Finally bloğunda Cursor'ı kapat
+
                     findParentId.close();
                 }
             } else {
@@ -135,7 +135,7 @@ public class CategoriesAdd  extends Fragment {
 
         if (error == 0) {
             if (parentId != null) {
-                // parentId mevcut, işlemleri gerçekleştir
+
                 String stringİsimSQL = db.quoteSmart(stringİsim);
                 String parentIdSQL = db.quoteSmart(parentId);
 
@@ -145,12 +145,12 @@ public class CategoriesAdd  extends Fragment {
                 Toast.makeText(getActivity(),"Yeni kategori oluşturuldu",Toast.LENGTH_LONG).show();
 
             } else {
-                // parentId null ise, bir hata durumu olabilir, gerekli işlemleri yapın
+
                 Log.e("ERROR_TAG", "parentId null, işlem gerçekleştirilemedi");
             }
 
         } else {
-            // Hata durumu varsa gerekli işlemleri yapın
+
             Log.e("ERROR_TAG", "Hata durumu: " + error);
         }
 

@@ -49,49 +49,7 @@ public class KategoriFragment extends Fragment {
     }
 
 
-
-
     /** @noinspection deprecation*/
-
-
-       /* @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            int id = item.getItemId();
-            if (id == R.id.action_plus) {
-                // Add the necessary operations to be performed when clicked
-                Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_LONG).show();
-                return true;
-            }
-            return super.onOptionsItemSelected(item);
-        }
-
-
-
-    /**
-     * @param menu     The options menu in which you place your items.
-     * @param inflater
-
-     * @noinspection deprecation
-     */
-
-   /* @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.categories_menu, menu);
-        MenuItem actionPlusItem = menu.findItem(R.id.action_plus);
-        actionPlusItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_LONG).show();
-                // Diğer işlemleri burada yapabilirsiniz
-                return true;
-            }
-        });
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-    */
-
-
-
 
 
 
@@ -170,22 +128,46 @@ public class KategoriFragment extends Fragment {
     }
 
     private void listİtemClicked(int listItemIdClicked) {
-        //Toast.makeText(getActivity(),"ID"+listItemIdClicked, Toast.LENGTH_SHORT).show();
-
         categoriesCursor.moveToPosition(listItemIdClicked);
 
-        String id=categoriesCursor.getString(0);
-        String name=categoriesCursor.getString(1);
-        String parentId=categoriesCursor.getString(2);
-        ((MainActivity2)getActivity()).getSupportActionBar().setTitle(name);
-        populateList(id,name);
+        String id = categoriesCursor.getString(0);
+        String name = categoriesCursor.getString(1);
+        String parentId = categoriesCursor.getString(2);
+        ((MainActivity2) getActivity()).getSupportActionBar().setTitle(name);
 
-
-
-        /*Toast.makeText(getActivity(), "Id:" + categoriesCursor.getString(0) + "\n" +
-                        "İsim:" + categoriesCursor.getString(1),
-                Toast.LENGTH_SHORT).show();*/
+        // Eğer alt kategori varsa alt kategorileri göster, yoksa boş bir sayfaya geçme
+        if (hasSubCategories(id)) {
+            populateList(id, name);
+        }
     }
+
+    private boolean hasSubCategories(String parentId) {
+        DbAdapter db = new DbAdapter(getActivity()) {
+            @Override
+            public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+            }
+
+            @Override
+            public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+            }
+        };
+        db.open();
+
+        Cursor subCursor = db.select("categories", new String[]{"_id"}, "category_parent_id", parentId);
+        boolean hasSubCategories = subCursor != null && subCursor.getCount() > 0;
+
+        if (subCursor != null) {
+            subCursor.close();
+        }
+        db.close();
+
+        return hasSubCategories;
+    }
+
+
+
 
     @SuppressLint("Range")
     private void populateListSub(String parentId, String parentName) {
@@ -256,7 +238,7 @@ public class KategoriFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         mainView=inflater.inflate(R.layout.fragment_kategori, container, false);
         ((MainActivity2)getActivity()).getSupportActionBar().setTitle("Kategoriler");
 
@@ -267,7 +249,7 @@ public class KategoriFragment extends Fragment {
         btnGecis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Diğer fragmente geçiş yap
+
                 Fragment yeniFragment = new CategoriesAdd();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.container, yeniFragment);

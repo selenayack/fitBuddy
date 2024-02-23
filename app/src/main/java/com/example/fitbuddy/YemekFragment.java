@@ -13,18 +13,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class YemekFragment extends Fragment {
 
@@ -86,22 +81,19 @@ public class YemekFragment extends Fragment {
 
         }
 
-        /** @noinspection deprecation*/
-        public boolean onOptionsItemSelected(MenuItem menuItem) {
 
-            int id = menuItem.getItemId();
-            if (id == R.id.action_plus) {
-                // Buraya artı simgesine tıklanıldığında yapılacak işlemleri ekleyin
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // Geri tuşuna basıldığında yapılacak işlemler
+                requireActivity().getSupportFragmentManager().popBackStack();
                 return true;
-            }
-            if (id == R.id.action_edit) {
-                // Buraya düzenle simgesine tıklanıldığında yapılacak işlemleri ekleyin
-                editFood();
-                return true;
-            }
-
-            return super.onOptionsItemSelected(menuItem);
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
+
+
 
 
     private void editFood() {
@@ -148,7 +140,7 @@ public class YemekFragment extends Fragment {
 // String currentIdSQL = db.quoteSmart(currentId);
             Cursor foodCursor = db.select("food", fields, "_id", currentId);
 
-            // Cursor boş değilse işlemleri gerçekleştir
+
             String StringId = foodCursor.getString(0);
             String Stringİsim = foodCursor.getString(1);
             String StringPorsiyonBuyuklugu = foodCursor.getString(2);
@@ -273,7 +265,7 @@ public class YemekFragment extends Fragment {
         Cursor foodCursor = db.select("food", fields, "_id", currentId);
 
         if (foodCursor != null && foodCursor.moveToFirst()) {
-            // Cursor boş değilse işlemleri gerçekleştir
+
             String StringId = foodCursor.getString(0);
             String Stringİsim = foodCursor.getString(1);
             String StringPorsiyonBuyuklugu = foodCursor.getString(2);
@@ -316,7 +308,7 @@ public class YemekFragment extends Fragment {
             TextView textViewFoodEnergyN=(TextView)getView().findViewById(R.id.textViewFoodEnergyN);
             textViewFoodEnergyN.setText(StringKaloriHesaplanmıs);
 
-            TextView textViewFoodproteinN=(TextView)getView().findViewById(R.id.textViewFoodProteinN);
+            TextView textViewFoodproteinN=(TextView)getView().findViewById(R.id.textViewProteinDiyetle);
             textViewFoodproteinN.setText(StringProteinHesaplanmıs);
 
             TextView textViewFoodCarbN=(TextView)getView().findViewById(R.id.textViewFoodCarbN);
@@ -327,7 +319,7 @@ public class YemekFragment extends Fragment {
 
 
 
-            // Diğer işlemleri burada devam ettirin
+
         } else {
             Log.e("ERROR_TAG", "FoodCursor boş");
         }

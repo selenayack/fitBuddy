@@ -49,61 +49,58 @@ public class DietFragment extends Fragment {
 
             View view = inflater.inflate(R.layout.fragment_diet, container, false);
 
-            LinearLayout linearLayout1 = view.findViewById(R.id.linearlayout1); // Bu kısmı kendi layoutunuzdaki LinearLayout'a uygun ID ile değiştirin
+            LinearLayout linearLayout1 = view.findViewById(R.id.linearlayout1);
 
-            // Tıklama olayını dinlemek için onClickListener ekleyin
             linearLayout1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Yeni bir activity başlatmak için Intent kullanarak startActivity metodunu çağırın
-                    Intent intent = new Intent(getActivity(), Diet1.class); // YourNewActivity yerine açmak istediğiniz Activity'nin adını yazın
+
+                    Intent intent = new Intent(getActivity(), Diet1.class);
                     startActivity(intent);
                 }
             });
 
 
-    LinearLayout linearLayout2 = view.findViewById(R.id.linearlayout2); // Bu kısmı kendi layoutunuzdaki LinearLayout'a uygun ID ile değiştirin
+    LinearLayout linearLayout2 = view.findViewById(R.id.linearlayout2);
 
-    // Tıklama olayını dinlemek için onClickListener ekleyin
+
             linearLayout2.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            // Yeni bir activity başlatmak için Intent kullanarak startActivity metodunu çağırın
-            Intent intent = new Intent(getActivity(), Diet2.class); // YourNewActivity yerine açmak istediğiniz Activity'nin adını yazın
+
+            Intent intent = new Intent(getActivity(), Diet2.class);
             startActivity(intent);
         }
     });
             LinearLayout linearLayout3 = view.findViewById(R.id.linearlayout3); // Bu kısmı kendi layoutunuzdaki LinearLayout'a uygun ID ile değiştirin
 
-            // Tıklama olayını dinlemek için onClickListener ekleyin
             linearLayout3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Yeni bir activity başlatmak için Intent kullanarak startActivity metodunu çağırın
-                    Intent intent = new Intent(getActivity(), Diet3.class); // YourNewActivity yerine açmak istediğiniz Activity'nin adını yazın
+
+                    Intent intent = new Intent(getActivity(), Diet3.class);
                     startActivity(intent);
                 }
             });
-            LinearLayout linearLayout4 = view.findViewById(R.id.linearlayout4); // Bu kısmı kendi layoutunuzdaki LinearLayout'a uygun ID ile değiştirin
+            LinearLayout linearLayout4 = view.findViewById(R.id.linearlayout4);
 
-            // Tıklama olayını dinlemek için onClickListener ekleyin
+
             linearLayout4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Yeni bir activity başlatmak için Intent kullanarak startActivity metodunu çağırın
-                    Intent intent = new Intent(getActivity(), Diet4.class); // YourNewActivity yerine açmak istediğiniz Activity'nin adını yazın
+
+                    Intent intent = new Intent(getActivity(), Diet4.class);
                     startActivity(intent);
                 }
             });
 
-            LinearLayout linearLayout5 = view.findViewById(R.id.linearlayout5); // Bu kısmı kendi layoutunuzdaki LinearLayout'a uygun ID ile değiştirin
+            LinearLayout linearLayout5 = view.findViewById(R.id.linearlayout5);
 
-            // Tıklama olayını dinlemek için onClickListener ekleyin
             linearLayout5.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Yeni bir activity başlatmak için Intent kullanarak startActivity metodunu çağırın
-                    Intent intent = new Intent(getActivity(), Diet5.class); // YourNewActivity yerine açmak istediğiniz Activity'nin adını yazın
+
+                    Intent intent = new Intent(getActivity(), Diet5.class);
                     startActivity(intent);
                 }
             });

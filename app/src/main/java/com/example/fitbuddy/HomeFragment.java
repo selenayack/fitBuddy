@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,6 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -32,11 +40,44 @@ public class HomeFragment extends Fragment {
     Cursor addFoodCursor;
     private View view;
 
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private NavigationView navigationView;
+
+    private  HedefFragment hedefFragment = new HedefFragment();
+    private  KategoriFragment kategoriFragment = new KategoriFragment();
+    private YemekFragment yemekFragment = new YemekFragment();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
+
+
+        drawerLayout = view.findViewById(R.id.drawer_layout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        Toolbar toolbar = view.findViewById(R.id.toolBar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        }
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+                NavigationView navigationView = view.findViewById(R.id.nav_view);
+                setupDrawerContent(navigationView);
+            }
+        });
+
+
 
         if (isDatabaseLoaded()==false) {
 
@@ -115,9 +156,6 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-
-
 
 
 
@@ -206,6 +244,70 @@ public class HomeFragment extends Fragment {
 
        // db.close();
 
+    }
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        // Menü öğesine tıklandığında ilgili fragmenti aç
+                        selectDrawerItem(item);
+                        drawerLayout.closeDrawers(); // Drawer'ı kapat
+                        return true;
+                    }
+                });
+    }
+
+
+
+
+    public void selectDrawerItem(MenuItem menuItem) {
+        Fragment fragment = null;
+        int itemId = menuItem.getItemId();
+
+        if (itemId == R.id.hedef) {
+            fragment = hedefFragment;
+        } else if (itemId == R.id.kategori) {
+            fragment = kategoriFragment;
+        } else if (itemId == R.id.yemek) {
+            fragment = yemekFragment;
+        }
+
+        if (fragment != null) {
+            setFragment(fragment);
+            setTitle(menuItem.getTitle());
+        }
+
+        menuItem.setChecked(true);
+        drawerLayout.closeDrawer(GravityCompat.START); // Drawer'ı kapat
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    private void setFragment(Fragment fragment) {
+        if (getActivity() != null) {
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+    }
+
+    private void setTitle(CharSequence title) {
+        if (getActivity() != null) {
+            getActivity().setTitle(title);
+        }
     }
 
 

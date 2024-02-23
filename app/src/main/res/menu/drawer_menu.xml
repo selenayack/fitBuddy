@@ -1,14 +1,23 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group android:checkableBehavior="single">
+
+
         <item
             android:id="@+id/hedef"
-            android:title="Hedefler" />
+            android:title="Hedefler"
+
+            />
         <item
             android:id="@+id/kategori"
-            android:title="Kategoriler" />
+            android:title="Kategoriler"
+
+           />
         <item
             android:id="@+id/yemek"
-            android:title="Besinler" />
+            android:title="Besinler"
+
+            />
     </group>
 </menu>

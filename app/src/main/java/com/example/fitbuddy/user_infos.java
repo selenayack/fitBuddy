@@ -65,7 +65,7 @@ public class user_infos extends AppCompatActivity {
         ArrayAdapter<String> adapterYear = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arraySpinnerDTYıl);
         spinnerDTYıl.setAdapter(adapterYear);
 
-        Button buttonDevam=(Button) findViewById(R.id.buttonDevam);
+        Button buttonDevam=(Button) findViewById(R.id.buttonBilgiGuncelle);
         buttonDevam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -424,10 +424,10 @@ public class user_infos extends AppCompatActivity {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
                 String email = user.getEmail();
-                //String userID = user.getUid();
-                String stringInput = "NULL," + dogumTarihiSQL + "," + stringCinsiyetSQL + "," + heightCmSQL + "," + intActivityLevelSQL + ",'" + email + "'," + stringOlcuSQL;
+                String userID = user.getUid();
+                String stringInput = "NULL,'" + userID+"',"+ dogumTarihiSQL + "," + doubleWeightSQL+","+ stringCinsiyetSQL + "," + heightCmSQL + "," + intActivityLevelSQL + ",'" + email + "'," + stringOlcuSQL;
 
-                db.insert("USER", "_id,user_dogum_tarih,user_cinsiyet,user_boy,user_aktivite_derecesi,user_email,user_olcu", stringInput);
+                db.insert("USER", "_id,user_id,user_dogum_tarih,user_kilo,user_cinsiyet,user_boy,user_aktivite_derecesi,user_email,user_olcu", stringInput);
 
                 DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                 String hedefTarih = df.format(Calendar.getInstance().getTime());

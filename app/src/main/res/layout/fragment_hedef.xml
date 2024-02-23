@@ -62,6 +62,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
                         android:text="@string/Mevcut_Kilo" />
 
                     <EditText
@@ -96,6 +97,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
+                        android:layout_marginLeft="5dp"
                         android:text="Hedef" />
 
                     <Spinner
@@ -120,6 +122,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
+                        android:layout_marginLeft="5dp"
                         android:text="@string/haftalık"/>
 
                     <Spinner
@@ -176,6 +179,231 @@
             </TableLayout>
 
             <!-- haftalık hedef-->
+
+            <TextView
+                android:id="@+id/textViewFoodKaloriTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:text="Hedef Kiloya Ulaşmak İçin"
+                android:textSize="18sp" />
+
+
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
+
+                    >
+
+
+                    <TextView
+                        android:id="@+id/textViewFoodBlank"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="70dp" />
+
+                    <TextView
+                        android:id="@+id/textViewFoodEnergy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="6dp"
+                        android:text="Kalori" />
+                    <TextView
+                        android:id="@+id/textViewFoodProtein"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Protein" />
+
+                    <TextView
+                        android:id="@+id/textViewFoodCarb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="6dp"
+                        android:text="Karbonhidrat" />
+                    <TextView
+                        android:id="@+id/textViewFoodFat"
+                        android:layout_width="match_parent"
+                        android:layout_marginRight="6dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Yağ" />
+
+
+
+
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+
+                    >
+
+
+                    <TextView
+                        android:id="@+id/textViewFoodBlankYüzde"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="0dp"
+                        android:text="Aktivite olmadan" />
+
+                    <TextView
+                        android:id="@+id/textViewFoodEnergyYüzde"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="0dp"
+                        android:text="Kalori" />
+
+                    <TextView
+                        android:id="@+id/textViewFoodProteinYüzde"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Protein" />
+                    <TextView
+                        android:id="@+id/textViewFoodCarbYüzde"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Karbonhidrat" />
+                    <TextView
+                        android:id="@+id/textViewFoodFatYüzde"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Yağ" />
+
+
+
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+
+                    >
+
+
+                    <TextView
+                        android:id="@+id/textViewFoodBlankN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="30dp"
+                        android:text="Aktivite İle" />
+                    <TextView
+                        android:id="@+id/textViewFoodEnergyN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Kalori" />
+                    <TextView
+                        android:id="@+id/textViewFoodProteinN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Protein" />
+                    <TextView
+                        android:id="@+id/textViewFoodCarbN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Karbonhidrat" />
+                    <TextView
+                        android:id="@+id/textViewFoodFatN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Yağ" />
+
+
+
+
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+
+                    >
+
+
+                    <TextView
+                        android:id="@+id/textViewBos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="30dp"
+                        android:text="Aktivite ve Diyet İle" />
+                    <TextView
+                        android:id="@+id/textViewDiyetle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Kalori" />
+                    <TextView
+                        android:id="@+id/textViewProteinDiyetle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Protein" />
+                    <TextView
+                        android:id="@+id/textViewCarbDiyetle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Karbonhidrat" />
+                    <TextView
+                        android:id="@+id/textViewYagDiyetle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Yağ" />
+
+
+
+
+
+                </TableRow>
+            </TableLayout>
+
+
 
 
 

@@ -58,38 +58,38 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
+            android:id="@+id/btnIptal"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:id="@+id/btnIptal"
             android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/orange"
             android:text="İptal"
             android:textColor="@color/white"
-            android:textSize="14sp"
+            android:textSize="10sp"
             app:cornerRadius="20dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/orange"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/emailBox"
             app:layout_constraintBottom_toBottomOf="@id/dialogBox"
-            app:layout_constraintEnd_toStartOf="@id/btnSifirla"/>
+            app:layout_constraintEnd_toStartOf="@id/btnSifirla"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/emailBox" />
+
         <Button
+            android:id="@+id/btnSifirla"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:id="@+id/btnSifirla"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="40dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/orange"
             android:text="Sifre Sıfırla"
             android:textColor="@color/white"
-            android:textSize="14sp"
+            android:textSize="10sp"
             app:cornerRadius="20dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/orange"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/dialogBox"
-            app:layout_constraintStart_toEndOf="@id/btnIptal"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnIptal" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

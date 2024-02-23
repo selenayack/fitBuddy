@@ -340,7 +340,7 @@
         </TableLayout>
 
             <Button
-                android:id="@+id/buttonDevam"
+                android:id="@+id/buttonBilgiGuncelle"
                 android:background="@drawable/buton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

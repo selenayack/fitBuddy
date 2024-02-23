@@ -21,7 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity2 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity2 extends AppCompatActivity {
 
 
     private DrawerLayout drawerLayout;
@@ -46,35 +46,6 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        drawerLayout = findViewById(R.id.drawer_layout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-
-        Toolbar toolbar = findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
-
-
-
-
-        toolbar.setNavigationIcon(R.drawable.ic_custom_icon);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                drawerLayout.openDrawer(GravityCompat.START);
-                navigationView = findViewById(R.id.nav_view);
-                setupDrawerContent(navigationView);
-
-
-            }
-        });
-
-
-
 
 
         //bottomnavigation
@@ -118,40 +89,6 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
     }
 
 
-    private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        selectDrawerItem(item);
-                        return true;
-                    }
-                });
-    }
-
-    public void selectDrawerItem(MenuItem menuItem) {
-        Fragment fragment = null;
-        int itemId = menuItem.getItemId();
-
-     if (itemId == R.id.hedef) {
-            fragment = hedefFragment;
-        } else if (itemId == R.id.kategori) {
-            fragment = kategoriFragment;
-        } else if (itemId == R.id.yemek) {
-            fragment = yemekFragment;
-        }
-
-        if (fragment != null) {
-            setFragment(fragment);
-        }
-
-        menuItem.setChecked(true);
-        setTitle(menuItem.getTitle());
-        drawerLayout.closeDrawers();
-    }
-
-
-
 
     private void setFragment(Fragment fragment){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -177,8 +114,5 @@ public class MainActivity2 extends AppCompatActivity implements NavigationView.O
      * @param item The selected item
      * @return true to display the item as the selected item
      */
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
-    }
+
 }

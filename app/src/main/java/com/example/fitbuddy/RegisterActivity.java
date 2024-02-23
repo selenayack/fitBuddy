@@ -55,52 +55,6 @@ public class RegisterActivity extends AppCompatActivity {
         txtSifre=yeniKullanicisifre.getText().toString();
         txtİsim=yeniKullaniciİsim.getText().toString();
 
-        /*if(!TextUtils.isEmpty(txtİsim)&&!TextUtils.isEmpty(txtEmail)&&!TextUtils.isEmpty(txtSifre)){
-            mAuth.createUserWithEmailAndPassword(txtEmail,txtSifre)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {//kullanıcıyı kaydetmek için
-                            if(task.isSuccessful()){
-                                mUser=mAuth.getCurrentUser();
-                                mData=new HashMap<>();
-                                mData.put("kullaniciAdı",txtİsim);
-                                mData.put("kullaniciMail",txtEmail);
-                                mData.put("kullaniciSifre",txtSifre);
-                                mData.put("kullaniciId",mUser.getUid());
-
-                                mReference.child("kullanicilar").child(mUser.getUid())
-                                        .setValue(mData)
-                                        .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {//kullanıcıyı database e kaydetmek icin
-                                                if(task.isSuccessful()){
-                                                    Toast.makeText(RegisterActivity.this,"Kayit islemi basarili",Toast.LENGTH_SHORT).show();
-                                                    Intent girisSayfasi=new Intent(getApplicationContext(), MainActivity.class);
-                                                    startActivity(girisSayfasi);
-                                                }
-                                                else{
-                                                    Toast.makeText(RegisterActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                                                }
-
-                                            }
-                                        });
-
-
-                            }
-                            else{
-                                Toast.makeText(RegisterActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                            }
-
-                        }
-                    });
-        }
-
-        else{
-            Toast.makeText(this,"E mail ve sifre bos olamaz",Toast.LENGTH_SHORT).show();
-        }*/
-
-
-
 
         if(!TextUtils.isEmpty(txtİsim)&&!TextUtils.isEmpty(txtEmail)&&!TextUtils.isEmpty(txtSifre)){
             mAuth.createUserWithEmailAndPassword(txtEmail,txtSifre)

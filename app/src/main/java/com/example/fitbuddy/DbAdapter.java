@@ -16,7 +16,7 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
 
 
     private static final String DATABASE_NAME = "fitBuddyDiet";
-    private static final int DATABASE_VERSION = 309;
+    private static final int DATABASE_VERSION = 316;
 
     private final Context context;
     private DatabaseHelper dbHelper;
@@ -83,6 +83,7 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
                 db.execSQL("CREATE TABLE IF NOT EXISTS USER("+
                         "_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                         "user_id TEXT ,"+
+                        "user_kilo INT,"+
                         "user_cinsiyet INT,"+
                         "user_boy INT,"+
                         "user_olcu VARCHAR,"+
@@ -349,6 +350,89 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
 
 
 
+    }
+
+    public boolean userExists(String userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            String query = "SELECT 1 FROM USER WHERE user_id = ?";
+            cursor = db.rawQuery(query, new String[]{userId});
+            return cursor != null && cursor.moveToFirst();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
+    public boolean updateUser(String table, ContentValues values, String whereClause, String[] whereArgs) {
+        SQLiteDatabase db = null;
+
+        try {
+            db = this.getWritableDatabase();
+
+            // Eğer kullanıcı zaten varsa, kullanıcı bilgilerini güncelle
+            if (userExists(values.getAsString("user_id"))) {
+                ContentValues updatedValues = new ContentValues();
+
+                if (values.containsKey("user_dogum_tarih")) {
+                    updatedValues.put("user_dogum_tarih", values.getAsString("user_dogum_tarih"));
+                }
+
+                if (values.containsKey("user_cinsiyet")) {
+                    updatedValues.put("user_cinsiyet", values.getAsString("user_cinsiyet"));
+                }
+
+                if (values.containsKey("user_boy")) {
+                    updatedValues.put("user_boy", values.getAsInteger("user_boy"));
+                }
+
+                if (values.containsKey("user_kilo")) {
+                    updatedValues.put("user_kilo", values.getAsInteger("user_kilo"));
+                }
+
+                if (values.containsKey("user_aktivite_derecesi")) {
+                    updatedValues.put("user_aktivite_derecesi", values.getAsString("user_aktivite_derecesi"));
+                }
+
+
+
+                if (values.containsKey("user_olcu")) {
+                    updatedValues.put("user_olcu", values.getAsString("user_olcu"));
+                }
+
+                if (values.containsKey("user_email")) {
+                    updatedValues.put("user_email", values.getAsString("user_email"));
+                }
+
+                int updatedRows = db.update(table, updatedValues, whereClause, whereArgs);
+                return updatedRows > 0;
+            } else {
+                // Eğer kullanıcı yoksa, yeni bir kullanıcı ekleyin
+                ContentValues userValues = new ContentValues();
+                userValues.put("user_id", values.getAsString("user_id"));
+                userValues.put("user_dogum_tarih", values.getAsString("user_dogum_tarih"));
+                userValues.put("user_cinsiyet", values.getAsString("user_cinsiyet"));
+                userValues.put("user_boy", values.getAsInteger("user_boy"));
+                userValues.put("user_kilo", values.getAsInteger("user_kilo"));
+                userValues.put("user_olcu", values.getAsString("user_olcu"));
+                userValues.put("user_email", values.getAsString("user_email"));
+                userValues.put("user_aktivite_derecesi", values.getAsString("user_aktivite_derecesi"));
+
+
+                long newRowId = db.insert(table, null, userValues);
+                return newRowId != -1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (db != null && db.isOpen()) {
+                db.close();
+            }
+        }
     }
 
 

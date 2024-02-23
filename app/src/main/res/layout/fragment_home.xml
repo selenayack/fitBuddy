@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -48,15 +57,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true" />
 
                 <LinearLayout
                     android:id="@+id/linearlayout"
-                    android:onClick="onLinearLayoutClick"
                     android:layout_width="fill_parent"
                     android:layout_height="130.0dp"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:onClick="onLinearLayoutClick"
                     android:orientation="horizontal"
 
                     >
@@ -85,15 +94,13 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.0"
-                        >
+                        android:layout_weight="0.0">
+
                         <ImageView
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:padding="40.0dp"
-                            android:src="@drawable/baseline_keyboard_arrow_right_24"
-                            />
-
+                            android:src="@drawable/baseline_keyboard_arrow_right_24" />
 
 
                     </LinearLayout>
@@ -293,8 +300,19 @@
 
 
 
-
     </ScrollView>
 
 
+
 </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/drawer_menu" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
