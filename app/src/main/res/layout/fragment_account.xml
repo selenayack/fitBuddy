@@ -52,7 +52,7 @@
 
                     <!-- Container LinearLayout for stacked TextViews -->
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/KahvatıAdd"
+                        android:id="@+id/person"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"

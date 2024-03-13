@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -33,12 +34,23 @@ public class AddFoodToDiaryFragment extends Fragment {
 
     Cursor addFoodCursor;
     Cursor listCursorFood;
-    private String currentMealNumber;
+    private Integer currentMealNumber;
     private View view;
     private String currentId;
 
+
+
+    private boolean lockPortionSizePcs;
+    private boolean lockPortionSizeGram;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private String currentPorsiyonSizePcs;
+    private String currentPorsiyonSizeGram;
+
+
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -51,12 +63,12 @@ public class AddFoodToDiaryFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_add_food_to_diary, container, false);
         ((MainActivity2) getActivity()).getSupportActionBar().setTitle("Besin Günlüğü");
-
-        Bundle bundle = this.getArguments();
-
+        Bundle bundle = getArguments();
         if (bundle != null) {
-            currentMealNumber = bundle.getString("mealnumber");
+            currentMealNumber = bundle.getInt("mealNumber"); // getInt kullanarak mealNumber'ı alıyoruz
+            Toast.makeText(getActivity(), "Mealnumberr: " + currentMealNumber, Toast.LENGTH_SHORT).show();
         }
+
 
 
         addFood("0", " ");
@@ -306,8 +318,8 @@ public class AddFoodToDiaryFragment extends Fragment {
             String StringCarb = foodCursor.getString(9);
             String StringKaloriHesaplanmıs = foodCursor.getString(10);
             String StringProteinHesaplanmıs = foodCursor.getString(11);
-            String StringYagHesaplanmıs = foodCursor.getString(12);
-            String StringCarbHesaplanmıs = foodCursor.getString(13);
+            String StringYagHesaplanmıs = foodCursor.getString(13);
+            String StringCarbHesaplanmıs = foodCursor.getString(12);
 
 
             TextView textViewFoodAbout = (TextView) getView().findViewById(R.id.textViewFoodAbout);
@@ -317,9 +329,11 @@ public class AddFoodToDiaryFragment extends Fragment {
 
             EditText editTextPorsiyonBuyuklugu = (EditText) getActivity().findViewById(R.id.editTextPorsiyonSayısı);
             editTextPorsiyonBuyuklugu.setText(StringBesinPorsiyonİsimNumara);
+            currentPorsiyonSizePcs=StringBesinPorsiyonİsimNumara;
 
             EditText editTextPorsiyonÖlcüsü = (EditText) getActivity().findViewById(R.id.editTextGram);
             editTextPorsiyonÖlcüsü.setText(StringPorsiyonBuyuklugu);
+            currentPorsiyonSizeGram=StringPorsiyonBuyuklugu;
 
             TextView textViewPorsiyonOlcusu = (TextView) getActivity().findViewById(R.id.textViewOlcuBirimi2);
             textViewPorsiyonOlcusu.setText(StringBesinPorsiyonİsimKelime);
@@ -375,10 +389,60 @@ public class AddFoodToDiaryFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!(editable.toString().equals(""))) {
-                    edittextPorsiyonSizeChanged();
-                }
 
+                    edittextPorsiyonSizeChanged();
+
+
+
+            }
+        });
+        
+        editTextPorsiyonSayısı.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b){
+                    
+                }
+                else{
+                    String lock="portionSizePcs";
+                    releaseLock(lock);
+                }
+            }
+        });
+        EditText editTextPorsiyonGram = (EditText) getActivity().findViewById(R.id.editTextGram);
+        editTextPorsiyonGram.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+
+                    edittextPorsiyonGramChanged();
+
+
+
+            }
+        });
+        editTextPorsiyonGram.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b){
+
+                }
+                else{
+                    String lock="portionSizeGram";
+                    releaseLock(lock);
+                }
             }
         });
 
@@ -395,7 +459,18 @@ public class AddFoodToDiaryFragment extends Fragment {
 
         //db.close();
 
+        //Toast.makeText(getActivity(),"pcs"+currentPorsiyonSizePcs+"gram"+currentPorsiyonSizeGram,Toast.LENGTH_LONG).show();
 
+
+    }
+
+    private void releaseLock(String lock) {
+        if(lock.equals("portionSizeGram")){
+            lockPortionSizeGram=false;
+        }
+        else{
+            lockPortionSizePcs=false;
+        }
     }
 
     /*private void edittextPorsiyonGramChanged() {
@@ -404,6 +479,11 @@ public class AddFoodToDiaryFragment extends Fragment {
     }*/
 
     private void edittextPorsiyonSizeChanged() {
+
+        if(!(lockPortionSizeGram)) {
+
+        lockPortionSizePcs=true;
+
 
         String currentId = listCursorFood.getString(0);
 
@@ -467,10 +547,29 @@ public class AddFoodToDiaryFragment extends Fragment {
         db.close();
 
 
-        }
+        }}
+    private void edittextPorsiyonGramChanged() {
 
 
-        private void addFoodToDiary () {
+        if(!(lockPortionSizePcs)) {
+
+            lockPortionSizeGram=true;
+            String currentId = listCursorFood.getString(0);
+
+
+            EditText editTextPorsiyonGram = view.findViewById(R.id.editTextGram);
+            String stringPorsiyonGram = editTextPorsiyonGram.getText().toString();
+
+            double doubleporsiyonGram = 0;
+            try {
+                doubleporsiyonGram = Double.parseDouble(stringPorsiyonGram);
+            } catch (NumberFormatException nfe) {
+                System.out.println("parse edilemedi" + nfe);
+                return;  // Eğer parse işlemi başarısız olursa, geri kalan işlemleri yapmamak için metottan çık
+            }
+
+            EditText editTextPorsiyonSayisi = (EditText) getActivity().findViewById(R.id.editTextPorsiyonSayısı);
+
 
             DbAdapter db = new DbAdapter(getActivity()) {
                 @Override
@@ -483,121 +582,239 @@ public class AddFoodToDiaryFragment extends Fragment {
             };
             db.open();
 
+
             String fields[] = new String[]{
                     "_id",
-                    "besin_isim",
-                    "besin_porsiyon_büyüklügü_gram" ,
+                    "besin_porsiyon_büyüklügü_gram",
                     "besin_porsiyon_büyüklügü_ölcüsü_gram",
                     "besin_porsiyon_büyüklügü_adet",
                     "besin_porsiyon_büyüklügü_adet_ölcüsü",
-                    "besin_kalori",
-                    "besin_protein",
-                    "besin_yag",
-                    "besin_karbonhidrat",
-                    "besin_kalori_hesaplanmıs",
-                    "besin_protein_hesaplanmıs",
-                    "besin_karbonhidrat_hesaplanmıs",
-                    "besin_yag_hesaplanmıs"
             };
 
-// String currentIdSQL = db.quoteSmart(currentId);
+            String currentIdSQL = db.quoteSmart(currentId);
+            Cursor foodCursor = db.select("food", fields, "_id", currentId);
 
-            Cursor foodCursor = db.select("food", fields, "_id=?", Arrays.toString(new String[]{String.valueOf(currentId)}));
+            //Toast.makeText(getActivity(),"pcs"+currentPorsiyonSizePcs+"gram"+doubleporsiyonGram,Toast.LENGTH_LONG).show();
+
+            double doubleServingNameNumber = 0;
 
             if (foodCursor != null && foodCursor.moveToFirst()) {
-
-                String StringId = foodCursor.getString(0);
-                String Stringİsim = foodCursor.getString(1);
-                String StringPorsiyonBuyuklugu = foodCursor.getString(2);
-                String StringPorsiyonOlcusu = foodCursor.getString(3);
-                String StringBesinPorsiyonİsimNumara = foodCursor.getString(4);
-                String StringBesinPorsiyonİsimKelime = foodCursor.getString(5);
-                String StringKalori = foodCursor.getString(6);
-                String StringProtein = foodCursor.getString(7);
-                String StringYag = foodCursor.getString(8);
-                String StringCarb = foodCursor.getString(9);
-                String StringKaloriHesaplanmıs = foodCursor.getString(10);
-                String StringProteinHesaplanmıs = foodCursor.getString(11);
-                String StringYagHesaplanmıs = foodCursor.getString(12);
-                String StringCarbHesaplanmıs = foodCursor.getString(13);
+                do {
+                    String StringPorsiyonBuyuklugu = foodCursor.getString(1);
 
 
-                EditText edittextGram=(EditText) getActivity().findViewById(R.id.editTextGram);
-            String stringedittextGram=edittextGram.getText().toString();
-
-        int error=0;
-        double doublePorsiyonGram=0;
-        try{
-            doublePorsiyonGram=Double.parseDouble(stringedittextGram);
-
-        }
-        catch (NumberFormatException nfe){
-            error=1;
-            Toast.makeText(getActivity(),"gram sayı olmalı",Toast.LENGTH_SHORT).show();
-
-        }
-
-        if(stringedittextGram.equals("")){
-            Toast.makeText(getActivity(),"gram boş olamaz",Toast.LENGTH_SHORT).show();
-
-        }
-
-            DateFormat df=new SimpleDateFormat("dd-MM-yyyy");
-            String besin_tarih=df.format(Calendar.getInstance().getTime());
-            String besinTarihSQL=db.quoteSmart(besin_tarih);
-
-           /* Calendar cc=Calendar.getInstance();
-            int yıl=cc.get(Calendar.YEAR);
-            int ay=cc.get(Calendar.MONTH);
-            int gün=cc.get(Calendar.DAY_OF_MONTH);*/
-
-            String stringMealNumber=currentMealNumber;
-            String stringMealNumberSQL=db.quoteSmart(stringMealNumber);
-
-            String stringFoodId=currentId;
-            String stringFoodIdSQL=db.quoteSmart(stringFoodId);
+                    try {
+                        doubleServingNameNumber = Double.parseDouble(StringPorsiyonBuyuklugu);
+                    } catch (NumberFormatException nfe) {
+                        System.out.println("parse edilemedi" + nfe);
+                        continue;  // Eğer parse işlemi başarısız olursa, diğer kayıta geç ve döngüyü devam ettir
+                    }
 
 
-            String fd_porsiyon_büyüklügü_gram=edittextGram.getText().toString();
+                } while (foodCursor.moveToNext());
 
-            String fd_porsiyon_büyüklügü_gramSQL= db.quoteSmart(fd_porsiyon_büyüklügü_gram);
-            String fd_porsiyon_büyüklügü_ölcüsü_gramSQL=db.quoteSmart(StringPorsiyonOlcusu);
-
-
-            double doublePorsiyonBuyuluguGram=0;
-            try{
-                doublePorsiyonBuyuluguGram=Double.parseDouble(stringedittextGram);
+            } else {
+                System.out.println("cursor boşş");
             }
 
-            catch(NumberFormatException nfe){
-                System.out.println("parse edilemedi"+nfe);
-            }
 
-            double doublePorsiyonSayısıAdet=Math.round(doublePorsiyonGram/doublePorsiyonBuyuluguGram);
-            String stringFdServingSizePcs=""+doublePorsiyonSayısıAdet;
-            String stringFdServingSizePcsSql=db.quoteSmart(stringFdServingSizePcs);
+            int intPorsiyon = (int) (doubleporsiyonGram / doubleServingNameNumber);
+            editTextPorsiyonSayisi.setText(String.valueOf(intPorsiyon));
 
 
-            String stringFdServingSizePcsOlcuSql=db.quoteSmart(StringBesinPorsiyonİsimKelime);
+            //Toast.makeText(getActivity(), "pcssss" + doubleServingNameNumber + "gram" + doubleporsiyonGram + "PORSİYON" + doublePorsiyon, Toast.LENGTH_LONG).show();
 
-            double doubleEnergyPerHundred=Double.parseDouble( StringKalori);
-            double doubleEnergyCalculated=(doublePorsiyonBuyuluguGram*doubleEnergyPerHundred);
-            Toast.makeText(getActivity(),"Energy"+doubleEnergyCalculated,Toast.LENGTH_SHORT).show();
+            //db.close();
 
-
-        }}
-
-        @Override
-        public void onCreate (Bundle savedInstanceState){
-            super.onCreate(savedInstanceState);
-            if (getArguments() != null) {
-                mParam1 = getArguments().getString(ARG_PARAM1);
-                mParam2 = getArguments().getString(ARG_PARAM2);
-            }
         }
-
-
     }
+
+
+
+    private void addFoodToDiary () {
+
+        DbAdapter db = new DbAdapter(getActivity()) {
+            @Override
+            public void onCreate(SQLiteDatabase sqLiteDatabase) {
+            }
+
+            @Override
+            public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+            }
+        };
+        db.open();
+
+        String currentId = listCursorFood.getString(0);
+
+        String fields[] = new String[]{
+                "_id",
+                "besin_isim",
+                "besin_porsiyon_büyüklügü_gram",
+                "besin_porsiyon_büyüklügü_ölcüsü_gram",
+                "besin_porsiyon_büyüklügü_adet",
+                "besin_porsiyon_büyüklügü_adet_ölcüsü",
+                "besin_kalori",
+                "besin_protein",
+                "besin_yag",
+                "besin_karbonhidrat",
+                "besin_kalori_hesaplanmıs",
+                "besin_protein_hesaplanmıs",
+                "besin_karbonhidrat_hesaplanmıs",
+                "besin_yag_hesaplanmıs"
+        };
+
+        //String currentIdSQL = db.quoteSmart(currentId);
+        Cursor foodCursor = db.select("food", fields, "_id", currentId);
+
+        if (foodCursor != null && foodCursor.moveToFirst()) {
+
+
+            String StringId = foodCursor.getString(0);
+            String Stringİsim = foodCursor.getString(1);
+            String StringPorsiyonBuyukluguGram = foodCursor.getString(2);
+            String StringPorsiyonOlcusuGram = foodCursor.getString(3);
+            String StringBesinPorsiyonİsimNumara = foodCursor.getString(4);
+            String StringBesinPorsiyonİsimKelime = foodCursor.getString(5);
+            String StringKalori = foodCursor.getString(6);
+            String StringProtein = foodCursor.getString(7);
+            String StringYag = foodCursor.getString(8);
+            String StringCarb = foodCursor.getString(9);
+            String StringKaloriHesaplanmıs = foodCursor.getString(10);
+            String StringProteinHesaplanmıs = foodCursor.getString(11);
+            String StringYagHesaplanmıs = foodCursor.getString(12);
+            String StringCarbHesaplanmıs = foodCursor.getString(13);
+
+
+            int error = 0;
+
+            EditText editTextPorsiyongram = (EditText) getActivity().findViewById(R.id.editTextGram);
+            String fdPorsiyonGram = editTextPorsiyongram.getText().toString();
+            String fdPorsiyonGramSQL = db.quoteSmart(fdPorsiyonGram);
+
+            double doublePorsiyonGram = 0;
+
+            try {
+                doublePorsiyonGram = Double.parseDouble(fdPorsiyonGram);
+            } catch (NumberFormatException nfe) {
+                error = 1;
+                Toast.makeText(getActivity(), "Lütfen gram için sayı giriniz", Toast.LENGTH_SHORT).show();
+            }
+            if (fdPorsiyonGram.equals("")) {
+                error = 1;
+                Toast.makeText(getActivity(), "Gram boş olamaz", Toast.LENGTH_SHORT).show();
+
+            }
+
+
+            //tarih
+
+
+           /* Calendar calendar = Calendar.getInstance();
+            int yıl = calendar.get(Calendar.YEAR);
+            int ay = calendar.get(Calendar.MONTH);
+            int gün = calendar.get(Calendar.DAY_OF_MONTH);*/
+
+            DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+            String stringFdDate  = df.format(Calendar.getInstance().getTime());
+
+
+            String stringFdDateSql = db.quoteSmart(stringFdDate);
+
+            //öğün numarası
+            //String string_fd_meal_number = currentMealNumber;
+            //String fdmealNumberSQL = db.quoteSmart(string_fd_meal_number);
+
+            //food id
+            String stringFdFoodId = currentId;
+            String stringFdFoodIdSQL = db.quoteSmart(stringFdFoodId);
+
+            //Porsiyon gram
+            String fdServingSizeGramÖlçüsüSQL = db.quoteSmart(StringPorsiyonOlcusuGram);
+
+            //Porsiyon adet
+            double doubleporsiyonAsılGram = 0;
+            try {
+                doubleporsiyonAsılGram = Double.parseDouble(StringPorsiyonBuyukluguGram);
+            } catch (NumberFormatException nfe) {
+                System.out.println("parse edilemedi" + nfe);
+                return;  // Eğer parse işlemi başarısız olursa, geri kalan işlemleri yapmamak için metottan çık
+            }
+
+
+
+
+            double doublePorsiyonAdet = Math.round(doublePorsiyonGram / doubleporsiyonAsılGram);
+            String stringFdPorsiyonAdet = "" + doublePorsiyonAdet;
+            String stringFdPorsiyonAdetSQL = db.quoteSmart(stringFdPorsiyonAdet);
+
+            //porsiyon olcusu
+            String fdServingSizePorsiyonÖlçüsüSQL = db.quoteSmart(StringBesinPorsiyonİsimKelime);
+
+
+            //energy
+            double doubleEnergyYüzde = Double.parseDouble(StringKalori);
+            double doubleFdKaloriHesaplanmış = (doublePorsiyonGram * doubleEnergyYüzde) / 100;
+            String stringFdKaloriHesaplanmış = "" + doubleFdKaloriHesaplanmış;
+            String stringFdKaloriHesaplanmışSQL = db.quoteSmart(stringFdKaloriHesaplanmış);
+
+
+            //protein
+            double doubleProteinYüzde = Double.parseDouble(StringProtein);
+            double doubleFdProteinHesaplanmış = (doublePorsiyonGram * doubleProteinYüzde) / 100;
+            String stringFdProteinHesaplanmış = "" + doubleFdProteinHesaplanmış;
+            String stringFdProteinHesaplanmışSQL = db.quoteSmart(stringFdProteinHesaplanmış);
+
+            //karbonhidrat
+            double doubleCarbYüzde = Double.parseDouble(StringCarb);
+            double doubleFdCarbHesaplanmış = (doublePorsiyonGram * doubleCarbYüzde) / 100;
+            String stringFdCarbHesaplanmış = "" + doubleFdCarbHesaplanmış;
+            String stringFdCarbHesaplanmışSQL = db.quoteSmart(stringFdCarbHesaplanmış);
+
+
+            //yag
+            double doubleYagYüzde = Double.parseDouble(StringYag);
+            double doubleFdYagHesaplanmış = (doublePorsiyonGram * doubleYagYüzde) / 100;
+            String stringFdYagHesaplanmış = "" + doubleFdYagHesaplanmış;
+            String stringFdYagHesaplanmışSQL = db.quoteSmart(stringFdYagHesaplanmış);
+
+
+            if (error == 0) {
+                String impFields = "_id,fd_tarih,fd_ögün_numara,fd_besin_id ," +
+                        "fd_porsiyon_büyüklügü_gram,fd_porsiyon_büyüklügü_ölcüsü_gram," +
+                        "fd_porsiyon_büyüklügü_adet,fd_porsiyon_büyüklügü_ölcüsü_adet," +
+                        "fd_kalori_hesaplanmıs,fd_protein_hesaplanmıs," +
+                        "fd_karbonhidrat_hesaplanmıs,fd_yag_hesaplanmıs";
+                String impValues = "NULL," + stringFdDateSql + ","+currentMealNumber+","+stringFdFoodIdSQL + "," +
+                        fdPorsiyonGramSQL + "," + fdServingSizeGramÖlçüsüSQL + "," +
+                        stringFdPorsiyonAdet + "," + stringFdPorsiyonAdetSQL + "," +
+                        stringFdKaloriHesaplanmışSQL + "," + stringFdProteinHesaplanmışSQL + "," +
+                        stringFdCarbHesaplanmışSQL + "," + stringFdYagHesaplanmışSQL;
+
+
+                db.insert("food_diary", impFields, impValues);
+                Toast.makeText(getActivity(), "Besin Günlüğü güncellendi", Toast.LENGTH_SHORT).show();
+
+
+                //Toast.makeText(getActivity(),"kalori"+doubleFdKaloriHesaplanmış,Toast.LENGTH_SHORT).show();
+
+            } else {
+                Log.e("ERROR_TAG", "FoodCursor boş");
+            }
+
+            Fragment yeniFragment = new HomeFragment();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, yeniFragment);
+            transaction.addToBackStack(null); // Geri butonu ile geri dönülebilirlik ekler
+            transaction.commit();
+
+
+            db.close();
+
+
+        }
+
+
+    }}
 
    /* private void showFoodInCategory(String currentId, String name, String parentId) {
 
@@ -623,9 +840,10 @@ public class AddFoodToDiaryFragment extends Fragment {
             String fields[]=new String[]{
                     "_id",
                     "besin_isim",
-                    "besin_porsiyon_büyüklügü",
-                    "besin_porsiyon_ölcüsü",
-                    "besin_porsiyon_isim_kelime",
+                    "besin_porsiyon_büyüklügü_gram",
+                    "besin_porsiyon_büyüklügü_ölcüsü_gram",
+                    "besin_porsiyon_büyüklügü_adet",
+                    "besin_porsiyon_büyüklügü_adet_ölcüsü",
                     "besin_kalori_hesaplanmıs",
                     "besin_protein_hesaplanmıs",
                     "besin_yag_hesaplanmıs",

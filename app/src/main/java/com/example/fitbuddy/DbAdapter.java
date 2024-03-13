@@ -265,6 +265,11 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
 
     }
 
+    public void insert(String table, ContentValues values) {
+        db.insert(table, null, values);
+    }
+
+
     public Cursor select(String table, String[] columns, String whereColumn, String whereValue) {
         SQLiteDatabase db = this.getReadableDatabase();
         String selection = whereColumn + " = ?";
@@ -434,6 +439,13 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
             }
         }
     }
+
+    public void delete(String tableName, String whereClause, String[] whereArgs) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(tableName, whereClause, whereArgs);
+        db.close();
+    }
+
 
 
 

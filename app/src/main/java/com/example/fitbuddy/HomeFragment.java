@@ -1,5 +1,6 @@
 package com.example.fitbuddy;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,11 +11,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,15 +23,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
-import org.checkerframework.checker.units.qual.A;
-
-import java.io.File;
-import java.util.ArrayList;
+import java.util.Calendar;
 
 public class HomeFragment extends Fragment {
 
@@ -48,12 +44,28 @@ public class HomeFragment extends Fragment {
     private  KategoriFragment kategoriFragment = new KategoriFragment();
     private YemekFragment yemekFragment = new YemekFragment();
 
+    private String currentId;
+    private String currentName;
+
+    private String currentDateYıl="";
+    private String currentDateAy="";
+    private String currentDateGün="";
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+
+
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        /*Bundle bundle=this.getArguments();
+        if(bundle!=null){
+            Toast.makeText(getActivity(),"Bundle:"+bundle.toString(),Toast.LENGTH_LONG).show();
+        }*/
 
         drawerLayout = view.findViewById(R.id.drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -96,7 +108,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        FloatingActionButton buttonAddKahvaltı=view.findViewById(R.id.KahvatıAdd);
+        /*Bundle args = getArguments();
+        if (args != null) {
+            int mealNumber = args.getInt("mealNumber", 0); // mealNumber'ı alın
+            // mealNumber'ı kullanın
+        }*/
+
+       /*FloatingActionButton buttonAddKahvaltı=view.findViewById(R.id.KahvatıAddd);
 
         buttonAddKahvaltı.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +128,7 @@ public class HomeFragment extends Fragment {
 
 
             }
-        });
+        });*/
         FloatingActionButton buttonAddOgleYemegi=view.findViewById(R.id.ÖğleYemeğiAdd);
 
         buttonAddOgleYemegi.setOnClickListener(new View.OnClickListener() {
@@ -157,6 +175,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        initalizeHome();
+
 
 
         return view;
@@ -167,6 +187,180 @@ public class HomeFragment extends Fragment {
 
     private static final String PREFS_NAME = "FitBuddy15";
     private static final String DATABASE_LOADED_KEY = "database_load15";
+
+    private void initalizeHome() {
+
+        DbAdapter db = new DbAdapter(requireContext()) {
+            @Override
+            public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+            }
+
+            @Override
+            public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+            }
+        };
+        db.open();
+
+     /* if(currentDateYıl.equals("")|| currentDateAy.equals("")||currentDateGün.equals("")){
+
+          Calendar calendar=Calendar.getInstance();
+          int yıl=calendar.get(Calendar.YEAR);
+          int ay=calendar.get(Calendar.MONTH);
+          int gün=calendar.get(Calendar.DAY_OF_YEAR);
+
+          currentDateGün=""+gün;
+          currentDateAy=""+ ay;
+          currentDateYıl=""+yıl;
+    }
+
+      String stringFdDate=currentDateGün+"-"+currentDateAy+"-"+currentDateYıl;
+      String stringFdDateSQL=db.quoteSmart(stringFdDate);*/
+
+
+
+      FloatingActionButton floatingActionButtonKahvaltı=view.findViewById(R.id.KahvatıAddd);
+        if (floatingActionButtonKahvaltı != null) {
+            floatingActionButtonKahvaltı.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Toast.makeText(requireContext(), "aaa", Toast.LENGTH_SHORT).show();
+
+                    addFood(0);
+                }
+            });
+        } else {
+            // floatingActionButtonKahvaltı null ise bu durumu işleyin
+        }
+
+        /*updateTable(stringFdDate,"0");*/
+
+
+
+
+
+    }
+
+   private void updateTable(String stringFdDate, String s) {
+
+        DbAdapter db= new DbAdapter(requireContext()) {
+            @Override
+            public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+            }
+
+            @Override
+            public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+            }
+        };
+        db.open();
+
+
+
+        String fields[]=new String[]{
+                "_id",
+                "fd_besin_id",
+                "fd_porsiyon_büyüklügü_gram ",
+                "fd_porsiyon_büyüklügü_ölcüsü_gram",
+                "fd_porsiyon_büyüklügü_adet ",
+                "fd_porsiyon_büyüklügü_ölcüsü_adet ",
+                "fd_kalori_hesaplanmıs",
+                "fd_protein_hesaplanmıs",
+                "fd_karbonhidrat_hesaplanmıs",
+                "fd_yag_hesaplanmıs"
+
+        };
+
+
+        Cursor cursorFd = db.select("food_diary", fields, "fd_tarih", stringFdDate);
+
+        int intCursorFdCount=cursorFd.getCount();
+        for(int x=0;x<intCursorFdCount;x++){
+            String stringFdId=cursorFd.getString(0);
+            Toast.makeText(getActivity(),"ID:"+stringFdId,Toast.LENGTH_LONG).show();
+            cursorFd.moveToNext();
+        }
+
+        TextView textViewKahvaltıItemsName=(TextView) getActivity().findViewById(R.id.textViewKahvaltııtemsName);
+        //textViewKahvaltıItemsName.setText(cursorFd.getString(2));
+
+
+
+
+
+
+
+
+
+    }
+
+    private void addFood(int mealNumber) {
+
+
+       /* Fragment fragment=null;
+        Class fragmentClass=null;
+        fragmentClass= AddFoodToDiaryFragment.class;
+        try {
+            fragment=(Fragment) fragmentClass.newInstance();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        Bundle bundle=new Bundle();
+        bundle.putString("mealnumber",""+mealNumber);
+        fragment.setArguments(bundle);
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null); // Geri butonu ile geri dönülebilirlik ekler
+        transaction.commit();*/
+
+        Fragment fragment = new AddFoodToDiaryFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("mealNumber", mealNumber); // Anahtar olarak "mealNumber"ı ekleyin
+        fragment.setArguments(bundle);
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+
+
+
+
+       // Toast.makeText(requireContext(), "Kahvaltıı", Toast.LENGTH_SHORT).show();
+
+        //addMealNumberToDatabase(mealNumber);
+    }
+
+    private void addMealNumberToDatabase(int mealNumber) {
+        DbAdapter db = new DbAdapter(requireContext()) {
+            @Override
+            public void onCreate(SQLiteDatabase sqLiteDatabase) {}
+
+            @Override
+            public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {}
+        };
+        db.open();
+
+        ContentValues values = new ContentValues();
+        values.put("fd_ögün_numara", mealNumber);
+
+        Toast.makeText(getActivity(),"qqqqq",Toast.LENGTH_SHORT).show();
+
+        // Örneğin, food_diary tablosuna meal_number sütununa mealNumber değerini ekleyebilirsiniz.
+        db.insert("food_diary", values);
+    }
+
+
+
+
+
 
     private boolean isDatabaseLoaded() {
         Context context = requireContext();

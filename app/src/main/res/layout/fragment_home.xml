@@ -8,9 +8,7 @@
     android:layout_height="match_parent">
 
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
@@ -138,7 +136,7 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="100dp">
+                android:layout_marginBottom="10dp">
 
 
                 <TableRow
@@ -149,7 +147,7 @@
                     >
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/KahvatıAdd"
+                        android:id="@+id/KahvatıAddd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -157,22 +155,102 @@
                         android:layout_margin="16dp"
                         app:backgroundTint="#FF5722"
                         app:fabSize="mini"
-                        app:srcCompat="@drawable/baseline_add_24" />
+                        app:srcCompat="@drawable/baseline_add_24"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
 
                     <TextView
                         android:id="@+id/textViewKahvaltı"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="0dp"
                         android:layout_marginTop="20dp"
-                        android:layout_marginRight="70dp"
+                        android:layout_marginRight="130dp"
                         android:text="@string/Kahvaltı"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewKahvaltıKalori"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Toplam"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/tableLayoutKahvaltıItems"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+
+                    >
+
+
+                    <TextView
+                        android:id="@+id/textViewKahvaltııtemsName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="80"
+                        android:text="İsim"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewKahvaltıItemsKalori"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="10"
+                        android:text="Kalori"
                         android:textSize="18dp"
                         android:textStyle="bold" />
 
                 </TableRow>
             </TableLayout>
+
+            <TableLayout
+                android:id="@+id/tableLayoutKahvaltıItemsToplam"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="100dp">
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+
+                    >
+
+
+                    <TextView
+                        android:id="@+id/textViewKahvaltııtemsToplam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="80"
+                        android:layout_marginLeft="10dp"
+                        android:text="İsim"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+
+
+
+                </TableRow>
+            </TableLayout>
+
+
 
 
             <TableLayout
@@ -204,11 +282,11 @@
                     android:id="@+id/textViewÖğleYemeği"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="0dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="70dp"
                     android:text="@string/Öğle_Yemeği"
-                    android:textSize="18dp"
+                    android:textSize="16dp"
                     android:textStyle="bold" />
 
             </TableRow>
@@ -243,11 +321,11 @@
                         android:id="@+id/textViewAkşam_Yemeği"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="0dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="70dp"
                         android:text="@string/Akşam_Yemeği"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:textStyle="bold" />
 
                 </TableRow>
@@ -282,11 +360,11 @@
                         android:id="@+id/textViewAtıştırmalık"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="0dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="70dp"
                         android:text="@string/Ara_Öğün"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:textStyle="bold" />
 
                 </TableRow>
