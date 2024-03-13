@@ -62,6 +62,7 @@ public class HomeFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
+
         /*Bundle bundle=this.getArguments();
         if(bundle!=null){
             Toast.makeText(getActivity(),"Bundle:"+bundle.toString(),Toast.LENGTH_LONG).show();
@@ -203,7 +204,7 @@ public class HomeFragment extends Fragment {
         };
         db.open();
 
-     /* if(currentDateYıl.equals("")|| currentDateAy.equals("")||currentDateGün.equals("")){
+     if(currentDateYıl.equals("")|| currentDateAy.equals("")||currentDateGün.equals("")){
 
           Calendar calendar=Calendar.getInstance();
           int yıl=calendar.get(Calendar.YEAR);
@@ -216,7 +217,7 @@ public class HomeFragment extends Fragment {
     }
 
       String stringFdDate=currentDateGün+"-"+currentDateAy+"-"+currentDateYıl;
-      String stringFdDateSQL=db.quoteSmart(stringFdDate);*/
+      String stringFdDateSQL=db.quoteSmart(stringFdDate);
 
 
 
@@ -226,16 +227,16 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
 
-                    Toast.makeText(requireContext(), "aaa", Toast.LENGTH_SHORT).show();
+
 
                     addFood(0);
                 }
             });
         } else {
-            // floatingActionButtonKahvaltı null ise bu durumu işleyin
+
         }
 
-        /*updateTable(stringFdDate,"0");*/
+        updateTable(stringFdDate,"0");
 
 
 
@@ -274,20 +275,45 @@ public class HomeFragment extends Fragment {
 
         };
 
-
-        Cursor cursorFd = db.select("food_diary", fields, "fd_tarih", stringFdDate);
-
-        int intCursorFdCount=cursorFd.getCount();
-        for(int x=0;x<intCursorFdCount;x++){
-            String stringFdId=cursorFd.getString(0);
-            Toast.makeText(getActivity(),"ID:"+stringFdId,Toast.LENGTH_LONG).show();
-            cursorFd.moveToNext();
-        }
-
-        TextView textViewKahvaltıItemsName=(TextView) getActivity().findViewById(R.id.textViewKahvaltııtemsName);
-        //textViewKahvaltıItemsName.setText(cursorFd.getString(2));
+        String stringDateSQL=db.quoteSmart(stringFdDate);
 
 
+       Cursor cursorFd = db.select("food_diary", fields);
+       String fieldsFood[]=new String[]{
+               "_id",
+               "besin_isim",
+               "besin_porsiyon_büyüklügü_gram",
+               "besin_porsiyon_büyüklügü_ölcüsü_gram",
+               "besin_porsiyon_büyüklügü_adet",
+               "besin_porsiyon_büyüklügü_adet_ölcüsü",
+               "besin_kalori "
+
+
+       };
+       Cursor cursorFood;
+       int intCursorCount=cursorFd.getCount();
+
+
+       if (cursorFd != null && cursorFd.moveToFirst()) {
+           do {
+               String stringFdId = cursorFd.getString(0);
+
+
+               String fdFoodId = cursorFd.getString(1); // 1. sütundaki değeri al
+               String fdFoodIdSQL = db.quoteSmart(fdFoodId);
+
+               cursorFood = db.select("food", fieldsFood);
+               if (cursorFood != null && cursorFood.moveToFirst()) {
+                   String foodName = cursorFood.getString(1); // 1. sütundaki değeri al
+
+                   TextView textViewKahvaltıItemsName = view.findViewById(R.id.textViewKahvaltııtemsName);
+                   textViewKahvaltıItemsName.setText(foodName);
+               }
+
+           } while (cursorFd.moveToNext());
+       } else {
+           // Cursor boşsa veya veri yoksa bu durumu işleyin
+       }
 
 
 
@@ -295,29 +321,15 @@ public class HomeFragment extends Fragment {
 
 
 
-    }
+
+
+
+
+   }
 
     private void addFood(int mealNumber) {
 
 
-       /* Fragment fragment=null;
-        Class fragmentClass=null;
-        fragmentClass= AddFoodToDiaryFragment.class;
-        try {
-            fragment=(Fragment) fragmentClass.newInstance();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        Bundle bundle=new Bundle();
-        bundle.putString("mealnumber",""+mealNumber);
-        fragment.setArguments(bundle);
-
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, fragment);
-        transaction.addToBackStack(null); // Geri butonu ile geri dönülebilirlik ekler
-        transaction.commit();*/
 
         Fragment fragment = new AddFoodToDiaryFragment();
         Bundle bundle = new Bundle();
@@ -332,30 +344,8 @@ public class HomeFragment extends Fragment {
 
 
 
-
-       // Toast.makeText(requireContext(), "Kahvaltıı", Toast.LENGTH_SHORT).show();
-
-        //addMealNumberToDatabase(mealNumber);
     }
 
-    private void addMealNumberToDatabase(int mealNumber) {
-        DbAdapter db = new DbAdapter(requireContext()) {
-            @Override
-            public void onCreate(SQLiteDatabase sqLiteDatabase) {}
-
-            @Override
-            public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {}
-        };
-        db.open();
-
-        ContentValues values = new ContentValues();
-        values.put("fd_ögün_numara", mealNumber);
-
-        Toast.makeText(getActivity(),"qqqqq",Toast.LENGTH_SHORT).show();
-
-        // Örneğin, food_diary tablosuna meal_number sütununa mealNumber değerini ekleyebilirsiniz.
-        db.insert("food_diary", values);
-    }
 
 
 

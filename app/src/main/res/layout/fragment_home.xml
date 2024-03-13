@@ -165,7 +165,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="20dp"
-                        android:layout_marginRight="130dp"
+                        android:layout_marginRight="150dp"
                         android:text="@string/Kahvaltı"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -203,9 +203,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="80"
-                        android:text="İsim"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
+                        android:textSize="16dp"
+                         />
 
                     <TextView
                         android:id="@+id/textViewKahvaltıItemsKalori"
@@ -213,8 +212,8 @@
                         android:layout_height="fill_parent"
                         android:layout_weight="10"
                         android:text="Kalori"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
+                        android:textSize="16dp"
+                        />
 
                 </TableRow>
             </TableLayout>
@@ -238,11 +237,11 @@
                         android:id="@+id/textViewKahvaltııtemsToplam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="80"
                         android:layout_marginLeft="10dp"
+                        android:layout_weight="80"
                         android:text="İsim"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
+                        android:textSize="16dp"
+                        />
 
 
 
