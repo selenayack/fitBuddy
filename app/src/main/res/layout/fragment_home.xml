@@ -135,8 +135,8 @@
 
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp">
+                android:layout_height="70dp"
+                android:layout_marginBottom="0dp">
 
 
                 <TableRow
@@ -165,7 +165,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="20dp"
-                        android:layout_marginRight="150dp"
+                        android:layout_marginRight="120dp"
                         android:text="@string/Kahvaltı"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -175,7 +175,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="Toplam"
+                        android:text="Toplam Kalori"
                         android:textSize="16dp"
                         android:textStyle="bold" />
 
@@ -186,12 +186,14 @@
                 android:id="@+id/tableLayoutKahvaltıItems"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp">
 
 
                 <TableRow
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="0dp"
 
 
                     >
@@ -201,19 +203,18 @@
                         android:id="@+id/textViewKahvaltııtemsName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="80"
-                        android:textSize="16dp"
-                         />
+                        android:layout_marginLeft="0dp"
+                        android:text="İsim"
+                        android:textSize="16dp" />
 
                     <TextView
                         android:id="@+id/textViewKahvaltıItemsKalori"
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
+                        android:layout_marginLeft="120dp"
                         android:layout_weight="10"
                         android:text="Kalori"
-                        android:textSize="16dp"
-                        />
+                        android:textSize="16dp" />
 
                 </TableRow>
             </TableLayout>
@@ -230,23 +231,7 @@
                     android:layout_height="match_parent"
 
 
-                    >
-
-
-                    <TextView
-                        android:id="@+id/textViewKahvaltııtemsToplam"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="80"
-                        android:text="İsim"
-                        android:textSize="16dp"
-                        />
-
-
-
-
-                </TableRow>
+                    />
             </TableLayout>
 
 

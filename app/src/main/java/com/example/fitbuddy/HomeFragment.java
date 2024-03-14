@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -302,12 +304,60 @@ public class HomeFragment extends Fragment {
                String fdFoodId = cursorFd.getString(1); // 1. sütundaki değeri al
                String fdFoodIdSQL = db.quoteSmart(fdFoodId);
 
-               cursorFood = db.select("food", fieldsFood);
+               String fdServingSizeGram=cursorFd.getString(2);
+               String fdServingSizeGramOlcu=cursorFd.getString(3);
+               String fdServingSizeAdet=cursorFd.getString(4);
+               String fdServingSizeAdetOlcu=cursorFd.getString(5);
+               String fdFoodEnergy=cursorFd.getString(6);
+
+
+
+               cursorFood = db.select("food", fieldsFood,"_id",fdFoodId);
                if (cursorFood != null && cursorFood.moveToFirst()) {
                    String foodName = cursorFood.getString(1); // 1. sütundaki değeri al
 
-                   TextView textViewKahvaltıItemsName = view.findViewById(R.id.textViewKahvaltııtemsName);
+                   String foodId=cursorFood.getString(0);
+                   String subLine=fdServingSizeGram+" "+fdServingSizeGramOlcu+","+fdServingSizeAdet+" "+fdServingSizeAdetOlcu;
+
+                   TableLayout tl=(TableLayout)view.findViewById(R.id.tableLayoutKahvaltıItems);
+                   TableRow tr=new TableRow(getActivity());
+                   tr.setLayoutParams(new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+
+
+                   TableRow tr2=new TableRow(getActivity());
+                   tr2.setLayoutParams(new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                   TextView textViewName=new TextView(getActivity());
+                   textViewName.setText(foodName);
+
+
+                   TextView textViewKalori=new TextView(getActivity());
+                   textViewKalori.setText(fdFoodEnergy);
+
+
+                   tr.addView(textViewName);
+
+                   TextView textViewEmpty = new TextView(getActivity());
+                   textViewEmpty.setText("");
+                   tr.addView(textViewEmpty);
+
+                   tr.addView(textViewKalori);
+
+                   TextView textViewInfo=new TextView(getActivity());
+                   textViewInfo.setText(subLine);
+                   tr2.addView(textViewInfo);
+
+                   tl.addView(tr,new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                   tl.addView(tr2,new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+
+
+                  /* TextView textViewKahvaltıItemsName = view.findViewById(R.id.textViewKahvaltııtemsName);
                    textViewKahvaltıItemsName.setText(foodName);
+                   TextView textViewKahvaltıItemSub = view.findViewById(R.id.textViewKahvaltııtemsToplam);
+                   textViewKahvaltıItemSub .setText(subLine);
+                   TextView textViewKahvaltıItemKalori = view.findViewById(R.id.textViewKahvaltıItemsKalori);
+                   textViewKahvaltıItemKalori .setText(fdFoodEnergy);*/
                }
 
            } while (cursorFd.moveToNext());
