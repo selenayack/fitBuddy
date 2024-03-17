@@ -62,6 +62,21 @@ public class AddFoodToDiaryFragment extends Fragment {
 
 
         view = inflater.inflate(R.layout.fragment_add_food_to_diary, container, false);
+
+        DbAdapter db = new DbAdapter(getActivity()) {
+            @Override
+            public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+            }
+
+            @Override
+            public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+            }
+        };
+        db.open();
+        //db.delete("food_diary", null, null);
+
         ((MainActivity2) getActivity()).getSupportActionBar().setTitle("Besin Günlüğü");
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -721,8 +736,8 @@ public class AddFoodToDiaryFragment extends Fragment {
             String stringFdDateSql = db.quoteSmart(stringFdDate);
 
             //öğün numarası
-            //String string_fd_meal_number = currentMealNumber;
-            //String fdmealNumberSQL = db.quoteSmart(string_fd_meal_number);
+            String string_fd_meal_number = currentMealNumber.toString();
+            String fdmealNumberSQL = db.quoteSmart(string_fd_meal_number);
 
             //food id
             String stringFdFoodId = currentId;
@@ -784,9 +799,9 @@ public class AddFoodToDiaryFragment extends Fragment {
                         "fd_porsiyon_büyüklügü_adet,fd_porsiyon_büyüklügü_ölcüsü_adet," +
                         "fd_kalori_hesaplanmıs,fd_protein_hesaplanmıs," +
                         "fd_karbonhidrat_hesaplanmıs,fd_yag_hesaplanmıs";
-                String impValues = "NULL," + stringFdDateSql + ","+currentMealNumber+","+stringFdFoodIdSQL + "," +
+                String impValues = "NULL," + stringFdDateSql + ","+fdmealNumberSQL+","+stringFdFoodIdSQL + "," +
                         fdPorsiyonGramSQL + "," + fdServingSizeGramÖlçüsüSQL + "," +
-                        stringFdPorsiyonAdet + "," + stringFdPorsiyonAdetSQL + "," +
+                        stringFdPorsiyonAdetSQL + "," + fdServingSizePorsiyonÖlçüsüSQL + "," +
                         stringFdKaloriHesaplanmışSQL + "," + stringFdProteinHesaplanmışSQL + "," +
                         stringFdCarbHesaplanmışSQL + "," + stringFdYagHesaplanmışSQL;
 
