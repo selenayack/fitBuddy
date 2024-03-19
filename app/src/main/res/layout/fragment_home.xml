@@ -190,49 +190,8 @@
                 android:layout_marginBottom="10dp">
 
 
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="0dp"
-
-
-                    >
-
-
-                    <TextView
-                        android:id="@+id/textViewKahvaltııtemsName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="0dp"
-                        android:text="İsim"
-                        android:textSize="16dp" />
-
-                    <TextView
-                        android:id="@+id/textViewKahvaltıItemsKalori"
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:layout_marginLeft="120dp"
-                        android:layout_weight="10"
-                        android:text="Kalori"
-                        android:textSize="16dp" />
-
-                </TableRow>
             </TableLayout>
 
-            <TableLayout
-                android:id="@+id/tableLayoutKahvaltıItemsToplam"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="100dp">
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-
-                    />
-            </TableLayout>
 
 
 
@@ -291,49 +250,10 @@
                 android:layout_marginBottom="10dp">
 
 
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="0dp"
 
-
-                    >
-
-
-                    <TextView
-                        android:id="@+id/textViewOgleItemsName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="0dp"
-                        android:text="İsim"
-                        android:textSize="16dp" />
-
-                    <TextView
-                        android:id="@+id/textViewOgleItemsKalori"
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:layout_marginLeft="120dp"
-                        android:layout_weight="10"
-                        android:text="Kalori"
-                        android:textSize="16dp" />
-
-                </TableRow>
             </TableLayout>
 
-            <TableLayout
-                android:id="@+id/tableLayouOgleItemsToplam"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="100dp">
 
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-
-                    />
-            </TableLayout>
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -389,49 +309,10 @@
                 android:layout_marginBottom="10dp">
 
 
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="0dp"
 
-
-                    >
-
-
-                    <TextView
-                        android:id="@+id/textViewAksamItemsName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="0dp"
-                        android:text="İsim"
-                        android:textSize="16dp" />
-
-                    <TextView
-                        android:id="@+id/textViewAksamItemsKalori"
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:layout_marginLeft="120dp"
-                        android:layout_weight="10"
-                        android:text="Kalori"
-                        android:textSize="16dp" />
-
-                </TableRow>
             </TableLayout>
 
-            <TableLayout
-                android:id="@+id/tableLayouAksamItemsToplam"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="100dp">
 
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-
-                    />
-            </TableLayout>
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -487,52 +368,8 @@
                 android:layout_marginBottom="10dp">
 
 
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="0dp"
 
-
-                    >
-
-
-                    <TextView
-                        android:id="@+id/textViewtAtıstırmalıkItemsName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="0dp"
-                        android:text="İsim"
-                        android:textSize="16dp" />
-
-                    <TextView
-                        android:id="@+id/textViewtAtıstırmalıkItemsKalori"
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:layout_marginLeft="120dp"
-                        android:layout_weight="10"
-                        android:text="Kalori"
-                        android:textSize="16dp" />
-
-                </TableRow>
             </TableLayout>
-
-            <TableLayout
-                android:id="@+id/tableLayoutAtıstırmalıkItemsToplam"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="100dp">
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-
-                    />
-            </TableLayout>
-
-
-
 
 
 
