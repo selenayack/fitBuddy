@@ -476,25 +476,25 @@ public class HomeFragment extends Fragment {
                    String subLine=fdServingSizeGram+" "+fdServingSizeGramOlcu+","+fdServingSizeAdet+" "+fdServingSizeAdetOlcu;
                    TableLayout tl=null;
 
-                   if(mealNumber=="0"){
+                   if(mealNumber.equals("0")){
                        Log.d("MealNumber", "Kahvaltı seçildi");
                        tl=view.findViewById(R.id.tableLayoutKahvaltıItems);
 
                    }
-                   else if(mealNumber=="1"){
+                   else if(mealNumber.equals("1")){
                        Log.d("MealNumber", "Ogle seçildi");
                        tl=view.findViewById(R.id.tableLayoutOgleItems);
 
 
                    }
-                   else if(mealNumber=="2"){
+                   else if(mealNumber.equals("2")){
                        Log.d("MealNumber", "aksam seçildi");
                        tl=view.findViewById(R.id.tableLayoutAksamItems);
 
 
                    }
 
-                   else if(mealNumber=="3"){
+                   else if(mealNumber.equals("3")){
                        Log.d("MealNumber", " seçildi atıstırmalık");
                        tl=view.findViewById(R.id.tableLayoutAtıstırmalıkItems);
 
@@ -552,26 +552,26 @@ public class HomeFragment extends Fragment {
                intFdceYenenYag=  intFdceYenenYag+intfdFoodYag;
 
                TextView textViewKalori=null;
-               if(mealNumber=="0"){
+               if(mealNumber.equals("0")){
                    textViewKalori=view.findViewById(R.id.textViewKahvaltıKalori);
                    textViewKalori.setText(String.valueOf(intFdceYenenKalori));
 
                }
-               else if(mealNumber=="1"){
+               else if(mealNumber.equals("1")){
                    textViewKalori=view.findViewById(R.id.textViewOgleKalori);
                    textViewKalori.setText(String.valueOf(intFdceYenenKalori));
 
 
 
                }
-               else if(mealNumber=="2"){
+               else if(mealNumber.equals("2")){
                    textViewKalori=view.findViewById(R.id.textViewKAksamKalori);
                    textViewKalori.setText(String.valueOf(intFdceYenenKalori));
 
 
                }
 
-               else if(mealNumber=="3"){
+               else if(mealNumber.equals("3")){
                    textViewKalori=view.findViewById(R.id.textViewAtıstırmalıkKalori);
                    textViewKalori.setText(String.valueOf(intFdceYenenKalori));
 
