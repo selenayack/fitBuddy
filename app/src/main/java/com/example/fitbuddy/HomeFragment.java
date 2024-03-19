@@ -1,6 +1,5 @@
 package com.example.fitbuddy;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -25,12 +24,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class HomeFragment extends Fragment {
@@ -63,6 +63,24 @@ public class HomeFragment extends Fragment {
 
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
+        DbAdapter db = new DbAdapter(requireContext()) {
+            @Override
+            public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+            }
+
+            @Override
+            public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+            }
+        };
+        db.open();
+
+
+        // db.delete("food_diary_kalori_yenen", null, null);
+      //db.delete("food_diary", null, null);
+
+
 
 
         /*Bundle bundle=this.getArguments();
@@ -206,21 +224,11 @@ public class HomeFragment extends Fragment {
         };
         db.open();
 
-     if(currentDateYıl.equals("")|| currentDateAy.equals("")||currentDateGün.equals("")){
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        String stringFdDate  = df.format(Calendar.getInstance().getTime());
 
-          Calendar calendar=Calendar.getInstance();
-          int yıl=calendar.get(Calendar.YEAR);
-          int ay=calendar.get(Calendar.MONTH);
-          int gün=calendar.get(Calendar.DAY_OF_YEAR);
 
-          currentDateGün=""+gün;
-          currentDateAy=""+ ay;
-          currentDateYıl=""+yıl;
-    }
-
-      String stringFdDate=currentDateGün+"-"+currentDateAy+"-"+currentDateYıl;
-      String stringFdDateSQL=db.quoteSmart(stringFdDate);
-
+        String stringFdDateSql = db.quoteSmart(stringFdDate);
 
 
       FloatingActionButton floatingActionButtonKahvaltı=view.findViewById(R.id.KahvatıAddd);
@@ -237,8 +245,56 @@ public class HomeFragment extends Fragment {
         } else {
 
         }
+        FloatingActionButton floatingActionButtonOgleYemegi=view.findViewById(R.id.ÖğleYemeğiAdd);
+        if (floatingActionButtonOgleYemegi != null) {
+            floatingActionButtonOgleYemegi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-        updateTable(stringFdDate,"0");
+
+
+                    addFood(1);
+                }
+            });
+        } else {
+
+        }
+        FloatingActionButton floatingActionButtonAkşam=view.findViewById(R.id.Akşam_YemeğiAdd);
+        if (floatingActionButtonAkşam != null) {
+            floatingActionButtonAkşam.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+
+                    addFood(2);
+                }
+            });
+        } else {
+
+        }
+        FloatingActionButton floatingActionButtonAtıstırmalik=view.findViewById(R.id.AtıştırmalıkAdd);
+        if (floatingActionButtonAtıstırmalik != null) {
+            floatingActionButtonAtıstırmalik.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+
+                    addFood(3);
+                }
+            });
+        } else {
+
+        }
+
+
+        updateTableItems(stringFdDateSql,"0");
+        //updateTableItems(stringFdDateSql,"1");
+       // updateTableItems(stringFdDateSql,"2");
+       // updateTableItems(stringFdDateSql,"3");
+
+
 
 
 
@@ -246,7 +302,9 @@ public class HomeFragment extends Fragment {
 
     }
 
-   private void updateTable(String stringFdDate, String s) {
+
+    private void updateTableItems(String stringFdDate, String mealNumber) {
+
 
         DbAdapter db= new DbAdapter(requireContext()) {
             @Override
@@ -260,6 +318,9 @@ public class HomeFragment extends Fragment {
             }
         };
         db.open();
+        String stringMealNumberSQL=db.quoteSmart(mealNumber);
+
+
 
 
 
@@ -279,8 +340,7 @@ public class HomeFragment extends Fragment {
 
         String stringDateSQL=db.quoteSmart(stringFdDate);
 
-
-       Cursor cursorFd = db.select("food_diary", fields);
+        Cursor cursorFd = db.select("food_diary", fields);
        String fieldsFood[]=new String[]{
                "_id",
                "besin_isim",
@@ -293,6 +353,66 @@ public class HomeFragment extends Fragment {
 
        };
        Cursor cursorFood;
+
+        Cursor cursorFdYenenkalori;
+        String fieldsYenenKalori[]=new String[]{
+                "_id",
+                "kalori_yenen_id",
+                "kalori_yenen_tarih ",
+                "kalori_yenen_ogun_no ",
+                "kalori_yenen_kalori",
+                "kalori_yenen_protein",
+                "kalori_yenen_karbonhidrat",
+                "kalori_yenen_yag"
+
+
+        };
+
+        String whereClause[] = new String[]{
+                "kalori_yenen_tarih",
+                "kalori_yenen_ogun_no"
+        };
+
+        String whereCondition[]=new String[]{
+             stringDateSQL,
+                stringMealNumberSQL
+        };
+        String whereAndOr[]=new String[]{
+            "AND"
+        };
+
+
+
+
+        cursorFdYenenkalori = db.select("food_diary_kalori_yenen",fieldsYenenKalori,whereClause,whereCondition,whereAndOr);
+        //Cursor cursorFdYenenkalorii = db.select("food_diary_kalori_yenen",fieldsYenenKalori);
+
+
+
+        int cursorFdYenenCount=cursorFdYenenkalori.getCount();
+        int errorFdce=0;
+        if(cursorFdYenenCount==0) {
+            errorFdce=1;
+
+            String insFields = "_id, kalori_yenen_tarih, kalori_yenen_ogun_no, kalori_yenen_kalori, kalori_yenen_protein ,kalori_yenen_karbonhidrat, kalori_yenen_yag";
+            String insValues = "NULL," + stringFdDate + ","+ stringMealNumberSQL + ", '0', '0', '0', '0'";
+
+            db.insert("food_diary_kalori_yenen", insFields, insValues);
+
+            cursorFdYenenkalori = db.select("food_diary_kalori_yenen",fieldsYenenKalori);
+           // cursorFdYenenkalori = db.select("food_diary_kalori_yenen",fieldsYenenKalori,whereClause,whereCondition,whereAndOr);
+
+        }
+
+
+
+
+        int intFdceYenenKalori=0;
+        int intFdceYenenProtein=0;
+        int intFdceYenenKarb=0;
+        int intFdceYenenYag=0;
+
+
        int intCursorCount=cursorFd.getCount();
 
 
@@ -309,17 +429,54 @@ public class HomeFragment extends Fragment {
                String fdServingSizeAdet=cursorFd.getString(4);
                String fdServingSizeAdetOlcu=cursorFd.getString(5);
                String fdFoodEnergy=cursorFd.getString(6);
+               String fdFoodProtein=cursorFd.getString(7);
+               String fdFoodKarb=cursorFd.getString(8);
+               String fdFoodYag=cursorFd.getString(9);
+               int intfdFoodEnergy=Integer.parseInt(fdFoodEnergy);
+               int intfdFoodProtein=Integer.parseInt(fdFoodProtein);
+               int intfdFoodKarb=Integer.parseInt(fdFoodKarb);
+               int intfdFoodYag=Integer.parseInt(fdFoodYag);
+
 
 
 
                cursorFood = db.select("food", fieldsFood,"_id",fdFoodId);
+
+
+
+
+
                if (cursorFood != null && cursorFood.moveToFirst()) {
                    String foodName = cursorFood.getString(1); // 1. sütundaki değeri al
 
                    String foodId=cursorFood.getString(0);
                    String subLine=fdServingSizeGram+" "+fdServingSizeGramOlcu+","+fdServingSizeAdet+" "+fdServingSizeAdetOlcu;
+                   TableLayout tl=null;
 
-                   TableLayout tl=(TableLayout)view.findViewById(R.id.tableLayoutKahvaltıItems);
+                   if(mealNumber=="0"){
+                       tl=(TableLayout)view.findViewById(R.id.tableLayoutKahvaltıItems);
+
+                   }
+                   else if(mealNumber=="1"){
+                       tl=(TableLayout)view.findViewById(R.id.tableLayoutOgleItems);
+
+
+                   }
+                   else if(mealNumber=="2"){
+                       tl=(TableLayout)view.findViewById(R.id.tableLayoutAksamItems);
+
+
+                   }
+
+                   else if(mealNumber=="3"){
+                       tl=(TableLayout)view.findViewById(R.id.tableLayoutAtıstırmalıkItems);
+
+
+                   }
+
+
+
+
                    TableRow tr=new TableRow(getActivity());
                    tr.setLayoutParams(new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
 
@@ -331,8 +488,8 @@ public class HomeFragment extends Fragment {
                    textViewName.setText(foodName);
 
 
-                   TextView textViewKalori=new TextView(getActivity());
-                   textViewKalori.setText(fdFoodEnergy);
+                   TextView textViewKaloriItems=new TextView(getActivity());
+                   textViewKaloriItems.setText(fdFoodEnergy);
 
 
                    tr.addView(textViewName);
@@ -341,7 +498,7 @@ public class HomeFragment extends Fragment {
                    textViewEmpty.setText("");
                    tr.addView(textViewEmpty);
 
-                   tr.addView(textViewKalori);
+                   tr.addView(textViewKaloriItems);
 
                    TextView textViewInfo=new TextView(getActivity());
                    textViewInfo.setText(subLine);
@@ -352,6 +509,9 @@ public class HomeFragment extends Fragment {
                    tl.addView(tr2,new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
 
 
+
+
+
                   /* TextView textViewKahvaltıItemsName = view.findViewById(R.id.textViewKahvaltııtemsName);
                    textViewKahvaltıItemsName.setText(foodName);
                    TextView textViewKahvaltıItemSub = view.findViewById(R.id.textViewKahvaltııtemsToplam);
@@ -359,19 +519,111 @@ public class HomeFragment extends Fragment {
                    TextView textViewKahvaltıItemKalori = view.findViewById(R.id.textViewKahvaltıItemsKalori);
                    textViewKahvaltıItemKalori .setText(fdFoodEnergy);*/
                }
+               intFdceYenenKalori= intFdceYenenKalori+intfdFoodEnergy;
+               intFdceYenenProtein= intFdceYenenProtein+intfdFoodProtein;
+               intFdceYenenKarb= intFdceYenenKarb+intfdFoodKarb;
+               intFdceYenenYag=  intFdceYenenYag+intfdFoodYag;
+
+               TextView textViewKalori=null;
+               if(mealNumber=="0"){
+                   textViewKalori=view.findViewById(R.id.textViewKahvaltıKalori);
+                   textViewKalori.setText(""+intFdceYenenKalori);
+
+               }
+               else if(mealNumber=="1"){
+                   textViewKalori=view.findViewById(R.id.textViewOgleKalori);
+                   textViewKalori.setText(""+intFdceYenenKalori);
+
+
+               }
+               else if(mealNumber=="2"){
+                   textViewKalori=view.findViewById(R.id.textViewKAksamKalori);
+                   textViewKalori.setText(""+intFdceYenenKalori);
+
+
+               }
+
+               else if(mealNumber=="3"){
+                   textViewKalori=view.findViewById(R.id.textViewAtıstırmalıkKalori);
+                   textViewKalori.setText(""+intFdceYenenKalori);
+
+
+               }
+
+
+
+
+
+               String updateFields[]=new String[]{
+                       "kalori_yenen_kalori",
+                       "kalori_yenen_protein",
+                       "kalori_yenen_karbonhidrat",
+                       "kalori_yenen_yag"
+
+               };
+               String updateValues[]=new String[]{
+                       "'"+intFdceYenenKalori+"'",
+                       "'"+intFdceYenenProtein+"'",
+                       "'"+intFdceYenenKarb+"'",
+                       "'"+intFdceYenenYag+"'"
+
+               };
+               System.out.println("kalori"+intFdceYenenKalori);
+
+
+
+
+               if (cursorFdYenenkalori != null && cursorFdYenenkalori.moveToFirst()) {
+                   String stringFdceId = cursorFdYenenkalori.getString(0);
+
+                   long  longFdceId = Long.parseLong(stringFdceId);
+
+                   db.update("food_diary_kalori_yenen","_id",longFdceId,updateFields,updateValues);
+               }
+               else{
+                   System.out.println("cursor boşşş");
+               }
+
+
+
+
+
+
+
+
+
 
            } while (cursorFd.moveToNext());
-       } else {
+
+
+
+
+
+
+
+       }
+
+
+
+       else {
            // Cursor boşsa veya veri yoksa bu durumu işleyin
        }
 
 
 
+            // Proceed with accessing other data from the cursor
+
+
+
+       //long longPrimaryKey=Long.parseLong(currentId);
 
 
 
 
 
+
+
+db.close();
 
 
 

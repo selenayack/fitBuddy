@@ -769,27 +769,33 @@ public class AddFoodToDiaryFragment extends Fragment {
             //energy
             double doubleEnergyYüzde = Double.parseDouble(StringKalori);
             double doubleFdKaloriHesaplanmış = (doublePorsiyonGram * doubleEnergyYüzde) / 100;
-            String stringFdKaloriHesaplanmış = "" + doubleFdKaloriHesaplanmış;
+            int intFdKloriHesaplanmış = (int) doubleFdKaloriHesaplanmış;
+
+            String stringFdKaloriHesaplanmış = "" + intFdKloriHesaplanmış;
             String stringFdKaloriHesaplanmışSQL = db.quoteSmart(stringFdKaloriHesaplanmış);
 
 
             //protein
             double doubleProteinYüzde = Double.parseDouble(StringProtein);
             double doubleFdProteinHesaplanmış = (doublePorsiyonGram * doubleProteinYüzde) / 100;
-            String stringFdProteinHesaplanmış = "" + doubleFdProteinHesaplanmış;
+            int intFdProteinHesaplanmış = (int) doubleFdProteinHesaplanmış;
+
+            String stringFdProteinHesaplanmış = "" + intFdProteinHesaplanmış;
             String stringFdProteinHesaplanmışSQL = db.quoteSmart(stringFdProteinHesaplanmış);
 
             //karbonhidrat
             double doubleCarbYüzde = Double.parseDouble(StringCarb);
             double doubleFdCarbHesaplanmış = (doublePorsiyonGram * doubleCarbYüzde) / 100;
-            String stringFdCarbHesaplanmış = "" + doubleFdCarbHesaplanmış;
+            int intFdCarbHesaplanmış = (int) doubleFdCarbHesaplanmış;
+            String stringFdCarbHesaplanmış = "" + intFdCarbHesaplanmış;
             String stringFdCarbHesaplanmışSQL = db.quoteSmart(stringFdCarbHesaplanmış);
 
 
             //yag
             double doubleYagYüzde = Double.parseDouble(StringYag);
             double doubleFdYagHesaplanmış = (doublePorsiyonGram * doubleYagYüzde) / 100;
-            String stringFdYagHesaplanmış = "" + doubleFdYagHesaplanmış;
+            int intFdYagHesaplanmış = (int) doubleFdYagHesaplanmış;
+            String stringFdYagHesaplanmış = "" +intFdYagHesaplanmış;
             String stringFdYagHesaplanmışSQL = db.quoteSmart(stringFdYagHesaplanmış);
 
 

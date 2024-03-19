@@ -7,6 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -269,6 +270,35 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
         db.insert(table, null, values);
     }
 
+    public Cursor select(String tableName, String[] columns, String whereClause) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query(tableName, columns, whereClause, null, null, null, null);
+    }
+
+    public Cursor select(String tableName, String[] fields, String[] whereClause, String[] whereCondition, String[] whereAndOr) throws SQLException {
+        String where="";
+        int arraySize = whereClause.length;
+
+        for (int x = 0; x < arraySize; x++) {
+            if (where.equals("")) {
+                where = whereClause[x] + "='" + whereCondition[x] + "'";
+
+            } else {
+                where = where + " " + whereAndOr[x - 1] + " " + whereClause[x] + "=" + whereCondition[x] ;
+            }
+        }
+        Toast.makeText(context, where, Toast.LENGTH_SHORT).show();
+
+        Cursor mcursor = db.query(tableName, fields, where,null, null, null, null, null);
+
+        if (mcursor != null) {
+            mcursor.moveToFirst();
+        }
+        return mcursor;
+    }
+
+
+
 
     public Cursor select(String table, String[] columns, String whereColumn, String whereValue) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -324,6 +354,26 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
 
     return cursor;
 }
+
+
+        public boolean update(String table, String primaryKey, long sutunId, String fields[], String value[]) throws SQLException {
+            ContentValues args = new ContentValues();
+            for (int i = 0; i < fields.length; i++) {
+                args.put(fields[i], value[i]);
+            }
+            return db.update(table, args, primaryKey + "=" + sutunId, null) > 0;
+        }
+
+
+
+
+
+
+
+
+
+
+
     public boolean update(String table,String primaryKey,long sutunId,String fields,String value)throws SQLException{
 
         value=value.substring(1,value.length()-1);
