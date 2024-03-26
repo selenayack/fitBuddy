@@ -609,6 +609,31 @@ public class HomeFragment extends Fragment {
                   System.out.println("cursor boşşş");
               }
 
+              String fieldsHedef[]=new String[]{
+                      "_id",
+                      "hedef_kalori_aktivite_diyet_ile"
+              };
+              Cursor cursorHedef=db.select("hedef",fieldsHedef);
+              cursorHedef.moveToLast();
+              String stringHedefKaloriAktiviteVeDiyet=cursorHedef.getString(1);
+              TextView textViewkaloriAktiviteDiyet=view.findViewById(R.id.textViewHedefAktiviteİleCal);
+              textViewkaloriAktiviteDiyet.setText(stringHedefKaloriAktiviteVeDiyet);
+
+              TextView textViewAlınanKalori=view.findViewById(R.id.textViewAlınanKaloriCal);
+              textViewAlınanKalori.setText(""+intFdceYenenKalori);
+
+              int intHedefKaloriAktiviteVeDiyet=0;
+              try {
+                   intHedefKaloriAktiviteVeDiyet=Integer.parseInt(stringHedefKaloriAktiviteVeDiyet);
+              }
+              catch (NumberFormatException nfe){
+
+              }
+
+              int textViewKalan=intHedefKaloriAktiviteVeDiyet-intFdceYenenKalori;
+              TextView textViewKalanKalori=view.findViewById(R.id.textViewHedefKalanKaloriCal);
+              textViewKalanKalori.setText(""+textViewKalan);
+
 
 
 

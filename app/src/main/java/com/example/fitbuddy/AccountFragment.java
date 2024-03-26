@@ -88,7 +88,7 @@ public class AccountFragment extends Fragment {
         ArrayAdapter<String> adapterYear = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,arraySpinnerDTYıl);
         spinnerDTYıl.setAdapter(adapterYear);
 
-        Button buttonDevam=(Button) view.findViewById(R.id.buttonBilgiGuncelle);
+        Button buttonDevam= view.findViewById(R.id.buttonBilgiGuncelle);
         buttonDevam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

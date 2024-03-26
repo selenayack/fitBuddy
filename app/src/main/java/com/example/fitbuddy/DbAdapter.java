@@ -17,7 +17,7 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
 
 
     private static final String DATABASE_NAME = "fitBuddyDiet";
-    private static final int DATABASE_VERSION = 316;
+    private static final int DATABASE_VERSION = 317;
 
     private final Context context;
     private DatabaseHelper dbHelper;
@@ -359,6 +359,8 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
         public boolean update(String table, String primaryKey, long sutunId, String fields[], String value[]) throws SQLException {
             ContentValues args = new ContentValues();
             for (int i = 0; i < fields.length; i++) {
+
+                value[i]=  value[i].substring(1,value[i].length()-1);
                 args.put(fields[i], value[i]);
             }
             return db.update(table, args, primaryKey + "=" + sutunId, null) > 0;
