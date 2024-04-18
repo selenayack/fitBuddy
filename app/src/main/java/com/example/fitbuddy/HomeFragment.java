@@ -36,6 +36,7 @@ import java.util.Calendar;
 public class HomeFragment extends Fragment {
 
     Cursor addFoodCursor;
+    Cursor listCursorHedef;
     private View view;
 
     private DrawerLayout drawerLayout;
@@ -516,7 +517,7 @@ public class HomeFragment extends Fragment {
 
 
                    TextView textViewKaloriItems=new TextView(getActivity());
-                   textViewKaloriItems.setText(fdFoodEnergy);
+                   textViewKaloriItems.setText("                                                 "+fdFoodEnergy);
 
 
                    tr.addView(textViewName);
@@ -617,10 +618,10 @@ public class HomeFragment extends Fragment {
               cursorHedef.moveToLast();
               String stringHedefKaloriAktiviteVeDiyet=cursorHedef.getString(1);
               TextView textViewkaloriAktiviteDiyet=view.findViewById(R.id.textViewHedefAktiviteİleCal);
-              textViewkaloriAktiviteDiyet.setText(stringHedefKaloriAktiviteVeDiyet);
+              textViewkaloriAktiviteDiyet.setText("   "+stringHedefKaloriAktiviteVeDiyet);
 
               TextView textViewAlınanKalori=view.findViewById(R.id.textViewAlınanKaloriCal);
-              textViewAlınanKalori.setText(""+intFdceYenenKalori);
+              textViewAlınanKalori.setText(" "+intFdceYenenKalori);
 
               int intHedefKaloriAktiviteVeDiyet=0;
               try {
@@ -632,13 +633,17 @@ public class HomeFragment extends Fragment {
 
               int textViewKalan=intHedefKaloriAktiviteVeDiyet-intFdceYenenKalori;
               TextView textViewKalanKalori=view.findViewById(R.id.textViewHedefKalanKaloriCal);
-              textViewKalanKalori.setText(""+textViewKalan);
+              textViewKalanKalori.setText("  "+textViewKalan);
 
 
+              TextView textViewProtein=view.findViewById(R.id.textViewAlınanP);
+              textViewProtein.setText("  "+intFdceYenenProtein+" g");
+              TextView textViewKarb=view.findViewById(R.id.textViewAlınanK);
+              textViewKarb.setText("   "+intFdceYenenKarb+" g");
+              TextView textViewYag=view.findViewById(R.id.textViewAlınanY);
+              textViewYag.setText(""+intFdceYenenYag+" g");
 
-
-
-
+             // Toast.makeText(getActivity(), " "+intfdFoodProtein, Toast.LENGTH_SHORT).show();
 
               cursorFd.moveToNext();
            }
@@ -654,7 +659,69 @@ public class HomeFragment extends Fragment {
 
        }
 
-       db.close();
+        String fields2[] = new String[]{
+                "_id",
+                "hedef_kalori INT",
+                "hedef_protein INT",
+                "hedef_carb INT",
+                "hedef_yag INT",
+                "hedef_kalori_aktiviteİle INT",
+                "hedef_protein_aktiviteİle INT",
+                "hedef_carb_aktiviteİle INT",
+                "hedef_yag_aktiviteİle INT",
+                "hedef_kalori_aktivite_diyet_ile INT",
+                "hedef_protein_aktivite_diyet_ile INT",
+                "hedef_carb_aktivite_diyet_ile INT",
+                "hedef_yag_aktivite_diyet_ile INT"
+        };
+
+        listCursorHedef = db.select("hedef", fields2, "", "", "_id", "ASC");
+
+
+
+// String currentIdSQL = db.quoteSmart(currentId);
+
+        String currentId = listCursorHedef.getString(0);
+        String currentName = listCursorHedef.getString(1);
+        Cursor HedefCursor = db.select("hedef", fields2, "_id", currentId);
+
+
+
+        if (HedefCursor != null && HedefCursor.moveToFirst()) {
+
+            String StringProteinAktiviteDiyet = HedefCursor.getString(10);
+            String StringCarbAktiviteDiyet  = HedefCursor.getString(11);
+            String StringYagAktiviteDiyet= HedefCursor.getString(12);
+            int intDiyetleProtein=Integer.parseInt(StringProteinAktiviteDiyet);
+            int intDiyetleKarb=Integer.parseInt(StringCarbAktiviteDiyet);
+            int intDiyetleYag=Integer.parseInt(StringYagAktiviteDiyet);
+
+
+            int textViewKalanProtein=intDiyetleProtein-intFdceYenenProtein;
+            TextView textViewKalanP=view.findViewById(R.id.textViewkalanP);
+            textViewKalanP.setText("  "+textViewKalanProtein+" g");
+            int textViewKalanCarb=intDiyetleKarb-intFdceYenenKarb;
+            TextView textViewKalanK=view.findViewById(R.id.textViewkalanK);
+            textViewKalanK.setText("  "+textViewKalanCarb+" g");
+            int textViewKalanYag=intDiyetleYag-intFdceYenenYag;
+            TextView textViewKalanY=view.findViewById(R.id.textViewkalanY);
+            textViewKalanY.setText("  "+textViewKalanYag+" g");
+
+
+
+
+
+
+
+
+        }
+
+        else {
+            Log.e("ERROR_TAG", "Cursor is empty");
+        }
+
+
+        db.close();
 
 
 
