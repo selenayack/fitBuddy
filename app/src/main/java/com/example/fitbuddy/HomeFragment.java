@@ -136,66 +136,6 @@ public class HomeFragment extends Fragment {
             // mealNumber'ı kullanın
         }*/
 
-       /*FloatingActionButton buttonAddKahvaltı=view.findViewById(R.id.KahvatıAddd);
-
-        buttonAddKahvaltı.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Fragment yeniFragment = new AddFoodToDiaryFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.container, yeniFragment);
-                transaction.addToBackStack(null); // Geri butonu ile geri dönülebilirlik ekler
-                transaction.commit();
-
-
-            }
-        });*/
-        FloatingActionButton buttonAddOgleYemegi=view.findViewById(R.id.ÖğleYemeğiAdd);
-
-        buttonAddOgleYemegi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment yeniFragment = new AddFoodToDiaryFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.container, yeniFragment);
-                transaction.addToBackStack(null); // Geri butonu ile geri dönülebilirlik ekler
-                transaction.commit();
-
-
-
-            }
-        });
-        FloatingActionButton buttonAddAksamYemegi=view.findViewById(R.id.Akşam_YemeğiAdd);
-
-        buttonAddAksamYemegi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment yeniFragment = new AddFoodToDiaryFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.container, yeniFragment);
-                transaction.addToBackStack(null); // Geri butonu ile geri dönülebilirlik ekler
-                transaction.commit();
-
-
-
-            }
-        });
-        FloatingActionButton buttonAddAraOgun=view.findViewById(R.id.AtıştırmalıkAdd);
-
-        buttonAddAraOgun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment yeniFragment = new AddFoodToDiaryFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.container, yeniFragment);
-                transaction.addToBackStack(null); // Geri butonu ile geri dönülebilirlik ekler
-                transaction.commit();
-
-
-
-            }
-        });
 
         initalizeHome();
 
@@ -231,17 +171,22 @@ public class HomeFragment extends Fragment {
 
         String stringFdDateSql = db.quoteSmart(stringFdDate);
 
-        updateTableItems(stringFdDateSql,"0");
-        updateTableItems(stringFdDateSql,"1");
-        updateTableItems(stringFdDateSql,"2");
-        updateTableItems(stringFdDateSql,"3");
+        updateTableItems( stringFdDateSql, "0");
+        updateTableItems( stringFdDateSql, "1");
+        updateTableItems(stringFdDateSql, "2");
+        updateTableItems( stringFdDateSql, "3");
 
 
-      FloatingActionButton floatingActionButtonKahvaltı=view.findViewById(R.id.KahvatıAddd);
+        FloatingActionButton floatingActionButtonKahvaltı=view.findViewById(R.id.KahvatıAddd);
         if (floatingActionButtonKahvaltı != null) {
             floatingActionButtonKahvaltı.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Fragment yeniFragment = new AddFoodToDiaryFragment();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.container, yeniFragment);
+                    transaction.addToBackStack(null); // Geri butonu ile geri dönülebilirlik ekler
+                    transaction.commit();
 
 
                     addFood(0);
@@ -259,6 +204,11 @@ public class HomeFragment extends Fragment {
             floatingActionButtonOgleYemegi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Fragment yeniFragment = new AddFoodToDiaryFragment();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.container, yeniFragment);
+                    transaction.addToBackStack(null); // Geri butonu ile geri dönülebilirlik ekler
+                    transaction.commit();
 
                     addFood(1);
                 }
@@ -271,6 +221,11 @@ public class HomeFragment extends Fragment {
             floatingActionButtonAkşam.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Fragment yeniFragment = new AddFoodToDiaryFragment();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.container, yeniFragment);
+                    transaction.addToBackStack(null); // Geri butonu ile geri dönülebilirlik ekler
+                    transaction.commit();
 
 
 
@@ -285,6 +240,11 @@ public class HomeFragment extends Fragment {
             floatingActionButtonAtıstırmalik.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Fragment yeniFragment = new AddFoodToDiaryFragment();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.container, yeniFragment);
+                    transaction.addToBackStack(null); // Geri butonu ile geri dönülebilirlik ekler
+                    transaction.commit();
 
 
 
