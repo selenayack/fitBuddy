@@ -170,11 +170,10 @@ public class HomeFragment extends Fragment {
 
 
         String stringFdDateSql = db.quoteSmart(stringFdDate);
-
         updateTableItems( stringFdDateSql, "0");
-        updateTableItems( stringFdDateSql, "1");
-        updateTableItems(stringFdDateSql, "2");
-        updateTableItems( stringFdDateSql, "3");
+//        updateTableItems( stringFdDateSql, "1");
+      //  updateTableItems(stringFdDateSql, "2");
+       // updateTableItems( stringFdDateSql, "3");
 
 
         FloatingActionButton floatingActionButtonKahvaltı=view.findViewById(R.id.KahvatıAddd);
@@ -199,7 +198,7 @@ public class HomeFragment extends Fragment {
 
 
 
-        FloatingActionButton floatingActionButtonOgleYemegi=view.findViewById(R.id.ÖğleYemeğiAdd);
+      /*  FloatingActionButton floatingActionButtonOgleYemegi=view.findViewById(R.id.ÖğleYemeğiAdd);
         if (floatingActionButtonOgleYemegi != null) {
             floatingActionButtonOgleYemegi.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -253,7 +252,7 @@ public class HomeFragment extends Fragment {
             });
         } else {
 
-        }
+        }*/
 
 
 
@@ -401,100 +400,89 @@ public class HomeFragment extends Fragment {
 
 
        if (cursorFd != null && cursorFd.moveToFirst()) {
-          for(int x=0;x<intCursorCount;x++){
-               String stringFdId = cursorFd.getString(0);
+          for(int x=0;x<intCursorCount;x++) {
+              String stringFdId = cursorFd.getString(0);
 
 
-               String fdFoodId = cursorFd.getString(1); // 1. sütundaki değeri al
-               String fdFoodIdSQL = db.quoteSmart(fdFoodId);
+              String fdFoodId = cursorFd.getString(1); // 1. sütundaki değeri al
+              String fdFoodIdSQL = db.quoteSmart(fdFoodId);
 
-               String fdServingSizeGram=cursorFd.getString(2);
-               String fdServingSizeGramOlcu=cursorFd.getString(3);
-               String fdServingSizeAdet=cursorFd.getString(4);
-               String fdServingSizeAdetOlcu=cursorFd.getString(5);
-               String fdFoodEnergy=cursorFd.getString(6);
-               String fdFoodProtein=cursorFd.getString(7);
-               String fdFoodKarb=cursorFd.getString(8);
-               String fdFoodYag=cursorFd.getString(9);
-               int intfdFoodEnergy=Integer.parseInt(fdFoodEnergy);
-               int intfdFoodProtein=Integer.parseInt(fdFoodProtein);
-               int intfdFoodKarb=Integer.parseInt(fdFoodKarb);
-               int intfdFoodYag=Integer.parseInt(fdFoodYag);
-
-
+              String fdServingSizeGram = cursorFd.getString(2);
+              String fdServingSizeGramOlcu = cursorFd.getString(3);
+              String fdServingSizeAdet = cursorFd.getString(4);
+              String fdServingSizeAdetOlcu = cursorFd.getString(5);
+              String fdFoodEnergy = cursorFd.getString(6);
+              String fdFoodProtein = cursorFd.getString(7);
+              String fdFoodKarb = cursorFd.getString(8);
+              String fdFoodYag = cursorFd.getString(9);
+              int intfdFoodEnergy = Integer.parseInt(fdFoodEnergy);
+              int intfdFoodProtein = Integer.parseInt(fdFoodProtein);
+              int intfdFoodKarb = Integer.parseInt(fdFoodKarb);
+              int intfdFoodYag = Integer.parseInt(fdFoodYag);
 
 
-              cursorFood = db.select("food", fieldsFood,"_id",fdFoodId);
+              cursorFood = db.select("food", fieldsFood, "_id", fdFoodId);
 
 
+              if (cursorFood != null && cursorFood.moveToFirst()) {
+                  String foodName = cursorFood.getString(1); // 1. sütundaki değeri al
+
+                  String foodId = cursorFood.getString(0);
+                  String subLine = fdServingSizeGram + " " + fdServingSizeGramOlcu + "," + fdServingSizeAdet + " " + fdServingSizeAdetOlcu;
+                  TableLayout tl = null;
+
+                  if (mealNumber.equals("0")) {
+                      //Log.d("MealNumber", "Kahvaltı seçildi");
+                      tl = view.findViewById(R.id.tableLayoutKahvaltıItems);
+
+                  } else if (mealNumber.equals("1")) {
+                      Log.d("MealNumber", "Ogle seçildi");
+                      //tl=view.findViewById(R.id.tableLayoutOgleItems);
 
 
-
-               if (cursorFood != null && cursorFood.moveToFirst()) {
-                   String foodName = cursorFood.getString(1); // 1. sütundaki değeri al
-
-                   String foodId=cursorFood.getString(0);
-                   String subLine=fdServingSizeGram+" "+fdServingSizeGramOlcu+","+fdServingSizeAdet+" "+fdServingSizeAdetOlcu;
-                   TableLayout tl=null;
-
-                   if(mealNumber.equals("0")){
-                       Log.d("MealNumber", "Kahvaltı seçildi");
-                       tl=view.findViewById(R.id.tableLayoutKahvaltıItems);
-
-                   }
-                   else if(mealNumber.equals("1")){
-                       Log.d("MealNumber", "Ogle seçildi");
-                       tl=view.findViewById(R.id.tableLayoutOgleItems);
+                  } else if (mealNumber.equals("2")) {
+                      Log.d("MealNumber", "aksam seçildi");
+                      // tl=view.findViewById(R.id.tableLayoutAksamItems);
 
 
-                   }
-                   else if(mealNumber.equals("2")){
-                       Log.d("MealNumber", "aksam seçildi");
-                       tl=view.findViewById(R.id.tableLayoutAksamItems);
+                  } else if (mealNumber.equals("3")) {
+                      Log.d("MealNumber", " seçildi atıstırmalık");
+                      // tl=view.findViewById(R.id.tableLayoutAtıstırmalıkItems);
 
 
-                   }
-
-                   else if(mealNumber.equals("3")){
-                       Log.d("MealNumber", " seçildi atıstırmalık");
-                       tl=view.findViewById(R.id.tableLayoutAtıstırmalıkItems);
+                  }
 
 
-                   }
+                  TableRow tr = new TableRow(getActivity());
+                  tr.setLayoutParams(new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
 
+                  TableRow tr2 = new TableRow(getActivity());
+                  tr2.setLayoutParams(new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                  TextView textViewName = new TextView(getActivity());
+                  textViewName.setText("  "+foodName);
 
 
-                   TableRow tr=new TableRow(getActivity());
-                   tr.setLayoutParams(new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+                  TextView textViewKaloriItems = new TextView(getActivity());
+                  textViewKaloriItems.setText("                                                         " + fdFoodEnergy);
 
 
-                   TableRow tr2=new TableRow(getActivity());
-                   tr2.setLayoutParams(new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+                  tr.addView(textViewName);
 
-                   TextView textViewName=new TextView(getActivity());
-                   textViewName.setText(foodName);
+                  TextView textViewEmpty = new TextView(getActivity());
+                  textViewEmpty.setText("");
+                  tr.addView(textViewEmpty);
 
+                  tr.addView(textViewKaloriItems);
 
-                   TextView textViewKaloriItems=new TextView(getActivity());
-                   textViewKaloriItems.setText("                                                 "+fdFoodEnergy);
+                  TextView textViewInfo = new TextView(getActivity());
+                  textViewInfo.setText("  "+subLine);
+                  tr2.addView(textViewInfo);
 
+                  tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-                   tr.addView(textViewName);
-
-                   TextView textViewEmpty = new TextView(getActivity());
-                   textViewEmpty.setText("");
-                   tr.addView(textViewEmpty);
-
-                   tr.addView(textViewKaloriItems);
-
-                   TextView textViewInfo=new TextView(getActivity());
-                   textViewInfo.setText(subLine);
-                   tr2.addView(textViewInfo);
-
-                   tl.addView(tr,new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
-
-                   tl.addView(tr2,new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+                  tl.addView(tr2, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
 
 
@@ -506,107 +494,101 @@ public class HomeFragment extends Fragment {
                    textViewKahvaltıItemSub .setText(subLine);
                    TextView textViewKahvaltıItemKalori = view.findViewById(R.id.textViewKahvaltıItemsKalori);
                    textViewKahvaltıItemKalori .setText(fdFoodEnergy);*/
-               }
-               intFdceYenenKalori= intFdceYenenKalori+intfdFoodEnergy;
-               intFdceYenenProtein= intFdceYenenProtein+intfdFoodProtein;
-               intFdceYenenKarb= intFdceYenenKarb+intfdFoodKarb;
-               intFdceYenenYag=  intFdceYenenYag+intfdFoodYag;
+              }
+              intFdceYenenKalori = intFdceYenenKalori + intfdFoodEnergy;
+              intFdceYenenProtein = intFdceYenenProtein + intfdFoodProtein;
+              intFdceYenenKarb = intFdceYenenKarb + intfdFoodKarb;
+              intFdceYenenYag = intFdceYenenYag + intfdFoodYag;
 
-               TextView textViewKalori=null;
-               if(mealNumber.equals("0")){
-                   textViewKalori=view.findViewById(R.id.textViewKahvaltıKalori);
-                   textViewKalori.setText(String.valueOf(intFdceYenenKalori));
+              TextView textViewKalori = null;
+              if (mealNumber.equals("0")) {
+                  textViewKalori = view.findViewById(R.id.textViewKahvaltıKalori);
+                  textViewKalori.setText(String.valueOf(intFdceYenenKalori));
 
-               }
-               else if(mealNumber.equals("1")){
-                   textViewKalori=view.findViewById(R.id.textViewOgleKalori);
-                   textViewKalori.setText(String.valueOf(intFdceYenenKalori));
-
+              } else if (mealNumber.equals("1")) {
+                  // textViewKalori=view.findViewById(R.id.textViewOgleKalori);
+                  textViewKalori.setText(String.valueOf(intFdceYenenKalori));
 
 
-               }
-               else if(mealNumber.equals("2")){
-                   textViewKalori=view.findViewById(R.id.textViewKAksamKalori);
-                   textViewKalori.setText(String.valueOf(intFdceYenenKalori));
+              } else if (mealNumber.equals("2")) {
+                  //textViewKalori=view.findViewById(R.id.textViewKAksamKalori);
+                  textViewKalori.setText(String.valueOf(intFdceYenenKalori));
 
 
-               }
-
-               else if(mealNumber.equals("3")){
-                   textViewKalori=view.findViewById(R.id.textViewAtıstırmalıkKalori);
-                   textViewKalori.setText(String.valueOf(intFdceYenenKalori));
+              } else if (mealNumber.equals("3")) {
+                  // textViewKalori=view.findViewById(R.id.textViewAtıstırmalıkKalori);
+                  textViewKalori.setText(String.valueOf(intFdceYenenKalori));
 
 
+              }
 
-               }
-
-              String updateFields[]=new String[]{
+              String updateFields[] = new String[]{
                       "kalori_yenen_kalori",
                       "kalori_yenen_protein",
                       "kalori_yenen_karbonhidrat",
                       "kalori_yenen_yag"
 
               };
-              String updateValues[]=new String[]{
-                      "'"+intFdceYenenKalori+"'",
-                      "'"+intFdceYenenProtein+"'",
-                      "'"+intFdceYenenKarb+"'",
-                      "'"+intFdceYenenYag+"'"
+              String updateValues[] = new String[]{
+                      "'" + intFdceYenenKalori + "'",
+                      "'" + intFdceYenenProtein + "'",
+                      "'" + intFdceYenenKarb + "'",
+                      "'" + intFdceYenenYag + "'"
 
               };
               //  System.out.println("kalori"+intFdceYenenKalori);
 
 
-
-
               if (cursorFdYenenkalori != null && cursorFdYenenkalori.moveToFirst()) {
                   String stringFdceId = cursorFdYenenkalori.getString(0);
 
-                  long  longFdceId = Long.parseLong(stringFdceId);
+                  long longFdceId = Long.parseLong(stringFdceId);
 
-                  db.update("food_diary_kalori_yenen","_id",longFdceId,updateFields,updateValues);
-              }
-              else{
+                  db.update("food_diary_kalori_yenen", "_id", longFdceId, updateFields, updateValues);
+              } else {
                   System.out.println("cursor boşşş");
               }
 
-              String fieldsHedef[]=new String[]{
+              String fieldsHedef[] = new String[]{
                       "_id",
                       "hedef_kalori_aktivite_diyet_ile"
               };
-              Cursor cursorHedef=db.select("hedef",fieldsHedef);
+              Cursor cursorHedef = db.select("hedef", fieldsHedef);
               cursorHedef.moveToLast();
-              String stringHedefKaloriAktiviteVeDiyet=cursorHedef.getString(1);
-              TextView textViewkaloriAktiviteDiyet=view.findViewById(R.id.textViewHedefAktiviteİleCal);
-              textViewkaloriAktiviteDiyet.setText("   "+stringHedefKaloriAktiviteVeDiyet);
-
-              TextView textViewAlınanKalori=view.findViewById(R.id.textViewAlınanKaloriCal);
-              textViewAlınanKalori.setText(" "+intFdceYenenKalori);
-
-              int intHedefKaloriAktiviteVeDiyet=0;
-              try {
-                   intHedefKaloriAktiviteVeDiyet=Integer.parseInt(stringHedefKaloriAktiviteVeDiyet);
-              }
-              catch (NumberFormatException nfe){
-
-              }
-
-              int textViewKalan=intHedefKaloriAktiviteVeDiyet-intFdceYenenKalori;
-              TextView textViewKalanKalori=view.findViewById(R.id.textViewHedefKalanKaloriCal);
-              textViewKalanKalori.setText("  "+textViewKalan);
 
 
-              TextView textViewProtein=view.findViewById(R.id.textViewAlınanP);
-              textViewProtein.setText("  "+intFdceYenenProtein+" g");
-              TextView textViewKarb=view.findViewById(R.id.textViewAlınanK);
-              textViewKarb.setText("   "+intFdceYenenKarb+" g");
-              TextView textViewYag=view.findViewById(R.id.textViewAlınanY);
-              textViewYag.setText(""+intFdceYenenYag+" g");
+                  TextView textViewAlınanKalori = view.findViewById(R.id.textViewAlınanKaloriCal);
+                  textViewAlınanKalori.setText(" " + intFdceYenenKalori);
+                  String stringHedefKaloriAktiviteVeDiyet = cursorHedef.getString(1);
+                  //TextView textViewkaloriAktiviteDiyet=view.findViewById(R.id.textViewHedefAktiviteİleCal);
+                  //textViewkaloriAktiviteDiyet.setText("   "+stringHedefKaloriAktiviteVeDiyet);
 
-             // Toast.makeText(getActivity(), " "+intfdFoodProtein, Toast.LENGTH_SHORT).show();
 
-              cursorFd.moveToNext();
-           }
+                  int intHedefKaloriAktiviteVeDiyet = 0;
+                  try {
+                      intHedefKaloriAktiviteVeDiyet = Integer.parseInt(stringHedefKaloriAktiviteVeDiyet);
+                  } catch (NumberFormatException nfe) {
+
+                  }
+
+                  int textViewKalan = intHedefKaloriAktiviteVeDiyet - intFdceYenenKalori;
+                  TextView textViewKalanKalori = view.findViewById(R.id.textViewHedefKalanKaloriCal);
+                  textViewKalanKalori.setText("  " + textViewKalan);
+
+
+                  TextView textViewProtein = view.findViewById(R.id.textViewAlınanP);
+                  textViewProtein.setText("  " + intFdceYenenProtein + " g");
+                  TextView textViewKarb = view.findViewById(R.id.textViewAlınanK);
+                  textViewKarb.setText("   " + intFdceYenenKarb + " g");
+                  TextView textViewYag = view.findViewById(R.id.textViewAlınanY);
+                  textViewYag.setText("" + intFdceYenenYag + " g");
+
+                  // Toast.makeText(getActivity(), " "+intfdFoodProtein, Toast.LENGTH_SHORT).show();
+
+                  cursorFd.moveToNext();
+
+
+          }
 
 
 
@@ -619,7 +601,8 @@ public class HomeFragment extends Fragment {
 
        }
 
-        String fields2[] = new String[]{
+
+       String fields2[] = new String[]{
                 "_id",
                 "hedef_kalori INT",
                 "hedef_protein INT",
@@ -641,13 +624,16 @@ public class HomeFragment extends Fragment {
 
 // String currentIdSQL = db.quoteSmart(currentId);
 
-        String currentId = listCursorHedef.getString(0);
-        String currentName = listCursorHedef.getString(1);
+       String currentId = listCursorHedef.getString(0);
+      String currentName = listCursorHedef.getString(1);
         Cursor HedefCursor = db.select("hedef", fields2, "_id", currentId);
 
 
-
         if (HedefCursor != null && HedefCursor.moveToFirst()) {
+
+            String stringHedefKaloriAktiviteVeDiyet=HedefCursor.getString(9);
+            TextView textViewkaloriAktiviteDiyet=view.findViewById(R.id.textViewHedefAktiviteİleCal);
+            textViewkaloriAktiviteDiyet.setText("   "+stringHedefKaloriAktiviteVeDiyet);
 
             String StringProteinAktiviteDiyet = HedefCursor.getString(10);
             String StringCarbAktiviteDiyet  = HedefCursor.getString(11);

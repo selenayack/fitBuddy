@@ -152,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="0dp"
-                    android:layout_marginRight="40dp"
+                    android:layout_marginRight="55dp"
                     android:text="Hedef Kalori"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -163,7 +163,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="0dp"
-                    android:layout_marginRight="80dp"
+                    android:layout_marginRight="100dp"
                     android:text="Alınan"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -245,7 +245,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="70dp"
+                        android:layout_marginRight="90dp"
                         android:text=" Protein"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -256,7 +256,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="40dp"
+                        android:layout_marginRight="60dp"
                         android:text="Karbonhidrat"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -338,7 +338,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="30dp"
+                        android:layout_marginRight="50dp"
                         android:text="Kalan Protein"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -349,7 +349,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="45dp"
+                        android:layout_marginRight="25dp"
                         android:text="Kalan Karb"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -413,7 +413,6 @@
             </TableLayout>
 
 
-
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -446,8 +445,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="20dp"
-                        android:layout_marginRight="150dp"
-                        android:text="@string/Kahvaltı"
+                        android:layout_marginRight="170dp"
+                        android:text="Besin Ekle"
                         android:textSize="16dp"
                         android:textStyle="bold" />
 
@@ -468,7 +467,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="0dp">
+                android:layout_marginBottom="100dp">
 
 
             </TableLayout>
@@ -479,180 +478,7 @@
 
 
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginBottom="0dp">
 
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-
-                >
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/ÖğleYemeğiAdd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="16dp"
-                    app:backgroundTint="#FF5722"
-                    app:fabSize="mini"
-                    app:srcCompat="@drawable/baseline_add_24" />
-
-
-                <TextView
-                    android:id="@+id/textViewÖğleYemeği"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="120dp"
-                    android:text="@string/Öğle_Yemeği"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/textViewOgleKalori"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Toplam Kalori"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-            </TableRow>
-            </TableLayout>
-            <TableLayout
-                android:id="@+id/tableLayoutOgleItems"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp">
-
-
-
-            </TableLayout>
-
-
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginBottom="0dp">
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-
-                    >
-
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/Akşam_YemeğiAdd"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:fabSize="mini"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_margin="16dp"
-                        app:backgroundTint="#FF5722"
-                        app:srcCompat="@drawable/baseline_add_24" />
-
-
-                    <TextView
-                        android:id="@+id/textViewAkşam_Yemeği"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="100dp"
-                        android:text="@string/Akşam_Yemeği"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/textViewKAksamKalori"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="Toplam Kalori"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-
-                </TableRow>
-            </TableLayout>
-            <TableLayout
-                android:id="@+id/tableLayoutAksamItems"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp">
-
-
-
-            </TableLayout>
-
-
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginBottom="0dp">
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-
-                    >
-
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/AtıştırmalıkAdd"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_margin="16dp"
-                        app:fabSize="mini"
-                        app:backgroundTint="#FF5722"
-                        app:srcCompat="@drawable/baseline_add_24" />
-
-
-                    <TextView
-                        android:id="@+id/textViewAtıştırmalık"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="140dp"
-                        android:text="@string/Ara_Öğün"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/textViewAtıstırmalıkKalori"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="Toplam Kalori"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-
-                </TableRow>
-            </TableLayout>
-            <TableLayout
-                android:id="@+id/tableLayoutAtıstırmalıkItems"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp">
-
-
-
-            </TableLayout>
 
 
 
