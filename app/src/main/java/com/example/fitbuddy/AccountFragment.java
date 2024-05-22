@@ -283,9 +283,25 @@ public class AccountFragment extends Fragment {
             int selectedId = radioGroupCinsiyet.getCheckedRadioButtonId();
 
             RadioButton radioButtonCinsiyet = view.findViewById(selectedId);
-            String stringCinsiyet = radioButtonCinsiyet.getText().toString();
+            //String stringCinsiyet = radioButtonCinsiyet.getText().toString();
 
-            Log.d("Guncelle", "Cinsiyet: " + stringCinsiyet);
+
+
+
+            String stringGender = radioButtonCinsiyet.getText().toString();
+            Log.d("Guncelle", "Cinsiyet: " + stringGender);
+            int genderValue = 0;
+
+            if (stringGender.equals("Kadın")) {
+                genderValue = 0;
+            } else if (stringGender.equals("Erkek")) {
+                genderValue = 1;
+            }
+
+            EditText editTextYas = view.findViewById(R.id.editTextYas);
+            String stringYas = editTextYas.getText().toString();
+
+
 
 
 
@@ -298,10 +314,13 @@ public class AccountFragment extends Fragment {
                 ContentValues values = new ContentValues();
                 values.put("user_id", userId);
                 values.put("user_dogum_tarih",dogumTarihi); // Güncellenecek doğum tarihi
-                values.put("user_cinsiyet", stringCinsiyet);
+                values.put("user_cinsiyet", genderValue);
                 values.put("user_boy", stringHeightCm); // Güncellenecek boy
                 values.put("user_kilo",stringWeight); // Güncellenecek kilo
                 values.put("user_olcu", stringOlcuBirimi);
+                values.put("user_yas", stringYas);
+
+
                 values.put("user_aktivite_derecesi", intActivityLevel);// Güncellenecek ölçü
 
                 DbAdapter db = new DbAdapter(getActivity()) {

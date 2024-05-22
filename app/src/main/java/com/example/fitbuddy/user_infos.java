@@ -276,8 +276,24 @@ public class user_infos extends AppCompatActivity {
         }
 
 
-        String stringGender = "";
-        stringGender = radioButtonCinsiyet.getText().toString();
+
+        String stringGender = radioButtonCinsiyet.getText().toString();
+        int genderValue;
+
+        if (stringGender.equals("Kadın")) {
+            genderValue = 0;
+        } else if (stringGender.equals("Erkek")) {
+            genderValue = 1;
+        } else {
+            // Belirlenmemiş bir değer varsa bir hata mesajı gösterilebilir.
+            String errorMessageGender = "Geçersiz cinsiyet seçimi.";
+            textViewErrorMessage.setText(errorMessageGender);
+            textViewErrorMessage.setVisibility(View.VISIBLE);
+            imageViewError.setVisibility(View.VISIBLE);
+            return;
+        }
+
+
 
 
         //Toast.makeText(this,radioButtonCinsiyet.getText(),Toast.LENGTH_SHORT).show();
@@ -413,11 +429,15 @@ public class user_infos extends AppCompatActivity {
             };
             db.open();
 
+            EditText editTextYas = (EditText) findViewById(R.id.editTextYas);
+            String stringYas = editTextYas.getText().toString();
+
             String dogumTarihiSQL = db.quoteSmart(dogumTarihi);
-            String stringCinsiyetSQL = db.quoteSmart(stringGender);
+            String stringCinsiyetSQL = String.valueOf(db.quoteSmart(genderValue));
             double heightCmSQL = db.quoteSmart(heightCm);
             int intActivityLevelSQL = db.quoteSmart(intActivityLevel);
             String doubleWeightSQL = db.quoteSmart(stringWeight);
+            String yasSql = db.quoteSmart(stringYas);
             String stringOlcuSQL = db.quoteSmart(stringOlcuBiirimi);
 
 
@@ -425,9 +445,9 @@ public class user_infos extends AppCompatActivity {
             if (user != null) {
                 String email = user.getEmail();
                 String userID = user.getUid();
-                String stringInput = "NULL,'" + userID+"',"+ dogumTarihiSQL + "," + doubleWeightSQL+","+ stringCinsiyetSQL + "," + heightCmSQL + "," + intActivityLevelSQL + ",'" + email + "'," + stringOlcuSQL;
+                String stringInput = "NULL,'" + userID+"',"+ dogumTarihiSQL + "," + doubleWeightSQL+","+ stringCinsiyetSQL + "," + heightCmSQL + "," +stringYas+","+ intActivityLevelSQL + ",'" + email + "'," + stringOlcuSQL;
 
-                db.insert("USER", "_id,user_id,user_dogum_tarih,user_kilo,user_cinsiyet,user_boy,user_aktivite_derecesi,user_email,user_olcu", stringInput);
+                db.insert("USER", "_id,user_id,user_dogum_tarih,user_kilo,user_cinsiyet,user_boy,user_yas,user_aktivite_derecesi,user_email,user_olcu", stringInput);
 
                 DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                 String hedefTarih = df.format(Calendar.getInstance().getTime());

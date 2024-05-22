@@ -271,6 +271,40 @@
             </TableRow>
             <!--kilo-->
 
+            <!--yaş-->
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textViewYas"
+                    android:layout_marginTop="24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yaş" />
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <EditText
+                            android:id="@+id/editTextYas"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:ems="3"
+                            android:inputType="number" />
+
+                    </TableRow>
+                </TableLayout>
+            </TableRow>
+
+        //yaş
+
             <!-- aktivite-->
 
             <TableRow
