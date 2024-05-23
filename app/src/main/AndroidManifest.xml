@@ -20,7 +20,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitBuddy"
         tools:targetApi="31">
-
+        <activity
+            android:name=".GirisBilgiAlma"
+            android:exported="false"
+            android:label="@string/title_activity_giris_bilgi_alma"
+            android:theme="@style/Theme.FitBuddy" />
         <activity
             android:name=".calculate_bmr"
             android:exported="false" />
