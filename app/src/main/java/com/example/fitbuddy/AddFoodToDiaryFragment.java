@@ -81,7 +81,7 @@ public class AddFoodToDiaryFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             currentMealNumber = bundle.getInt("mealNumber"); // getInt kullanarak mealNumber'ı alıyoruz
-            Toast.makeText(getActivity(), "Mealnumberr: " + currentMealNumber, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "Mealnumberr: " + currentMealNumber, Toast.LENGTH_SHORT).show();
         }
 
 

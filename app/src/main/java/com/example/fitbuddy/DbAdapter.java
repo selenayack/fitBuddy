@@ -18,11 +18,15 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
 
 
     private static final String DATABASE_NAME = "fitBuddyDiet";
-    private static final int DATABASE_VERSION = 320;
+    private static final int DATABASE_VERSION = 329;
 
     private final Context context;
     private DatabaseHelper dbHelper;
     private SQLiteDatabase db;
+
+
+
+
 
     public DbAdapter(Context ctx) {
 
@@ -206,6 +210,8 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
 
     }
     //open database
+
+
 
     public DbAdapter open() throws SQLException {
         db = dbHelper.getWritableDatabase();

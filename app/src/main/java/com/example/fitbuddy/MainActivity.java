@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,6 +28,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -39,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
     private DocumentReference docRef; //tek bir kullanıcı verisi okumak için
 
     TextView forgotPassword, createAccount;
+
+    private DbAdapter dbAdapter;
+
+    private SharedPreferences sharedPreferences;
+    private static final String PREF_NAME = "MyPrefs";
+    private static final String USER_INFO_OPENED = "UserInfoOpened";
+
+
     Button loginButton;
 
 
@@ -48,12 +60,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         init();
 
+
+
+
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Login();
             }
         });
+
+
 
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +143,8 @@ public class MainActivity extends AppCompatActivity {
 
 }
 
+
+
     private void Login() {
         txtEmail = yeniKullaniciMail.getText().toString();
         txtSifre = yeniKullanicisifre.getText().toString();
@@ -139,10 +159,13 @@ public class MainActivity extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(txtEmail, txtSifre).addOnSuccessListener(this, new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
-
-                    Intent giris = new Intent(getApplicationContext(), MainActivity2.class);
-                    startActivity(giris);
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    if (user != null) {
+                        checkUserDataAndRedirect(user.getUid());
+                    }
                 }
+
+
             }).addOnFailureListener(this, new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
@@ -153,16 +176,50 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    private void checkUserDataAndRedirect(String userId) {
+        dbAdapter.open();
+        Cursor cursor = dbAdapter.select("USER", new String[]{"user_cinsiyet", "user_boy", "user_kilo", "user_yas"}, "user_id", userId);
+        boolean isDataComplete = true;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                for (int i = 0; i < cursor.getColumnCount(); i++) {
+                    if (cursor.isNull(i)) {
+                        isDataComplete = false;
+                        break;
+                    }
+                }
+            } while (cursor.moveToNext());
+            cursor.close();
+        } else {
+            isDataComplete = false;
+        }
+
+        dbAdapter.close();
+
+        if (isDataComplete) {
+            Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(MainActivity.this, user_infos.class);
+            startActivity(intent);
+        }
+    }
+
+
+
 
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            // reload();
+
+
         }
     }
+
+
     public void init() {
         createAccount = findViewById(R.id.createAccount);
         forgotPassword = findViewById(R.id.sifremiUnuttum);
@@ -170,6 +227,22 @@ public class MainActivity extends AppCompatActivity {
         yeniKullanicisifre = findViewById(R.id.giris_yap_editSifre);
         yeniKullaniciİsim = findViewById(R.id.kayit_ol_editİsim);
         loginButton = findViewById(R.id.giris_btn);
+
+
+
+        dbAdapter = new DbAdapter(this) {
+            @Override
+            public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+            }
+
+            @Override
+            public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+            }
+        };
+
+
 
         // Firebase
         mAuth = FirebaseAuth.getInstance();

@@ -28,6 +28,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -54,6 +56,8 @@ public class HomeFragment extends Fragment {
     private String currentDateAy="";
     private String currentDateGün="";
 
+    private TextView textViewMail;
+    private TextView textViewİsim;
 
 
     @Override
@@ -64,6 +68,11 @@ public class HomeFragment extends Fragment {
 
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
+
+
+
+
+
         DbAdapter db = new DbAdapter(requireContext()) {
             @Override
             public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -84,10 +93,6 @@ public class HomeFragment extends Fragment {
 
 
 
-        /*Bundle bundle=this.getArguments();
-        if(bundle!=null){
-            Toast.makeText(getActivity(),"Bundle:"+bundle.toString(),Toast.LENGTH_LONG).show();
-        }*/
 
         drawerLayout = view.findViewById(R.id.drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -120,21 +125,6 @@ public class HomeFragment extends Fragment {
             setDatabaseLoaded();
         }
 
-        LinearLayout linearLayout1 = view.findViewById(R.id.linearlayout);
-
-        linearLayout1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), user_infos.class);
-                startActivity(intent);
-            }
-        });
-
-        /*Bundle args = getArguments();
-        if (args != null) {
-            int mealNumber = args.getInt("mealNumber", 0); // mealNumber'ı alın
-            // mealNumber'ı kullanın
-        }*/
 
 
         initalizeHome();
@@ -571,7 +561,12 @@ public class HomeFragment extends Fragment {
 
                   }
 
+
+
+
                   int textViewKalan = intHedefKaloriAktiviteVeDiyet - intFdceYenenKalori;
+                   Log.d("kalann", "kalankalorii " + textViewKalan);
+
                   TextView textViewKalanKalori = view.findViewById(R.id.textViewHedefKalanKaloriCal);
                   textViewKalanKalori.setText("  " + textViewKalan);
 
