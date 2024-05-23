@@ -624,7 +624,7 @@ public class HomeFragment extends Fragment {
 
 // String currentIdSQL = db.quoteSmart(currentId);
 
-       String currentId = listCursorHedef.getString(0);
+    String currentId = listCursorHedef.getString(0);
       String currentName = listCursorHedef.getString(1);
         Cursor HedefCursor = db.select("hedef", fields2, "_id", currentId);
 

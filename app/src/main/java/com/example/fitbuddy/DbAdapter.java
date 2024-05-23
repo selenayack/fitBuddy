@@ -1,5 +1,6 @@
 package com.example.fitbuddy;// DbAdapter.java
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -17,7 +18,7 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
 
 
     private static final String DATABASE_NAME = "fitBuddyDiet";
-    private static final int DATABASE_VERSION = 318;
+    private static final int DATABASE_VERSION = 320;
 
     private final Context context;
     private DatabaseHelper dbHelper;
@@ -28,6 +29,33 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
         super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = ctx;
         dbHelper = new DatabaseHelper(context);
+    }
+
+    @SuppressLint("Range")
+    public float[] getUserData(int userId) {
+        Cursor cursor = db.rawQuery(
+                "SELECT hedef.hedef_yapılmak_istenen, user.user_cinsiyet, user.user_boy, user.user_kilo, user.user_yas " +
+                        "FROM user " +
+                        "INNER JOIN hedef ON user._id = hedef._id " +
+                        "WHERE user._id=?",
+                new String[]{String.valueOf(userId)}
+        );
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                float[] userData = new float[5];
+
+                userData[0] = cursor.getFloat(cursor.getColumnIndex("user_cinsiyet"));
+                userData[1] = cursor.getFloat(cursor.getColumnIndex("user_yas"));
+                userData[2] = cursor.getFloat(cursor.getColumnIndex("user_boy"));
+                userData[3] = cursor.getFloat(cursor.getColumnIndex("user_kilo"));
+                userData[4] = cursor.getFloat(cursor.getColumnIndex("hedef_yapılmak_istenen"));
+                cursor.close();
+                return userData;
+            }
+            cursor.close();
+        }
+        return null;
     }
 
     public Cursor select(String tableName, String[] columns) {
@@ -87,6 +115,7 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
                         "user_kilo INT,"+
                         "user_cinsiyet INT,"+
                         "user_boy INT,"+
+                        "user_yas INT,"+
                         "user_olcu VARCHAR,"+
                         "user_aktivite_derecesi INT,"+
                         "user_dogum_tarih DATE," +
@@ -448,6 +477,9 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
 
                 if (values.containsKey("user_kilo")) {
                     updatedValues.put("user_kilo", values.getAsInteger("user_kilo"));
+                }
+                if (values.containsKey("user_yas")) {
+                    updatedValues.put("user_yas", values.getAsInteger("user_yas"));
                 }
 
                 if (values.containsKey("user_aktivite_derecesi")) {

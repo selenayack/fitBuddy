@@ -152,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="0dp"
-                    android:layout_marginRight="55dp"
+                    android:layout_marginRight="35dp"
                     android:text="Hedef Kalori"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -163,7 +163,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="0dp"
-                    android:layout_marginRight="100dp"
+                    android:layout_marginRight="10dp"
                     android:text="Alınan"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -245,7 +245,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="90dp"
+                        android:layout_marginRight="70dp"
                         android:text=" Protein"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -256,7 +256,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="60dp"
+                        android:layout_marginRight="40dp"
                         android:text="Karbonhidrat"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -306,9 +306,9 @@
                         android:id="@+id/textViewAlınanY"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="0dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="120dp"
+                        android:layout_marginRight="130dp"
                         android:text="@string/blank"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -338,18 +338,18 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="50dp"
+                        android:layout_marginRight="0dp"
                         android:text="Kalan Protein"
                         android:textSize="16dp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textViewKalanKarb"
-                        android:layout_width="match_parent"
+                        android:layout_width="62dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="25dp"
+                        android:layout_marginRight="20dp"
                         android:text="Kalan Karb"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -358,9 +358,8 @@
                         android:id="@+id/textViewKalanYag"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="120dp"
+                        android:layout_marginRight="100dp"
                         android:text="Kalan Yağ"
                         android:textSize="16dp"
                         android:textStyle="bold" />

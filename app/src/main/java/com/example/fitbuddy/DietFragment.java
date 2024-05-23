@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
@@ -36,9 +37,36 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import java.io.IOException;
 
 
 public class DietFragment extends Fragment {
+
+    private DbAdapter  dbAdapter;
+    private ModelInterpreter modelInterpreter;
+    private TextView resultTextView;
+
+
+
+    private void displayDietList(int prediction) {
+        switch (prediction) {
+            case 1:
+                resultTextView.setText("Diyet Listesi 1");
+                break;
+            case 2:
+                resultTextView.setText("Diyet Listesi 2");
+                break;
+            case 3:
+                resultTextView.setText("Diyet Listesi 3");
+                break;
+            case 4:
+                resultTextView.setText("Diyet Listesi 4");
+                break;
+            default:
+                resultTextView.setText("Geçersiz çıktı");
+                break;
+        }
+    }
 
 
 
@@ -48,6 +76,39 @@ public class DietFragment extends Fragment {
                 Bundle savedInstanceState) {
 
             View view = inflater.inflate(R.layout.fragment_diet, container, false);
+
+            resultTextView = view.findViewById(R.id.result_text_view);
+
+            dbAdapter = new DbAdapter(getContext()) {
+                @Override
+                public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+                }
+
+                @Override
+                public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+                }
+            };
+            dbAdapter.open();
+
+            try {
+                modelInterpreter = new ModelInterpreter(getContext());
+            } catch (IOException e) {
+                e.printStackTrace();
+                resultTextView.setText("Model yüklenirken bir hata oluştu.");
+                return view;
+            }
+
+            int userId = 1; // Kullanıcı ID'sini alın
+            float[] userData = dbAdapter.getUserData(userId);
+            if (userData != null && userData.length == 5) {
+                int prediction = modelInterpreter.predict(userData);
+                displayDietList(prediction);
+            } else {
+                resultTextView.setText("Kullanıcı verileri alınamadı.");
+            }
+
 
             LinearLayout linearLayout1 = view.findViewById(R.id.linearlayout1);
 
