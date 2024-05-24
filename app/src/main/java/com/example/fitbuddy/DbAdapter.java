@@ -18,7 +18,7 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
 
 
     private static final String DATABASE_NAME = "fitBuddyDiet";
-    private static final int DATABASE_VERSION = 329;
+    private static final int DATABASE_VERSION = 340;
 
     private final Context context;
     private DatabaseHelper dbHelper;
@@ -34,6 +34,34 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
         this.context = ctx;
         dbHelper = new DatabaseHelper(context);
     }
+
+    public Cursor selectAll(String tableName, String[] fields) {
+        return db.query(tableName, fields, null, null, null, null, null);
+    }
+
+    @SuppressLint("Range")
+    public long getUserIdFromFirebaseId(String firebaseUserId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+         int userId = -1; // Kullanıcının _id'si
+
+        // Veritabanı sorgusu
+        String selectQuery = "SELECT _id FROM USER WHERE user_id = ?";
+
+        // Sorguyu çalıştırın ve sonucu alın
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{firebaseUserId});
+
+        // Sorgu sonucunu işleyin
+        if (cursor.moveToFirst()) {
+            // İlgili _id değerini alın
+            userId = (int) cursor.getLong(cursor.getColumnIndex("_id"));
+        }
+
+        cursor.close(); // Cursor'ı kapatın
+        db.close(); // Veritabanı bağlantısını kapatın
+
+        return userId;
+    }
+
 
     @SuppressLint("Range")
     public float[] getUserData(int userId) {
@@ -66,6 +94,13 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.query(tableName, columns, null, null, null, null, null);
     }
+
+    public Cursor getAllData(String tableName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + tableName, null);
+    }
+
+
 
 
 
@@ -253,6 +288,24 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
 
 
     }
+    @SuppressLint("Range")
+    public long getSQLiteIdFromFirebaseId(String firebaseUserId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        long sqliteUserId = -1;
+
+        String selectQuery = "SELECT _id FROM USER WHERE user_id = ?";
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{firebaseUserId});
+
+        if (cursor.moveToFirst()) {
+            sqliteUserId = cursor.getLong(cursor.getColumnIndex("_id"));
+        }
+
+        cursor.close();
+        db.close();
+
+        return sqliteUserId;
+    }
+
 
     public double quoteSmart(double value){
         return  value;

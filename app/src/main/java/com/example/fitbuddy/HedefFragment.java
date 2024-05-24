@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Calendar;
 
 public class HedefFragment extends Fragment {
@@ -84,9 +87,17 @@ public class HedefFragment extends Fragment {
 
 // String currentIdSQL = db.quoteSmart(currentId);
 
-        String currentId = listCursorHedef.getString(0);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+        String firebaseUserId = firebaseUser.getUid();
+
+
+
+        int currentId = (int) db.getUserIdFromFirebaseId(firebaseUserId);
         String currentName = listCursorHedef.getString(1);
-        Cursor HedefCursor = db.select("hedef", fields, "_id", currentId);
+        Cursor HedefCursor = db.select("hedef", fields, "_id", String.valueOf(currentId));
 
 
 
@@ -173,7 +184,15 @@ public class HedefFragment extends Fragment {
             }
         };
         db.open();
-        long sutunId = 1;
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+        String firebaseUserId = firebaseUser.getUid();
+
+
+
+        int sutunId = (int) db.getUserIdFromFirebaseId(firebaseUserId);
 
         String fields[] = new String[]{
                 "_id",
@@ -244,8 +263,16 @@ public class HedefFragment extends Fragment {
             db.open();
 
 
-            long hedefId = 1;
 
+           FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+           FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+           String firebaseUserId = firebaseUser.getUid();
+
+
+
+            int hedefId = (int) db.getUserIdFromFirebaseId(firebaseUserId);
             double doubleMevcutKiloSQL = db.quoteSmart(doubleMevcutKilo);
             boolean updateMevcutKilo = db.update("hedef", "_id", hedefId, "hedef_mevcut_kilo", doubleMevcutKiloSQL);
             Log.d("calculate_bmr", "hedef_mevcut_kilo güncellendi: " + updateMevcutKilo);
@@ -259,7 +286,9 @@ public class HedefFragment extends Fragment {
             Log.d("calculate_bmr", "hedef_haftalık_kg güncellendi: " + updateHaftalikKg);
 
 
-            long sutunId = 1;
+
+
+             int sutunId = (int) db.getUserIdFromFirebaseId(firebaseUserId);
 
             String fields[] = new String[]{
                     "_id",
@@ -480,9 +509,15 @@ public class HedefFragment extends Fragment {
 
 // String currentIdSQL = db.quoteSmart(currentId);
 
-        String currentId = listCursorHedef.getString(0);
+
+
+
+        int currentId = (int) db.getUserIdFromFirebaseId(firebaseUserId);
+
+
         String currentName = listCursorHedef.getString(1);
-        Cursor HedefCursor = db.select("hedef", fields2, "_id", currentId);
+        Cursor HedefCursor = db.select("hedef", fields2, "_id", String.valueOf(currentId));
+        Log.d("Guncelle", "currentId " + currentId);
 
 
 

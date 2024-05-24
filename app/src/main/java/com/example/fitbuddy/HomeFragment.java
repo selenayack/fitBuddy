@@ -87,12 +87,6 @@ public class HomeFragment extends Fragment {
         db.open();
 
 
-        //db.delete("food_diary_kalori_yenen", null, null);
-      //db.delete("food_diary", null, null);
-
-
-
-
 
         drawerLayout = view.findViewById(R.id.drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -619,9 +613,17 @@ public class HomeFragment extends Fragment {
 
 // String currentIdSQL = db.quoteSmart(currentId);
 
-    String currentId = listCursorHedef.getString(0);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+        String firebaseUserId = firebaseUser.getUid();
+
+
+
+        int currentId = (int) db.getUserIdFromFirebaseId(firebaseUserId);
       String currentName = listCursorHedef.getString(1);
-        Cursor HedefCursor = db.select("hedef", fields2, "_id", currentId);
+        Cursor HedefCursor = db.select("hedef", fields2, "_id", String.valueOf(currentId));
 
 
         if (HedefCursor != null && HedefCursor.moveToFirst()) {

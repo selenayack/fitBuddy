@@ -155,10 +155,17 @@ public class DietFragment extends Fragment {
                 return view;
             }
 
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+            String firebaseUserId = firebaseUser.getUid();
 
 
 
-            int userId = 1; // Kullanıcı ID'sini alın
+           int userId = (int) dbAdapter.getUserIdFromFirebaseId(firebaseUserId);
+
+
             float[] userData = dbAdapter.getUserData(userId);
             if (userData != null && userData.length == 5) {
                 int prediction = modelInterpreter.predict(userData);

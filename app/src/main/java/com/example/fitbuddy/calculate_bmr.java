@@ -60,7 +60,16 @@ public class calculate_bmr extends AppCompatActivity {
             }
         };
         db.open();
-        long sutunId = 1;
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+        String firebaseUserId = firebaseUser.getUid();
+
+
+
+        int sutunId = (int) db.getUserIdFromFirebaseId(firebaseUserId);
 
         String fields[] = new String[]{
                 "_id",
@@ -132,7 +141,16 @@ public class calculate_bmr extends AppCompatActivity {
 
 
 
-        long hedefId = 1;
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+        String firebaseUserId = firebaseUser.getUid();
+
+
+
+        int hedefId = (int) db.getUserIdFromFirebaseId(firebaseUserId);
 
 
 
@@ -149,7 +167,11 @@ public class calculate_bmr extends AppCompatActivity {
         Log.d("calculate_bmr", "hedef_haftalık_kg güncellendi: " + updateHaftalikKg);
 
 
-        long sutunId = 1;
+
+
+
+
+        int sutunId = (int) db.getUserIdFromFirebaseId(firebaseUserId);
 
         String fields[] = new String[]{
                 "_id",
