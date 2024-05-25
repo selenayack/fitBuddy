@@ -57,10 +57,6 @@ public class AccountFragment extends Fragment {
 
         view =  inflater.inflate(R.layout.fragment_account, container, false);
 
-
-
-
-
         textViewMail = view.findViewById(R.id.textViewMail);
         textViewİsim = view.findViewById(R.id.textViewİsim);
 

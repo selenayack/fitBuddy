@@ -43,6 +43,9 @@
             android:name=".Diet1"
             android:exported="false" />
         <activity
+            android:name=".KişiselleştirilmişListe"
+            android:exported="false" />
+        <activity
             android:name=".SporActivity4"
             android:exported="false" />
         <activity
