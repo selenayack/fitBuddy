@@ -18,7 +18,7 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
 
 
     private static final String DATABASE_NAME = "fitBuddyDiet";
-    private static final int DATABASE_VERSION = 341;
+    private static final int DATABASE_VERSION = 355;
 
     private final Context context;
     private DatabaseHelper dbHelper;
@@ -166,6 +166,7 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
                         "kalori_yenen_tarih DATE,"+
                         "kalori_yenen_ogun_no INT,"+
                         "kalori_yenen_kalori INT,"+
+                        "user_id TEXT ,"+
                         "kalori_yenen_protein INT,"+
                         "kalori_yenen_karbonhidrat INT,"+
                         "kalori_yenen_yag INT);");
@@ -174,6 +175,7 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
                 db.execSQL("CREATE TABLE IF NOT EXISTS food_diary("+
                         "_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                         "fd_id INTEGER,"+
+                        "user_id TEXT ,"+
                         "fd_tarih DATE,"+
                         "fd_ögün_numara INT,"+
                         "fd_besin_id INT,"+

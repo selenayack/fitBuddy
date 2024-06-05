@@ -23,6 +23,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -799,20 +802,33 @@ public class AddFoodToDiaryFragment extends Fragment {
             String stringFdYagHesaplanmışSQL = db.quoteSmart(stringFdYagHesaplanmış);
 
 
+
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+            String firebaseUserId = firebaseUser.getUid();
+
+            String stringuserId = "'" +firebaseUserId + "'";
+
+
+
             if (error == 0) {
-                String impFields = "_id,fd_tarih,fd_ögün_numara,fd_besin_id ," +
+                String impFields = "user_id,_id,fd_tarih,fd_ögün_numara,fd_besin_id," +
                         "fd_porsiyon_büyüklügü_gram,fd_porsiyon_büyüklügü_ölcüsü_gram," +
                         "fd_porsiyon_büyüklügü_adet,fd_porsiyon_büyüklügü_ölcüsü_adet," +
                         "fd_kalori_hesaplanmıs,fd_protein_hesaplanmıs," +
                         "fd_karbonhidrat_hesaplanmıs,fd_yag_hesaplanmıs";
-                String impValues = "NULL," + stringFdDateSql + ","+fdmealNumberSQL+","+stringFdFoodIdSQL + "," +
+
+                String impValues = "" + stringuserId + ",NULL," + stringFdDateSql + "," + fdmealNumberSQL + "," +
+                        stringFdFoodIdSQL + "," +
                         fdPorsiyonGramSQL + "," + fdServingSizeGramÖlçüsüSQL + "," +
                         stringFdPorsiyonAdetSQL + "," + fdServingSizePorsiyonÖlçüsüSQL + "," +
                         stringFdKaloriHesaplanmışSQL + "," + stringFdProteinHesaplanmışSQL + "," +
                         stringFdCarbHesaplanmışSQL + "," + stringFdYagHesaplanmışSQL;
 
-
                 db.insert("food_diary", impFields, impValues);
+                //db.insert("food_diary_kalori_yenen","user_id",stringuserId);
                 Toast.makeText(getActivity(), "Besin Günlüğü güncellendi", Toast.LENGTH_SHORT).show();
 
 

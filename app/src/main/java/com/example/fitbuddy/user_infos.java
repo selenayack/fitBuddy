@@ -466,6 +466,10 @@ public class user_infos extends AppCompatActivity {
 
                 db.insert("hedef", "_id,hedef_mevcut_kilo,hedef_mevcut_kilo_tarih", stringInput);
 
+
+
+
+
                 Intent i = new Intent(user_infos.this, calculate_bmr.class);
                 startActivity(i);
             }
