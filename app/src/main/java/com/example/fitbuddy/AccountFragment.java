@@ -216,93 +216,213 @@ public class AccountFragment extends Fragment {
 
     private void bilgilerimiGuncelle() {
 
-        EditText editTextHeightCm = view.findViewById(R.id.editTextHeightCm);
-        EditText editTextHeightInches = view.findViewById(R.id.editTextHeightInches);
-        Spinner spinnerOlcuBirimi = view.findViewById(R.id.spinnerHaftalıkKg);
-        EditText editTextWeight = view.findViewById(R.id.editTextWeight);
+
+        TextView textViewErrorMessage  =view. findViewById(R.id.textViewErrorMessage);
+        ImageView imageViewError =view.findViewById(R.id.imageViewerrormessage);
+
+        String errorMessage = "";
+
         Spinner spinnerDTGün = view.findViewById(R.id.spinner4);
-        Spinner spinnerAktivite = view.findViewById(R.id.spinner3);
         String stringDTGün = spinnerDTGün.getSelectedItem().toString();
         int DTGün = 0;
-
-        DTGün = Integer.parseInt(stringDTGün);
-        if (DTGün < 10) {
-            stringDTGün = "0" + stringDTGün;
-
-
-
-            Spinner spinnerDTAy = view.findViewById(R.id.spinner);
-            String stringDTAy = spinnerDTAy.getSelectedItem().toString();
-            if (stringDTAy.startsWith("Oc")) {
-                stringDTAy = "01";
-            } else if (stringDTAy.startsWith("Şu")) {
-                stringDTAy = "02";
-            } else if (stringDTAy.startsWith("Mar")) {
-                stringDTAy = "03";
-            } else if (stringDTAy.startsWith("Ni")) {
-                stringDTAy = "04";
-            } else if (stringDTAy.startsWith("May")) {
-                stringDTAy = "05";
-            } else if (stringDTAy.startsWith("Haz")) {
-                stringDTAy = "06";
-            } else if (stringDTAy.startsWith("Tem")) {
-                stringDTAy = "07";
-            } else if (stringDTAy.startsWith("Ağ")) {
-                stringDTAy = "08";
-            } else if (stringDTAy.startsWith("Ey")) {
-                stringDTAy = "09";
-            } else if (stringDTAy.startsWith("Ek")) {
-                stringDTAy = "10";
-            } else if (stringDTAy.startsWith("Ka")) {
-                stringDTAy = "11";
-            } else if (stringDTAy.startsWith("Ar")) {
-                stringDTAy = "12";
+        try {
+            DTGün = Integer.parseInt(stringDTGün);
+            if (DTGün < 10) {
+                stringDTGün = "0" + stringDTGün;
             }
+        } catch (NumberFormatException nfe) {
+            System.out.println("parse ediemedi" + nfe);
+            errorMessage = "lütfen dogum gününüzü girin";
 
-            Spinner spinnerDTYıl = view.findViewById(R.id.spinner5);
-            String stringDTYıl = spinnerDTYıl.getSelectedItem().toString();
-            int DTYıl = 0;
 
+        }
+
+        Spinner spinnerDTAy = view. findViewById(R.id.spinner);
+        String stringDTAy = spinnerDTAy.getSelectedItem().toString();
+        if (stringDTAy.startsWith("Oc")) {
+            stringDTAy = "01";
+        } else if (stringDTAy.startsWith("Şu")) {
+            stringDTAy = "02";
+        } else if (stringDTAy.startsWith("Mar")) {
+
+            stringDTAy = "03";
+        } else if (stringDTAy.startsWith("Ni")) {
+            stringDTAy = "04";
+        } else if (stringDTAy.startsWith("May")) {
+            stringDTAy = "05";
+        } else if (stringDTAy.startsWith("Haz")) {
+            stringDTAy = "06";
+        } else if (stringDTAy.startsWith("Tem")) {
+            stringDTAy = "07";
+        } else if (stringDTAy.startsWith("Ağ")) {
+            stringDTAy = "08";
+        } else if (stringDTAy.startsWith("Ey")) {
+            stringDTAy = "09";
+        } else if (stringDTAy.startsWith("Ek")) {
+            stringDTAy = "10";
+        } else if (stringDTAy.startsWith("Ka")) {
+            stringDTAy = "11";
+        } else if (stringDTAy.startsWith("Ar")) {
+            stringDTAy = "12";
+        }
+
+
+        Spinner spinnerDTYıl  =view.findViewById(R.id.spinner5);
+        String stringDTYıl = spinnerDTYıl.getSelectedItem().toString();
+        int DTYıl = 0;
+        try {
             DTYıl = Integer.parseInt(stringDTYıl);
+        } catch (NumberFormatException nfe) {
+            System.out.println("parse edilemedi" + nfe);
+            errorMessage = "lütfen dogum yilinizi girin";
 
 
-            String dogumTarihi = stringDTGün + "-" + stringDTAy + "-" + DTYıl;
-            RadioGroup radioGroupCinsiyet = view.findViewById(R.id.radioGrupCinsiyet);
+        }
 
-            String stringHeightCm = editTextHeightCm.getText().toString();
-            String stringHeightInches = editTextHeightInches.getText().toString();
-            String stringOlcuBirimi = spinnerOlcuBirimi.getSelectedItem().toString();
-            String stringWeight = editTextWeight.getText().toString();
-            int intActivityLevel = spinnerAktivite.getSelectedItemPosition();
+        String dogumTarihi = stringDTGün + "-" + stringDTAy + "-" + DTYıl;
+        //Toast.makeText(this,dogumTarihi,Toast.LENGTH_SHORT).show();
 
 
-            int selectedId = radioGroupCinsiyet.getCheckedRadioButtonId();
+        RadioGroup radioGroupCinsiyet =view. findViewById(R.id.radioGrupCinsiyet);
+        int selectedId = radioGroupCinsiyet.getCheckedRadioButtonId();
+        RadioButton radioButtonCinsiyet =view. findViewById(selectedId);
 
-            RadioButton radioButtonCinsiyet = view.findViewById(selectedId);
-            //String stringCinsiyet = radioButtonCinsiyet.getText().toString();
+        if (radioGroupCinsiyet.getCheckedRadioButtonId() == -1) {
+            // Cinsiyet seçilmemişse
+            String errorMessageGender = "Cinsiyet seçiniz."; // Hata mesajı
+            textViewErrorMessage.setText(errorMessageGender);
+            textViewErrorMessage.setVisibility(View.VISIBLE);
+            imageViewError.setVisibility(View.VISIBLE);
+            return; // Fonksiyonun burada sonlanması
+        }
+
+
+
+        String stringGender = radioButtonCinsiyet.getText().toString();
+        int genderValue;
+
+        if (stringGender.equals("Kadın")) {
+            genderValue = 0;
+        } else if (stringGender.equals("Erkek")) {
+            genderValue = 1;
+        } else {
+            // Belirlenmemiş bir değer varsa bir hata mesajı gösterilebilir.
+            String errorMessageGender = "Geçersiz cinsiyet seçimi.";
+            textViewErrorMessage.setText(errorMessageGender);
+            textViewErrorMessage.setVisibility(View.VISIBLE);
+            imageViewError.setVisibility(View.VISIBLE);
+            return;
+        }
 
 
 
 
-            String stringGender = radioButtonCinsiyet.getText().toString();
-            Log.d("Guncelle", "Cinsiyet: " + stringGender);
-            int genderValue = 0;
+        //Toast.makeText(this,radioButtonCinsiyet.getText(),Toast.LENGTH_SHORT).show();
 
-            if (stringGender.equals("Kadın")) {
-                genderValue = 0;
-            } else if (stringGender.equals("Erkek")) {
-                genderValue = 1;
+
+        EditText editTextHeightInches =view. findViewById(R.id.editTextHeightInches);
+        EditText editTextHeightCm  =view. findViewById(R.id.editTextHeightCm);
+        String stringHeightCm = editTextHeightCm.getText().toString();
+        String stringHeightInches = editTextHeightInches.getText().toString();
+
+        double heightCm = 0;
+        double heightFeet = 0;
+        double heightInches = 0;
+        boolean metric = true;
+
+        Spinner spinnerOlcuBirimi = view.findViewById(R.id.spinnerHaftalıkKg);
+        String stringOlcuBiirimi = spinnerOlcuBirimi.getSelectedItem().toString();
+
+        int intOlcu = spinnerOlcuBirimi.getSelectedItemPosition();
+
+        if (intOlcu == 0) {
+            stringOlcuBiirimi = "kg_cm";
+
+
+        } else {
+            stringOlcuBiirimi = "pound_inch";
+            metric = false;
+
+
+        }
+
+        if (stringOlcuBiirimi.startsWith("p")) {
+            metric = false;
+        }
+
+        if (metric == true) {
+            try {
+                heightCm = Double.parseDouble(stringHeightCm);
+            } catch (NumberFormatException nfe) {
+                errorMessage = "Boy(cm) sayı olmalı";
             }
 
-            EditText editTextYas = view.findViewById(R.id.editTextYas);
-            String stringYas = editTextYas.getText().toString();
+        } else {
+
+            try {
+                heightFeet = Double.parseDouble(stringHeightCm);
+            } catch (NumberFormatException nfe) {
+                errorMessage = "Boy(feet) sayı olmalı";
+            }
+            try {
+                heightInches = Double.parseDouble(stringHeightInches);
+            } catch (NumberFormatException nfe) {
+                errorMessage = "Boy(inch) sayı olmalı";
+            }
+
+            heightCm = ((heightFeet * 12) + heightInches) * 2.54;
+            heightCm = Math.round(heightCm);
+
+        }
+
+
+        EditText editTextWeight = view.findViewById(R.id.editTextWeight);
+        String stringWeight = editTextWeight.getText().toString();
+        double doubleWeight = 0;
+        int intWeight=0;
+
+        try {
+            intWeight = Integer.parseInt(stringWeight); // Kullanıcının girdiği değer tam sayıya dönüştürülür
+        } catch (NumberFormatException nfe) {
+            errorMessage = "Kilo tam sayı olmalı";
+        }
+
+        if (stringOlcuBiirimi.startsWith("p")) {
+            metric = false;
+        }
+        if (metric == true) {
+            // Eğer metric true ise, kullanıcının girdiği tam sayı değeri direkt olarak alınabilir
+            doubleWeight = intWeight;
+        } else {
+            // Eğer metric false ise, pound ve inch cinsinden girdi kabul edilmiştir
+            doubleWeight = Math.round(intWeight * 0.45359237); // Kilo cinsine dönüştürülür
+        }
+
+
+        editTextWeight.setText("" + doubleWeight);
+
+
+        EditText editTextYas = view. findViewById(R.id.editTextYas);
+        String stringYas = editTextYas.getText().toString();
+
+        if (stringYas.isEmpty()) {
+            errorMessage = "Yaşınızı girin.";
+        }
 
 
 
 
+        Spinner spinnerAktiviteSeviyesi = view. findViewById(R.id.spinner3);
+        String stringOlcuBirimi = spinnerOlcuBirimi.getSelectedItem().toString();
+
+        int intActivityLevel = spinnerAktiviteSeviyesi.getSelectedItemPosition();
+
+        if (errorMessage.isEmpty()) {
+            textViewErrorMessage.setVisibility(View.GONE);
+            imageViewError.setVisibility(View.GONE);
 
 
-            // Güncelleme işlemini gerçekleştir
+        // Güncelleme işlemini gerçekleştir
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
                 String userId = user.getUid();
@@ -342,7 +462,17 @@ public class AccountFragment extends Fragment {
 
                 db.close();
             };
-        }}
+        }else {
+            textViewErrorMessage.setText(errorMessage);
+            textViewErrorMessage.setText(errorMessage);
+            textViewErrorMessage.setVisibility(View.VISIBLE);
+            imageViewError.setVisibility(View.VISIBLE);
+        }
+
+
+
+
+    }
 
 
 
