@@ -267,8 +267,16 @@ public class HomeFragment extends Fragment {
             }
         };
         db.open();
-        String stringMealNumberSQL=db.quoteSmart(mealNumber);
 
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+        String firebaseUserId = firebaseUser.getUid();
+
+        String stringuserId = "'" +firebaseUserId + "'";
+
+        String stringMealNumberSQL=db.quoteSmart(mealNumber);
 
 
 
@@ -289,13 +297,13 @@ public class HomeFragment extends Fragment {
         String stringDateSQL=db.quoteSmart(stringFdDate);
 
         String fdwhereClause[] = new String[]{
-                "fd_tarih",
-                "fd_ögün_numara"
+                "user_id"
+
         };
 
         String fdwhereCondition[]=new String[]{
-                stringDateSQL,
-                stringMealNumberSQL
+                firebaseUserId
+
         };
         String fdwhereAndOr[]=new String[]{
                 "AND"
@@ -303,11 +311,9 @@ public class HomeFragment extends Fragment {
 
 
 
+        Cursor cursorFd = db.select("food_diary", fields, fdwhereClause, fdwhereCondition, fdwhereAndOr);
 
 
-
-
-        Cursor cursorFd = db.select("food_diary", fields);
        String fieldsFood[]=new String[]{
                "_id",
                "besin_isim",
@@ -322,54 +328,56 @@ public class HomeFragment extends Fragment {
        Cursor cursorFood;
 
         Cursor cursorFdYenenkalori;
-        String fieldsYenenKalori[]=new String[]{
+        String fieldsYenenKalori[] = new String[]{
                 "_id",
-                "kalori_yenen_id",
-                "kalori_yenen_tarih ",
-                "kalori_yenen_ogun_no ",
+                "kalori_yenen_ogun_no",
                 "kalori_yenen_kalori",
                 "kalori_yenen_protein",
                 "kalori_yenen_karbonhidrat",
                 "kalori_yenen_yag"
-
-
         };
 
         String whereClause[] = new String[]{
-                "kalori_yenen_tarih",
-                "kalori_yenen_ogun_no"
+
+                "user_id"
         };
 
-        String whereCondition[]=new String[]{
-             stringDateSQL,
-                stringMealNumberSQL
-        };
-        String whereAndOr[]=new String[]{
-            "AND"
+        String whereCondition[] = new String[]{
+
+                firebaseUserId
         };
 
+        String whereAndOr[] = new String[]{
+                "AND"
+        };
+
+
+        System.out.println("stringDateSQL: " + stringDateSQL);
+        System.out.println("string: " + stringFdDate);
+        System.out.println("stringıd: " + firebaseUserId);
 
 
 
-        cursorFdYenenkalori = db.select("food_diary_kalori_yenen",fieldsYenenKalori,whereClause,whereCondition,whereAndOr);
-        //Cursor cursorFdYenenkalorii = db.select("food_diary_kalori_yenen",fieldsYenenKalori);
 
 
 
-        int cursorFdYenenCount=cursorFdYenenkalori.getCount();
 
-        if(cursorFdYenenCount==0) {
+        Cursor cursorFdYenenkalorii = db.select("food_diary_kalori_yenen", fieldsYenenKalori, whereClause, whereCondition, whereAndOr);
 
 
-            String insFields = "_id, kalori_yenen_tarih, kalori_yenen_ogun_no, kalori_yenen_kalori, kalori_yenen_protein ,kalori_yenen_karbonhidrat, kalori_yenen_yag";
-            String insValues = "NULL," + stringFdDate + ","+ stringMealNumberSQL + ", '0', '0', '0', '0'";
+        int cursorFdYenenCount = cursorFdYenenkalorii.getCount();
+
+        if (cursorFdYenenCount == 0) {
+            String insFields = "user_id, kalori_yenen_tarih, kalori_yenen_ogun_no, kalori_yenen_kalori, kalori_yenen_protein, kalori_yenen_karbonhidrat, kalori_yenen_yag";
+
+            String insValues = "'" + firebaseUserId + "', " + stringFdDate + "," + stringMealNumberSQL + ", '0', '0', '0', '0'";
 
             db.insert("food_diary_kalori_yenen", insFields, insValues);
 
-            //cursorFdYenenkalori = db.select("food_diary_kalori_yenen",fieldsYenenKalori);
-            cursorFdYenenkalori = db.select("food_diary_kalori_yenen",fieldsYenenKalori);
-
+            // Yeni eklenen kayıtları tekrar al
+            cursorFdYenenkalorii = db.select("food_diary_kalori_yenen", fieldsYenenKalori, whereClause, whereCondition, whereAndOr);
         }
+
 
 
 
@@ -523,8 +531,8 @@ public class HomeFragment extends Fragment {
               //  System.out.println("kalori"+intFdceYenenKalori);
 
 
-              if (cursorFdYenenkalori != null && cursorFdYenenkalori.moveToFirst()) {
-                  String stringFdceId = cursorFdYenenkalori.getString(0);
+              if (cursorFdYenenkalorii != null && cursorFdYenenkalorii.moveToFirst()) {
+                  String stringFdceId = cursorFdYenenkalorii.getString(0);
 
                   long longFdceId = Long.parseLong(stringFdceId);
 
@@ -613,11 +621,7 @@ public class HomeFragment extends Fragment {
 
 // String currentIdSQL = db.quoteSmart(currentId);
 
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
-
-        String firebaseUserId = firebaseUser.getUid();
 
 
 
