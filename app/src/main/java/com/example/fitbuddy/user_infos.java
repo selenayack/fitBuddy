@@ -380,30 +380,14 @@ public class user_infos extends AppCompatActivity {
         editTextWeight.setText("" + doubleWeight);
 
 
+        EditText editTextYas = (EditText) findViewById(R.id.editTextYas);
+        String stringYas = editTextYas.getText().toString();
 
-
-
-
-
-
-       /* try {
-            doubleWeight=Double.parseDouble(stringWeight);
-        }
-        catch (NumberFormatException nfe) {
-            errorMessage="kilo sayı olmalı";
-
+        if (stringYas.isEmpty()) {
+            errorMessage = "Yaşınızı girin.";
         }
 
-        if(stringOlcuBiirimi.startsWith("p")) {
 
-            doubleWeight = Math.round(doubleWeight / 0.45359237);
-        }
-        else{
-            doubleWeight = Math.round(doubleWeight *0.45359237);
-
-        }
-
-        editTextWeight.setText("" +doubleWeight);*/
 
 
         Spinner spinnerAktiviteSeviyesi = (Spinner) findViewById(R.id.spinner3);
@@ -429,8 +413,6 @@ public class user_infos extends AppCompatActivity {
             };
             db.open();
 
-            EditText editTextYas = (EditText) findViewById(R.id.editTextYas);
-            String stringYas = editTextYas.getText().toString();
 
             String dogumTarihiSQL = db.quoteSmart(dogumTarihi);
             String stringCinsiyetSQL = String.valueOf(db.quoteSmart(genderValue));

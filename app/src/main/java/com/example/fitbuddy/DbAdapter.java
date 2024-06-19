@@ -18,7 +18,7 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
 
 
     private static final String DATABASE_NAME = "fitBuddyDiet";
-    private static final int DATABASE_VERSION = 374;
+    private static final int DATABASE_VERSION = 376;
 
     private final Context context;
     private DatabaseHelper dbHelper;
