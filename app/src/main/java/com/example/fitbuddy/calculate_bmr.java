@@ -104,7 +104,7 @@ public class calculate_bmr extends AppCompatActivity {
 
         String errorMessage = " ";
 
-        EditText editTextMevcutKilo = (EditText) findViewById(R.id.editTextMevcutKilo);
+       /* EditText editTextMevcutKilo = (EditText) findViewById(R.id.editTextMevcutKilo);
         String stringMevcutKilo = editTextMevcutKilo.getText().toString();
         double doubleMevcutKilo = 0;
         try {
@@ -112,7 +112,7 @@ public class calculate_bmr extends AppCompatActivity {
         } catch (NumberFormatException nfe) {
             errorMessage = "mevcut kilo sayı olmalı";
 
-        }
+        }*/
 
         Spinner spinnerHedef = (Spinner) findViewById(R.id.spinnerhedef);
         int intHedef = spinnerHedef.getSelectedItemPosition();
@@ -154,9 +154,7 @@ public class calculate_bmr extends AppCompatActivity {
 
 
 
-        double doubleMevcutKiloSQL = db.quoteSmart(doubleMevcutKilo);
-        boolean updateMevcutKilo = db.update("hedef", "_id", hedefId, "hedef_mevcut_kilo", doubleMevcutKiloSQL);
-        Log.d("calculate_bmr", "hedef_mevcut_kilo güncellendi: " + updateMevcutKilo);
+
 
         int intHedefSQL = db.quoteSmart(intHedef);
         boolean updateHedef = db.update("hedef", "_id", hedefId, "hedef_yapılmak_istenen", intHedefSQL);
@@ -178,15 +176,22 @@ public class calculate_bmr extends AppCompatActivity {
                 "user_dogum_tarih",
                 "user_cinsiyet",
                 "user_boy",
-                "user_aktivite_derecesi "
+                "user_aktivite_derecesi ",
+                "user_kilo"
 
 
         };
+
         Cursor c = db.selectPrimaryKey("USER", "_id", sutunId, fields);
         String stringUserDogum = c.getString(1);
         String stringUserCinsiyet = c.getString(2);
         String stringUserBoy = c.getString(3);
         String stringUserAktivite = c.getString(4);
+        String stringMevcutKilo = c.getString(5);
+        double doubleMevcutKilo = 0;
+
+        doubleMevcutKilo = Double.parseDouble(stringMevcutKilo);
+
 
         System.out.println("dogum"+stringUserDogum);
 
