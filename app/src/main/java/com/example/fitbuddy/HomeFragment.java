@@ -153,7 +153,8 @@ public class HomeFragment extends Fragment {
         String stringFdDate  = df.format(Calendar.getInstance().getTime());
 
 
-        String stringFdDateSql = db.quoteSmart(stringFdDate);
+        String stringFdDateSql = db.quoteSmartForDate(stringFdDate);
+        System.out.println("stringDate: " + stringFdDateSql);
         updateTableItems( stringFdDateSql, "0");
 //        updateTableItems( stringFdDateSql, "1");
       //  updateTableItems(stringFdDateSql, "2");
@@ -297,12 +298,14 @@ public class HomeFragment extends Fragment {
         String stringDateSQL=db.quoteSmart(stringFdDate);
 
         String fdwhereClause[] = new String[]{
-                "user_id"
+                "user_id",
+                "fd_tarih"
 
         };
 
         String fdwhereCondition[]=new String[]{
-                firebaseUserId
+                firebaseUserId,
+                stringDateSQL
 
         };
         String fdwhereAndOr[]=new String[]{
@@ -339,12 +342,15 @@ public class HomeFragment extends Fragment {
 
         String whereClause[] = new String[]{
 
-                "user_id"
+                "user_id",
+                "kalori_yenen_tarih",
+
         };
 
         String whereCondition[] = new String[]{
 
-                firebaseUserId
+                firebaseUserId,
+                stringDateSQL
         };
 
         String whereAndOr[] = new String[]{
@@ -354,7 +360,6 @@ public class HomeFragment extends Fragment {
 
         System.out.println("stringDateSQL: " + stringDateSQL);
         System.out.println("string: " + stringFdDate);
-        System.out.println("stringıd: " + firebaseUserId);
 
 
 
@@ -370,7 +375,7 @@ public class HomeFragment extends Fragment {
         if (cursorFdYenenCount == 0) {
             String insFields = "user_id, kalori_yenen_tarih, kalori_yenen_ogun_no, kalori_yenen_kalori, kalori_yenen_protein, kalori_yenen_karbonhidrat, kalori_yenen_yag";
 
-            String insValues = "'" + firebaseUserId + "', " + stringFdDate + "," + stringMealNumberSQL + ", '0', '0', '0', '0'";
+            String insValues = "'" + firebaseUserId + "', '" + stringFdDate + "'," + stringMealNumberSQL + ", '0', '0', '0', '0'";
 
             db.insert("food_diary_kalori_yenen", insFields, insValues);
 
