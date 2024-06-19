@@ -1,6 +1,7 @@
 package com.example.fitbuddy;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -56,6 +57,14 @@ public class AccountFragment extends Fragment {
 
 
         view =  inflater.inflate(R.layout.fragment_account, container, false);
+
+        Button logoutButton=view.findViewById(R.id.buttonLogout);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout(view);
+            }
+        });
 
         textViewMail = view.findViewById(R.id.textViewMail);
         textViewİsim = view.findViewById(R.id.textViewİsim);
@@ -123,6 +132,14 @@ public class AccountFragment extends Fragment {
 
         return view;
     }
+
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
+
+    }
+
 
 
 
@@ -488,15 +505,14 @@ public class AccountFragment extends Fragment {
         if (currentUser != null) {
 
             String userEmail = currentUser.getEmail();
-            String userName = currentUser.getDisplayName();
+            Log.d("mail", "mail"+userEmail);
+
 
             if (userEmail != null) {
                 textViewMail.setText(userEmail);
             }
 
-            if (userName != null) {
-                textViewİsim.setText(userName);
-            }
+
         }
     }
 

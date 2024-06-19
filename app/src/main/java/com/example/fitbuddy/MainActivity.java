@@ -200,9 +200,12 @@ public class MainActivity extends AppCompatActivity {
         if (isDataComplete) {
             Intent intent = new Intent(MainActivity.this, MainActivity2.class);
             startActivity(intent);
+            finish();
+
         } else {
             Intent intent = new Intent(MainActivity.this, user_infos.class);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -214,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
+            checkUserDataAndRedirect(currentUser.getUid());
 
 
         }
