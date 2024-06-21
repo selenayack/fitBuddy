@@ -147,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="100dp"
+                        android:layout_marginRight="90dp"
                         android:text="@string/blank"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -188,7 +188,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="70dp"
+                        android:layout_marginRight="10dp"
                         android:text=" Protein"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -240,7 +240,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="100dp"
+                        android:layout_marginRight="80dp"
                         android:text="@string/blank"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -288,11 +288,11 @@
 
                     <TextView
                         android:id="@+id/textViewKalanKarb"
-                        android:layout_width="62dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="40dp"
                         android:text="Kalan Karb"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -302,7 +302,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="100dp"
+                        android:layout_marginRight="0dp"
                         android:text="Kalan Yağ"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -332,7 +332,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="100dp"
+                        android:layout_marginRight="0dp"
                         android:text="@string/blank"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -343,7 +343,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="120dp"
+                        android:layout_marginRight="0dp"
                         android:text="@string/blank"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -387,7 +387,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="20dp"
-                        android:layout_marginRight="170dp"
+                        android:layout_marginRight="150dp"
                         android:text="Besin Ekle"
                         android:textSize="16dp"
                         android:textStyle="bold" />

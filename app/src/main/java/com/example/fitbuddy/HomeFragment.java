@@ -48,6 +48,8 @@ public class HomeFragment extends Fragment {
     private  HedefFragment hedefFragment = new HedefFragment();
     private  KategoriFragment kategoriFragment = new KategoriFragment();
     private YemekFragment yemekFragment = new YemekFragment();
+    private BgunluguFragment bGunluguFragment  = new BgunluguFragment();
+
 
     private String currentId;
     private String currentName;
@@ -358,13 +360,6 @@ public class HomeFragment extends Fragment {
         };
 
 
-        System.out.println("stringDateSQL: " + stringDateSQL);
-        System.out.println("string: " + stringFdDate);
-
-
-
-
-
 
 
         Cursor cursorFdYenenkalorii = db.select("food_diary_kalori_yenen", fieldsYenenKalori, whereClause, whereCondition, whereAndOr);
@@ -462,7 +457,7 @@ public class HomeFragment extends Fragment {
 
 
                   TextView textViewKaloriItems = new TextView(getActivity());
-                  textViewKaloriItems.setText("                                                         " + fdFoodEnergy);
+                  textViewKaloriItems.setText("                                           " + fdFoodEnergy);
 
 
                   tr.addView(textViewName);
@@ -809,6 +804,8 @@ public class HomeFragment extends Fragment {
         } else if (itemId == R.id.yemek) {
             fragment = yemekFragment;
         }
+        else if (itemId == R.id.besinGunlugu) {
+        fragment = bGunluguFragment;}
 
         if (fragment != null) {
             setFragment(fragment);

@@ -19,5 +19,10 @@
             android:title="Besinler"
 
             />
+        <item
+            android:id="@+id/besinGunlugu"
+            android:title="Geçmiş Kaloriler"
+
+            />
     </group>
 </menu>

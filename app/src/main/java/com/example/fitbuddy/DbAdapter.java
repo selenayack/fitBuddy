@@ -18,7 +18,7 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
 
 
     private static final String DATABASE_NAME = "fitBuddyDiet";
-    private static final int DATABASE_VERSION = 377;
+    private static final int DATABASE_VERSION = 379;
 
     private final Context context;
     private DatabaseHelper dbHelper;
@@ -257,6 +257,11 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
     public void close() {
         dbHelper.close();
     }
+    public String quoteSmartForDate(String value) {
+        return value; // Tarih formatı zaten 'dd-MM-yyyy' şeklinde olduğu için değişiklik yapmıyoruz
+    }
+
+
 
     public String quoteSmart(String value){
         boolean isNumeric=false;
