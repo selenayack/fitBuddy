@@ -402,6 +402,13 @@ public abstract class DbAdapter  extends SQLiteOpenHelper {
         return cursor;
     }
 
+
+    public Cursor select(String tableName, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query(tableName, columns, selection, selectionArgs, groupBy, having, orderBy);
+    }
+
+
     public Cursor select(String table, String[]fields, String whereClause,String whereCondition,String orderBy,String OrderMethod){
 
         Cursor mCursor=null;

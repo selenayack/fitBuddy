@@ -1,64 +1,101 @@
 package com.example.fitbuddy;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BgunluguFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+
 public class BgunluguFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private View mainView;
 
     public BgunluguFragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BgunluguFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static BgunluguFragment newInstance(String param1, String param2) {
-        BgunluguFragment fragment = new BgunluguFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mainView = view;
+        populateListKalori();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mainView = inflater.inflate(R.layout.fragment_bgunlugu, container, false);
+        return mainView;
+    }
+
+    private void populateListKalori() {
+        DbAdapter db = new DbAdapter(getActivity()) {
+            @Override
+            public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+            }
+
+            @Override
+            public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+            }
+        };
+        db.open();
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+        String firebaseUserId = firebaseUser.getUid();
+
+        String[] fieldsYenenKalori = new String[]{
+                "_id",
+                "kalori_yenen_kalori",
+                "kalori_yenen_tarih",
+                "kalori_yenen_protein",
+                "kalori_yenen_karbonhidrat",
+                "kalori_yenen_yag"
+        };
+
+        String selection = "user_id = ?";
+        String[] selectionArgs = new String[]{
+                firebaseUserId
+        };
+
+
+        String orderBy = "kalori_yenen_tarih ASC";
+
+        Cursor cursorFdYenenKalori = db.select("food_diary_kalori_yenen", fieldsYenenKalori, selection, selectionArgs, null, null, orderBy);
+
+        if (cursorFdYenenKalori != null && cursorFdYenenKalori.moveToFirst()) {
+            ListView lvItems = mainView.findViewById(R.id.listviewBgunlugu); // Use mainView to find ListView
+            BGunluguCursorAdapter continentAdapter = new BGunluguCursorAdapter(getActivity(), cursorFdYenenKalori);
+            lvItems.setAdapter(continentAdapter);
+        } else {
+
         }
+
+        db.close();
+
+    }
+    private void listİtemClicked(int arg2) {
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bgunlugu, container, false);
-    }
+
 }
